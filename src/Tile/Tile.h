@@ -37,4 +37,4 @@ class Tile {
         void setWildEngimon(Engimon* _wild_engimon);
 };
 
-#endif _TILE_H_
+#endif
