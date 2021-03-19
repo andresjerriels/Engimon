@@ -11,6 +11,12 @@ Tile::Tile(string _type, Engimon* _wild_engimon) {
     wild_engimon = _wild_engimon;
 }
 
+Tile::Tile(const Tile& other){
+    this->type = other.type;
+    this->isEngimonOccupied = other.isEngimonOccupied;
+    this->wild_engimon = other.wild_engimon;
+}
+
 Tile::~Tile() {
     delete wild_engimon;
 }
