@@ -5,6 +5,7 @@
 
 Engimon::Engimon(std::string _name, Element elmt1, Element elmt2=none){
     this->name = _name;
+    this->elements.clear();
     this->elements.push_back(elmt1);
     if (elmt2 != none) this->elements.push_back(elmt2);
     this->level = 1;
@@ -20,10 +21,10 @@ void Engimon::setSpecies(std::string _species) {
     this->species = _species;
 }
 
-void Engimon::setElements(Element elmt1, Element elmt2) {
+void Engimon::setElements(Element elmt1, Element elmt2=none) {
     this->elements.clear();
     this->elements.push_back(elmt1);
-    this->elements.push_back(elmt2);
+    if (elmt2 != none) this->elements.push_back(elmt2);
 }
 
 void Engimon::setLevel(int lvl) {
@@ -70,4 +71,21 @@ void Engimon::gainExp(int xp) {
 
 void Engimon::interact() {
     std::cout << "[" << this->name << "]: " << this->slogan << std::endl;
+}
+
+float Engimon::calcTypeAdvantage(Engimon& e) {
+    int ownElementCount = elements.size();
+    std::vector<Element> otherElements = e.getElements();
+    int otherElementCount = otherElements.size();
+    float maxAdv = -1;
+
+    for (int i = 0; i < ownElementCount; i++) {
+        for (int j = 0; j < otherElementCount; j++) {
+            if (typeAdvTable[elements[i]][otherElements[j]] > maxAdv) {
+                maxAdv = typeAdvTable[elements[i]][otherElements[j]];
+            }
+        }
+    }
+    
+    return maxAdv;
 }

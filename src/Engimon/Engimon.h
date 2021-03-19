@@ -5,7 +5,15 @@
 #include <vector>
 #include "../Skill/skill.hpp"
 
-enum Element{none, fire, water, ground, electric, ice};
+enum Element{none = -1, fire, water, ground, electric, ice};
+
+const float typeAdvTable[5][5] = {
+    {1, 0, 1, 0.5, 2},
+    {2, 1, 0, 1, 1}, 
+    {1, 2, 1, 0, 1.5}, 
+    {1.5, 1, 2, 1, 0}, 
+    {0, 1, 0.5, 2, 1}
+    };
 
 class Engimon {
 protected:
@@ -26,7 +34,7 @@ public:
     // Setters
     void setName(std::string);
     void setSpecies(std::string);
-    void setElements(Element, Element);
+    void setElements(Element, Element=none);
     void setLevel(int);
     void setExp(int);
     void setCumExp(int);
@@ -42,6 +50,7 @@ public:
     //Methods
     void gainExp(int);
     void interact();
+    float calcTypeAdvantage(Engimon&);
 };
 
 #endif
