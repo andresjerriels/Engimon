@@ -4,6 +4,7 @@
 #define NULL -1
 
 #include "../Engimon/Engimon.h"
+#include "../Engimon/Charmamon.h"
 #include <string>
 using namespace std;
 

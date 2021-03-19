@@ -25,6 +25,9 @@ public:
 
     //method untuk mencetak peta
     void PrintMap();
+
+    //method untuk generate wild engimon
+    void GenerateEngimon();
 };
 
 #endif
