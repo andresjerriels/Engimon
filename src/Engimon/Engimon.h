@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "../Skill/skill.hpp"
 
 enum Element{none, fire, water, ground, electric, ice};
 
@@ -13,7 +14,7 @@ protected:
     std::string slogan;
     std::vector<std::string> parentNames;
     std::vector<std::string> parentSpecies;
-    // std::vector<Skill> skills //nunggu kelas Skill
+    std::vector<Skill> skills;
     std::vector<Element> elements;
     int level;
     int exp;
