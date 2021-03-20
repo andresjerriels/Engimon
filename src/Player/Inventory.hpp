@@ -11,10 +11,12 @@ protected:
 	std::vector<T> container;
 	
 public:
-	Inventory() {}
+	Inventory() {
+		container = vector<T>();
+	}
 
 	void addToInventory(T item) { //menambahkan item (enigmon / skill item) ke dalam container
-		container.push_back(item);
+		container.push_back(item);z
 	}
 
 	int countItemInInventory() {
@@ -53,7 +55,7 @@ public:
 	}
 
 	T itemInIventory(int index) {
-		return container[i];
+		return container[index];
 	}
 
 	void removeFromInventory(T item) {
@@ -72,7 +74,7 @@ public:
 		typename std::vector<T>::const_iterator iterator;
 		for (iterator = container.begin(); 
 			iterator != container.end(); iterator++) {
-			cout << *iterator << ' ';
+			cout << iterator << ' ';
 		}
 		cout << endl;
 	}
