@@ -1,58 +1,63 @@
 #ifndef ENGIMON_H
 #define ENGIMON_H
 
+#include <map>
 #include <string>
 #include <vector>
 #include "../Skill/skill.hpp"
 
-enum Element{none = -1, fire, water, electric, ground, ice};
+enum Element { NONE = -1, FIRE, WATER, ELECTRIC, GROUND, ICE };
 
-const float typeAdvTable[5][5] = {
-    {1, 0, 1, 0.5, 2},
-    {2, 1, 0, 1, 1}, 
-    {1, 2, 1, 0, 1.5}, 
-    {1.5, 1, 2, 1, 0}, 
-    {0, 1, 0.5, 2, 1}
-    };
+const float typeAdvTable[5][5] = {{1, 0, 1, 0.5, 2},
+                                  {2, 1, 0, 1, 1},
+                                  {1, 2, 1, 0, 1.5},
+                                  {1.5, 1, 2, 1, 0},
+                                  {0, 1, 0.5, 2, 1}};
 
 class Engimon {
-protected:
-    std::string name;
-    std::string species;
-    std::string slogan;
-    std::vector<std::string> parentNames;
-    std::vector<std::string> parentSpecies;
-    std::vector<Skill> skills;
-    std::vector<Element> elements;
-    int level;
-    int exp;
-    int cum_exp;
+ protected:
+  std::string name;
+  std::string species;
+  std::string slogan;
+  std::vector<std::string> parentNames;
+  std::vector<std::string> parentSpecies;
+  std::vector<Skill> skills;
+  std::vector<Element> elements;
+  int level;
+  int exp;
+  int cum_exp;
 
-public:
-    Engimon(std::string, Element, Element=none);
+ public:
+  Engimon(std::string, Element, Element = NONE);
 
-    // Setters
-    void setName(std::string);
-    void setSpecies(std::string);
-    void setElements(Element, Element=none);
-    void setLevel(int);
-    void setExp(int);
-    void setCumExp(int);
-    
-    // Getters
-    std::string getName();
-    std::string getSpecies();
-    int getLevel();
-    int getExp();
-    int getCumExp();
-    std::vector<Element> getElements();
+  // Setters
+  void setName(std::string);
+  void setSpecies(std::string);
+  void setElements(Element, Element = NONE);
+  void setLevel(int);
+  void setExp(int);
+  void setCumExp(int);
 
-    //Methods
-    void gainExp(int);
-    void interact();
-    float calcTypeAdvantage(Engimon&);
-    static Engimon GenerateEngimon(std::string, std::string);
-    Engimon Breed(Engimon&);
+  // Getters
+  std::string getName() const;
+  std::string getSpecies() const;
+  int getLevel() const;
+  int getExp() const;
+  int getCumExp() const;
+  std::vector<Element> getElements() const;
+
+  // Methods
+  void gainExp(int);
+  void interact();
+  void addSkill(Skill);
+  float calcTypeAdvantage(Engimon&);
+  Engimon operator+(Engimon&);
+  static Engimon GenerateEngimon(std::string, std::string);
+  Engimon Breed(Engimon&);
+
+ private:
+  bool isSkillLearned(const Skill&);
+  bool canLearn(const Skill&);
 };
 
 #endif
