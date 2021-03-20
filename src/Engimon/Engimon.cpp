@@ -74,15 +74,13 @@ void Engimon::interact() {
 }
 
 float Engimon::calcTypeAdvantage(Engimon& e) {
-    int ownElementCount = elements.size();
     std::vector<Element> otherElements = e.getElements();
-    int otherElementCount = otherElements.size();
     float maxAdv = -1;
 
-    for (int i = 0; i < ownElementCount; i++) {
-        for (int j = 0; j < otherElementCount; j++) {
-            if (typeAdvTable[elements[i]][otherElements[j]] > maxAdv) {
-                maxAdv = typeAdvTable[elements[i]][otherElements[j]];
+    for (auto i = elements.begin(); i != elements.end(); i++) {
+        for (auto j = otherElements.begin(); j != otherElements.end(); j++) {
+            if (typeAdvTable[*i][*j] > maxAdv) {
+                maxAdv = typeAdvTable[*i][*j];
             }
         }
     }
