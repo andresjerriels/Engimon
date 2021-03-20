@@ -16,7 +16,7 @@ public:
 	}
 
 	void addToInventory(T item) { //menambahkan item (enigmon / skill item) ke dalam container
-		container.push_back(item);z
+		container.push_back(item);
 	}
 
 	int countItemInInventory() {

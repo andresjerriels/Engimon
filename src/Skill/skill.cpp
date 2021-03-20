@@ -70,7 +70,7 @@ Skill::Skill(string name){
             
         }
         else {
-            delete elements;
+            delete[] elements;
         }
     }
 }
