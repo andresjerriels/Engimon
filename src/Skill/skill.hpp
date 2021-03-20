@@ -65,32 +65,6 @@ class Skill{
         int getnSkillElmt();
 };
 
-
-
-// class EngiDummy{
-//     private :
-//         string e_name;
-//         vector<Skill> skills;
-//     public :
-//         EngiDummy(string name);
-//         void addSkill(string nameSkill);
-//         void printSkills();
-// };
-
-// class InvenDummy{
-//     private :
-//         vector<SkillItem> items;
-//     public :
-//         InvenDummy(){
-//             this->items = vector<SkillItem>;
-//         }
-//         learn(int idx){
-//             // Sementara ini, delete dari vector
-//             this->items[idx].
-//         }
-
-// };
-
 Skill returnSkill(string name);
 
 
