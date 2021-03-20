@@ -3,7 +3,7 @@
 
 #include "Engimon.h"
 
-Engimon::Engimon(std::string _name, Element elmt1, Element elmt2=none){
+Engimon::Engimon(std::string _name, Element elmt1, Element elmt2){
     this->name = _name;
     this->elements.clear();
     this->elements.push_back(elmt1);
@@ -21,7 +21,7 @@ void Engimon::setSpecies(std::string _species) {
     this->species = _species;
 }
 
-void Engimon::setElements(Element elmt1, Element elmt2=none) {
+void Engimon::setElements(Element elmt1, Element elmt2) {
     this->elements.clear();
     this->elements.push_back(elmt1);
     if (elmt2 != none) this->elements.push_back(elmt2);
