@@ -5,7 +5,7 @@
 #include <vector>
 #include "../Skill/skill.hpp"
 
-enum Element{none = -1, fire, water, ground, electric, ice};
+enum Element{none = -1, fire, water, electric, ground, ice};
 
 const float typeAdvTable[5][5] = {
     {1, 0, 1, 0.5, 2},
@@ -51,6 +51,8 @@ public:
     void gainExp(int);
     void interact();
     float calcTypeAdvantage(Engimon&);
+    static Engimon GenerateEngimon(std::string, std::string);
+    Engimon Breed(Engimon&);
 };
 
 #endif
