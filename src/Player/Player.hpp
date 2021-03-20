@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include "Inventory.hpp"
-#include "Engimon.h"
-#include "skill.hpp"
+#include "../Engimon/Engimon.h"
+#include "../Skill/skill.hpp"
 #include <vector>
 using namespace std;
 
@@ -22,7 +22,10 @@ public:
 	//getter
 	Engimon getActiveEngimon();
 
-	int countItem();
+	//set activeEngimon
+	void setActiveEngimon(Engimon); // asumsi Engimon valid
+
+	bool isInventoryFull();
 	void addToInvEngimon(Engimon engi);
 	void addToInvSkill(SkillItem skill);
 

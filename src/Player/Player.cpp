@@ -1,12 +1,12 @@
 #include <iostream>
 #include "Player.hpp"
 #include "Inventory.hpp"
-#include "Engimon.h"
-#include "Charmamon.h"
+#include "../Engimon/Engimon.h"
+#include "../Engimon/Charmamon.h"
 using namespace std;
 
 Player::Player(std::string starter_name) : MaxCapacity(20) {
-	Charmamon starterEngimon(starter_name);
+	Charmamon starterEngimon(starter_name); // <- ini engimon starter
 	this->activeEngimon = starterEngimon;
 }
 
@@ -15,6 +15,10 @@ Engimon Player::getActiveEngimon() {
 	return this->activeEngimon;
 }
 
+//set activeEngimon -> asumsi parameter valid
+void Player::setActiveEngimon(Engimon _engimon) {
+	this->activeEngimon = _engimon;
+}
 
 bool Player::isInventoryFull() { //true kalo boleh ditambahin -> otomatis maksimum MaxCapacity - 1
 	int count = 0;
