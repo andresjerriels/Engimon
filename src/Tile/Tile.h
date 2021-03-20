@@ -3,39 +3,39 @@
 
 #define NULL -1
 
-#include "../Engimon/Engimon.h"
-#include "../Engimon/Charmamon.h"
 #include <string>
+#include "../Engimon/Engimon.h"
+#include "../Engimon/Engimons.h"
 using namespace std;
 
 class Tile {
-    private:
-        string type;
-        bool isEngimonOccupied;
-        Engimon* wild_engimon;
-    
-    public:
-        // user-defined ctor for non engimon-occupied tiles
-        Tile(string _type);
+ private:
+  string type;
+  bool isEngimonOccupied;
+  Engimon* wild_engimon;
 
-        // user-defined ctor for engimon-occupied tiles
-        Tile(string _type, Engimon* _wild_engimon);
+ public:
+  // user-defined ctor for non engimon-occupied tiles
+  Tile(string _type);
 
-        // cctor
-        Tile(const Tile&);
+  // user-defined ctor for engimon-occupied tiles
+  Tile(string _type, Engimon* _wild_engimon);
 
-        // dtor
-        ~Tile();
+  // cctor
+  Tile(const Tile&);
 
-        // getter
-        string getType();
-        bool getIsEngimonOccupied();
-        Engimon getWildEngimon();
+  // dtor
+  ~Tile();
 
-        // setter
-        void setType(string _type);
-        void setIsEngimonOccupied(bool _isEngimonOccupied);
-        void setWildEngimon(Engimon* _wild_engimon);
+  // getter
+  string getType();
+  bool getIsEngimonOccupied();
+  Engimon getWildEngimon();
+
+  // setter
+  void setType(string _type);
+  void setIsEngimonOccupied(bool _isEngimonOccupied);
+  void setWildEngimon(Engimon* _wild_engimon);
 };
 
 #endif

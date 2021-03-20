@@ -51,8 +51,6 @@ class Engimon {
   void interact();
   void addSkill(Skill);
   float calcTypeAdvantage(Engimon&);
-  Engimon operator+(Engimon&);
-  static Engimon GenerateEngimon(std::string, std::string);
   Engimon Breed(Engimon&);
 
  private:
