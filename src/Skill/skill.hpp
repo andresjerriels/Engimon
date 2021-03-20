@@ -51,21 +51,48 @@ class Skill{
         int n_elmt;
         int maxElm; 
     public:
+        Skill();
         Skill(string name); // Menerima nama Engimon atau nama skill.
         Skill(const Skill& s);
         ~Skill();
         void getType();
         void addElTypeToElArr (string element);
         void printSkillInfo();
+        string getName();
+        int getBasePower();
+        int getMastery();
+        string getSkillElements();
+        int getnSkillElmt();
 };
 
-class SkillItem {
-    private :
-        Skill skill;
-        int amount;
-    public :
-        //void learn(int invenIdx, Engimon& engimon, Inventory& inventory); // Tunggu engimon dan inven
-};
+
+
+// class EngiDummy{
+//     private :
+//         string e_name;
+//         vector<Skill> skills;
+//     public :
+//         EngiDummy(string name);
+//         void addSkill(string nameSkill);
+//         void printSkills();
+// };
+
+// class InvenDummy{
+//     private :
+//         vector<SkillItem> items;
+//     public :
+//         InvenDummy(){
+//             this->items = vector<SkillItem>;
+//         }
+//         learn(int idx){
+//             // Sementara ini, delete dari vector
+//             this->items[idx].
+//         }
+
+// };
+
+Skill returnSkill(string name);
+
 
 
 #endif

@@ -1,5 +1,14 @@
 #include "skill.hpp"
 
+Skill::Skill(){
+    this->name = "NONE";
+    this->basepower = 0;
+    this->mastery = 0;
+    this->elements = new string[total_element_in_game];
+    this->n_elmt = 0;
+    this->maxElm = total_element_in_game;
+}
+
 Skill::Skill(string name){
     bool isEngimonNameOrUniqueSkill = false;
     int k = 0;
@@ -93,7 +102,6 @@ void Skill::addElTypeToElArr (string element){
 }
 
 void Skill::printSkillInfo(){
-    cout << "Skill Information:" << endl;
     cout << "- Name        : " << name << endl;
     cout << "- Basepower   : " << basepower << endl;
     cout << "- Mastery     : " << mastery << endl;
@@ -109,6 +117,70 @@ void Skill::printSkillInfo(){
         }
     }
     cout << endl;
+}
+
+string Skill::getName(){
+    return name;
+}
+int Skill::getBasePower(){
+    return basepower;
+}
+int Skill::getMastery(){
+    return basepower;
+}
+string Skill::getSkillElements(){
+    return *elements;
+}
+int Skill::getnSkillElmt(){
+    return n_elmt;
+}
+
+Skill returnSkill(string name){
+    return Skill(name);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EngiDummy::EngiDummy(string name){
+    this->e_name = name;
+    this->skills = vector<Skill>();
+}
+
+void EngiDummy::addSkill(string nameSkill){
+    Skill s(nameSkill);
+    this->skills.push_back(s);
+}
+
+void EngiDummy::printSkills(){
+    for (int i=0; i<skills.size(); i++){
+        skills[i].printSkillInfo();
+    }
 }
 
 

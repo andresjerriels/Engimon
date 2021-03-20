@@ -5,6 +5,7 @@
 #include "Inventory.hpp"
 #include "../Engimon/Engimon.h"
 #include "../Skill/skill.hpp"
+#include "../Skill/skillitem.hpp"
 #include <vector>
 using namespace std;
 
