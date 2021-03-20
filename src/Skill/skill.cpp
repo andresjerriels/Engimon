@@ -79,7 +79,7 @@ Skill::Skill(const Skill& s){
 }
 
 Skill::~Skill(){
-    delete elements;
+    delete[] elements;
 }
 
 void Skill::addElTypeToElArr (string element){
