@@ -6,7 +6,7 @@ Charmamon::Charmamon(std::string name) : Engimon(name, FIRE) {
   this->skills.push_back(Skill("Charmamon"));
 }
 
-Dittimon::Dittimon(std::string name) : Engimon(name, GROUND) {
+Dittimon::Dittimon(std::string name) : Engimon(name, WATER, GROUND) {
   this->species = "Dittimon";
   this->slogan = "{Blm kepikiran slogan}";
   this->skills.push_back(Skill("Dittimon"));
@@ -42,13 +42,13 @@ Tentamon::Tentamon(std::string name) : Engimon(name, WATER) {
   this->skills.push_back(Skill("Tentamon"));
 }
 
-Torchimon::Torchimon(std::string name) : Engimon(name, FIRE) {
+Torchimon::Torchimon(std::string name) : Engimon(name, FIRE, ELECTRIC) {
   this->species = "Torchimon";
   this->slogan = "{Blm kepikiran slogan}";
   this->skills.push_back(Skill("Torchimon"));
 }
 
-Tortomon::Tortomon(std::string name) : Engimon(name, WATER) {
+Tortomon::Tortomon(std::string name) : Engimon(name, WATER, ICE) {
   this->species = "Tortomon";
   this->slogan = "Ada engimon kura-kura";
   this->skills.push_back(Skill("Tortomon"));
