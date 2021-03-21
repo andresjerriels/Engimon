@@ -33,12 +33,12 @@ void Player::setActiveEngimon(Engimon _engimon) {
 bool Player::isInventoryFull() {  // true kalo boleh ditambahin -> otomatis
                                   // maksimum MaxCapacity - 1
   int count = 0;
-  count += inventoryEngimon.countItemInventory();
+  count += inventoryEngimon.countItemInInventory();
 
-  typename std::vector<SkillItem>::iterator it;
-  it = inventorySkill.begin();
+  typename std::vector<SkillItem>::iterator it = inventorySkill.getContainer().begin();
+
   int i = 0;
-  while (it != inventorySkill.end()) {
+  while (it != inventorySkill.getContainer().end()) {
     count += inventorySkill[i].getItemAmount();
     i++;
     it++;
@@ -61,12 +61,11 @@ void Player::addToInvEngimon(Engimon engi) {
 
 void Player::addToInvSkill(string _skill) {
   if (!isInventoryFull()) {  // jika tidak full
-    typename std::vector<SkillItem>::iterator it;
-    it = inventorySkill.begin();
+    typename std::vector<SkillItem>::iterator it = inventorySkill.getContainer().begin();
     int i = 0;
     bool found = false;
 
-    while (!found && it != inventorySkill.end()) {
+    while (!found && it != inventorySkill.getContainer().end()) {
       if (_skill == inventorySkill[i].skill->getName()) {
         found = true;
       }

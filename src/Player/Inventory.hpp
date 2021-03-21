@@ -15,6 +15,11 @@ public:
 		container = vector<T>();
 	}
 
+	//getter
+	vector<T> getContainer() const {
+		return this->container;
+	}
+
 	void addToInventory(T item) { //menambahkan item (enigmon / skill item) ke dalam container
 		container.push_back(item);
 	}
@@ -77,6 +82,10 @@ public:
 			cout << iterator << ' ';
 		}
 		cout << endl;
+	}
+
+	T operator[](int i) { //operator overloading elemen inventory
+		return container[i];
 	}
 	
 };

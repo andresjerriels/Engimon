@@ -18,7 +18,7 @@ protected:
 	const int MaxCapacity;
 
 public:
-	Player();
+	Player(std::string starter_name);
 	
 	//getter
 	Inventory<Engimon> getInventoryEngimon() const;
@@ -30,7 +30,7 @@ public:
 
 	bool isInventoryFull();
 	void addToInvEngimon(Engimon engi);
-	void addToInvSkill(SkillItem skill);
+	void addToInvSkill(std::string _skill);
 
 	~Player();
 	
