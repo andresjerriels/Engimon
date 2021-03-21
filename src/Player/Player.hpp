@@ -21,7 +21,9 @@ public:
 	Player();
 	
 	//getter
-	Engimon getActiveEngimon();
+	Inventory<Engimon> getInventoryEngimon() const;
+	Inventory<SkillItem> getInventorySkill() const;
+	Engimon getActiveEngimon() const;
 
 	//set activeEngimon
 	void setActiveEngimon(Engimon); // asumsi Engimon valid
