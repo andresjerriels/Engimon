@@ -5,6 +5,11 @@ SkillItem::SkillItem(int amount, string skillName) {
     this->amount = amount;
     this->skill = new Skill(skillName);
 }
+
+Skill* SkillItem::getSkill() const {
+	return skill;
+}
+
 int SkillItem::getItemAmount(){
     return amount;
 }

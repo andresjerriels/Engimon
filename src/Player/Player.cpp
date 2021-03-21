@@ -1,6 +1,6 @@
 #include "Player.hpp"
 #include <iostream>
-#include "../Engimon/Charmamon.h"
+#include "../Engimon/Engimons.h"
 #include "../Engimon/Engimon.h"
 #include "../Skill/skill.hpp"
 #include "../Skill/skillitem.hpp"
@@ -8,7 +8,7 @@
 using namespace std;
 
 Player::Player(std::string starter_name) : MaxCapacity(20) {
-  Charmamon starterEngimon(starter_name);  // <- ini engimon starter
+  Charmamon starterEngimon(starter_name);  // <- ini engimon starter, bisa dipilih atau engga(?)
   this->activeEngimon = starterEngimon;
 }
 
@@ -66,7 +66,7 @@ void Player::addToInvSkill(string _skill) {
     bool found = false;
 
     while (!found && it != inventorySkill.getContainer().end()) {
-      if (_skill == inventorySkill[i].skill->getName()) {
+      if (_skill == inventorySkill[i].getSkill()->getName()) {
         found = true;
       }
 

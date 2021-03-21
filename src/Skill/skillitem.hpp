@@ -2,11 +2,12 @@
 #include "../Engimon/Engimon.h"
 
 class SkillItem {
-    private :
+    protected :
         Skill *skill;
         int amount;
     public :
         SkillItem(int amount, string skillname);
+        Skill* getSkill() const;
         int getItemAmount();
         void incrementItemAmount();
         void decrementItemAmount();
