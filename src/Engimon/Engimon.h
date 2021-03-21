@@ -34,6 +34,7 @@ class Engimon {
   int cum_exp;
 
  public:
+  Engimon();
   Engimon(std::string, Element, Element = NONE);
 
   // Setters

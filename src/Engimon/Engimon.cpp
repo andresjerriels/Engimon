@@ -4,10 +4,15 @@
 #include "Engimon.h"
 #include "EngimonFactory.h"
 
+Engimon::Engimon() {
+  Engimon("", NONE, NONE);
+}
+
 Engimon::Engimon(std::string _name, Element elmt1, Element elmt2) {
   this->name = _name;
   this->elements.clear();
-  this->elements.push_back(elmt1);
+  if (elmt1 != NONE)
+    this->elements.push_back(elmt1);
   if (elmt2 != NONE)
     this->elements.push_back(elmt2);
   this->level = 1;
