@@ -61,7 +61,7 @@ class Engimon {
   void printSkills();
   void printInfo();
 
- private:
+ protected:
   bool isSkillLearned(const Skill&);
   bool canLearn(const Skill&);
 };
