@@ -40,6 +40,7 @@ class Engimon {
   // Setters
   void setName(std::string);
   void setSpecies(std::string);
+  void setParents(Engimon, Engimon);
   void setElements(Element, Element = NONE);
   void setLevel(int);
   void setExp(int);
@@ -57,10 +58,11 @@ class Engimon {
   void gainExp(int);
   void interact();
   void addSkill(Skill);
-  float calcTypeAdvantage(Engimon&);
+  float calcTypeAdvantage(const Engimon&);
   Engimon Breed(Engimon&);
   void printSkills();
   void printInfo();
+  float getPowerLevel(const Engimon&);
 
  protected:
   bool isSkillLearned(const Skill&);

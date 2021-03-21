@@ -30,6 +30,13 @@ void Engimon::setSpecies(std::string _species) {
   this->species = _species;
 }
 
+void Engimon::setParents(Engimon p1, Engimon p2) {
+  parentNames[0] = p1.getName();
+  parentSpecies[0] = p1.getSpecies();
+  parentNames[1] = p2.getName();
+  parentSpecies[1] = p2.getSpecies();
+}
+
 void Engimon::setElements(Element elmt1, Element elmt2) {
   this->elements.clear();
   this->elements.push_back(elmt1);
@@ -108,14 +115,14 @@ void Engimon::addSkill(Skill s) {
         }
       }
     } else {
-      throw "Tipe engimon tidak kompatibel";
+      throw "Elemen engimon tidak kompatibel";
     }
   } else {
     throw "Engimon sudah memiliki skill tersebut";
   }
 }
 
-float Engimon::calcTypeAdvantage(Engimon& e) {
+float Engimon::calcTypeAdvantage(const Engimon& e) {
   std::vector<Element> otherElements = e.getElements();
   float maxAdv = -1;
 
@@ -134,32 +141,51 @@ Engimon Engimon::Breed(Engimon& e) {
   // baru working untuk masing parent engimon hanya satu element
   // program untuk dual element parent bisa jadi redundan terhadap fungsi
   // calcTypeAdvantage
+  if (&e != this) {
+    if (level >= 30 && e.getLevel() >= 30) {
+      float adv1 = calcTypeAdvantage(e);
+      float adv2 = e.calcTypeAdvantage(*this);
+      std::string nm;
+      std::string spc;
 
-  if (this->level >= 30 && e.getLevel() >= 30) {
-    float adv1 = calcTypeAdvantage(e);
-    float adv2 = e.calcTypeAdvantage(*this);
-    std::string nm;
-    std::string spc;
+      level = level - 30;
+      e.setLevel(e.getLevel() - 30);
 
-    if (adv1 >= adv2) {  // jika sama, pakai spesies parent 1
-      spc = this->getSpecies();
+      // jika elemen sama atau advantage lebih tinggi
+      if (elements == e.getElements() || adv1 > adv2) {
+        spc = species;
+      } else if (adv1 < adv2) {  // elemen berbeda dan advantage lebih kecil
+        spc = e.getSpecies();
+      } else {  // elemen berbeda dan advantage sama
+        if ((elements[0] == FIRE && e.getElements()[0] == ELECTRIC) ||
+            (elements[0] == ELECTRIC && e.getElements()[0] == FIRE)) {
+          spc = "Torchimon";
+        } else if ((elements[0] == WATER && e.getElements()[0] == GROUND) ||
+                   (elements[0] == GROUND && e.getElements()[0] == WATER)) {
+          spc = "Dittimon";
+        } else {
+          spc = "Tortomon";
+        }
+      }
+
+      cout << adv1 << ", " << adv2 << endl;
+
+      cout << "You hatched a new " << spc << "!" << endl << "Name: ";
+      cin >> nm;
+
+      Engimon child = EngimonFactory::createEngimon(nm, spc);
+
+      child.setParents(*this, e);
+
+      // Add skill parentnya
+
+      return child;
+
     } else {
-      spc = e.getSpecies();
+      throw "Level parent < 30";
     }
-
-    cout << adv1 << ", " << adv2 << endl;
-
-    cout << "You hatched a new " << spc << "!" << endl << "Name: ";
-    cin >> nm;
-
-    Engimon child = EngimonFactory::createEngimon(nm, spc);
-
-    // Add skill parentnya
-
-    return child;
-
   } else {
-    throw "Level parent < 30";
+    throw "Cannot breed with self";
   }
 }
 
@@ -178,9 +204,24 @@ void Engimon::printInfo() {
        << "Parent Names: " << parentNames[0] << ", " << parentNames[1] << endl
        << "Parent Species: " << parentSpecies[0] << ", " << parentSpecies[1]
        << endl
-       << "ELements: " << elements[0] << endl
+       << "ELement(s): " << ElementTypes[elements[0]]
+       << (elements.size() == 2 ? (", " + ElementTypes[elements[1]]) : "")
+       << endl
+       << "Level: " << level << endl
+       << "Exp: " << exp << endl
+       << "Cumulative Exp: " << cum_exp << endl
        << "Skills: " << endl;
   printSkills();
+}
+
+float Engimon::getPowerLevel(const Engimon& e) {
+  float powerLvl = level * calcTypeAdvantage(e);
+
+  for (auto i = skills.begin(); i != skills.end(); i++) {
+    powerLvl += (*i).getBasePower() * (*i).getMastery();
+  }
+
+  return powerLvl;
 }
 
 bool Engimon::isSkillLearned(const Skill& s) {
