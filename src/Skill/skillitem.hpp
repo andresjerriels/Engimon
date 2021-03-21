@@ -1,14 +1,31 @@
 #include "skill.hpp"
+#include "../Player/Inventory.hpp"
 #include "../Engimon/Engimon.h"
 
 class SkillItem {
-    protected :
+    private :
         Skill *skill;
         int amount;
     public :
+        // Constructor
+        SkillItem();
         SkillItem(int amount, string skillname);
-        Skill* getSkill() const;
+
+        // Copy Constructor
+        SkillItem(const SkillItem&);
+
+        // Destructor
+        ~SkillItem();
+
+        // Getters
         int getItemAmount();
+        Skill getSkill();
+
+        // Setters
+        void setSkill(Skill*);
+        void setAmount(int);
+
+        // Methods
         void incrementItemAmount();
         void decrementItemAmount();
         void printSkillItem();

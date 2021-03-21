@@ -73,7 +73,7 @@ Skill::Skill(string name) {
       this->maxElm = total_element_in_game;
 
     } else {
-      delete[] elements;
+      delete elements;
     }
   }
 }
@@ -90,8 +90,62 @@ Skill::Skill(const Skill& s) {
   }
 }
 
+// Destruktor
 Skill::~Skill() {
-  delete[] elements;
+  delete elements;
+}
+
+// Getters
+string Skill::getName() {
+  return name;
+}
+
+int Skill::getBasePower() {
+  return basepower;
+}
+
+int Skill::getMastery() {
+  return mastery;
+}
+
+string Skill::getSkillElements() {
+  return *elements;
+}
+
+int Skill::getnSkillElmt() {
+  return n_elmt;
+}
+
+// Setters
+void Skill::setName(string name) {
+  this->name = name;
+}
+
+void Skill::setBasePower(int basepower) {
+  this->basepower = basepower;
+}
+
+void Skill::setMastery(int mastery) {
+  this->mastery = mastery;
+}
+
+void Skill::setSkillElements(string* elements) {
+  delete this->elements;
+  this->elements = elements;
+}
+void Skill::setnSkillElmt(int n_elmt) {
+  this->n_elmt = n_elmt;
+}
+
+// Methods}
+
+bool Skill::isSkillElement(string element) {
+  for (int i = 0; i < n_elmt; i++) {
+    if (elements[i].compare(element) == 0) {
+      return true;
+    }
+  }
+  return false;
 }
 
 void Skill::addElTypeToElArr(string element) {
@@ -108,8 +162,6 @@ void Skill::printSkillInfo() {
   cout << "- Name        : " << name << endl;
   cout << "- Basepower   : " << basepower << endl;
   cout << "- Mastery     : " << mastery << endl;
-  cout << "- nElmt       : " << n_elmt << endl;
-  cout << "- maxElm      : " << maxElm << endl;
   cout << "- Element(s)  : ";
   for (int i = 0; i < total_element_in_game; i++) {
     cout << elements[i];
@@ -122,36 +174,5 @@ void Skill::printSkillInfo() {
   cout << endl;
 }
 
-string Skill::getName() const {
-  return name;
-}
-int Skill::getBasePower() const {
-  return basepower;
-}
-int Skill::getMastery() const {
-  return basepower;
-}
-string* Skill::getSkillElements() const {
-  return elements;
-}
-int Skill::getnSkillElmt() const {
-  return n_elmt;
-}
-
-Skill& Skill::operator=(const Skill& s) {
-  this->name = s.name;
-  this->basepower = s.basepower;
-  this->mastery = s.mastery;
-  this->n_elmt = s.n_elmt;
-  this->maxElm = s.maxElm;
-  delete[] this->elements;
-  this->elements = new string[maxElm];
-  for (int i = 0; i < n_elmt; i++) {
-    this->elements[i] = s.elements[i];
-  }
-  return *this;
-}
-
 Skill returnSkill(string name) {
   return Skill(name);
-}
