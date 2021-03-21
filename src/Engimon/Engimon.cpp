@@ -13,6 +13,8 @@ Engimon::Engimon(std::string _name, Element elmt1, Element elmt2) {
   this->level = 1;
   this->exp = 0;
   this->cum_exp = 0;
+  this->parentNames = {"", ""};
+  this->parentSpecies = {"", ""};
 }
 
 void Engimon::setName(std::string _name) {
@@ -76,16 +78,37 @@ void Engimon::interact() {
   std::cout << "[" << this->name << "]: " << this->slogan << std::endl;
 }
 
-// void Engimon::addSkill(Skill s) {
-//   if (!isSkillLearned(s)) {
-//     if (canLearn(s)) {
-//     } else {
-//       throw "Tipe engimon tidak kompatibel";
-//     }
-//   } else {
-//     throw "Engimon ini sudah memiliki skill tersebut";
-//   }
-// }
+void Engimon::addSkill(Skill s) {
+  // Jika skill belum dimiliki engimon
+  if (!isSkillLearned(s)) {
+    // Jika tipe engimon sesuai dengan tipe skill
+    if (canLearn(s)) {
+      // Jika skill kurang dari 4
+      if (skills.size() < 4) {
+        skills.push_back(s);
+        cout << name << " berhasil mempelajari skill " << s.getName() << endl;
+      } else {  // Skill sudah 4
+        int pilihan;
+        cout << "Skill engimon sudah penuh, pilih skill untuk ditukar" << endl;
+        printSkills();
+        cout << "Masukkan pilihan (1/2/3/4): ";
+        cin >> pilihan;
+        if (1 <= pilihan && pilihan <= 4) {
+          string oldSkillName = skills[pilihan - 1].getName();
+          skills[pilihan - 1] = s;
+          cout << name << " berhasil melupakan skill " << oldSkillName
+               << " dan mempelajari skill " << s.getName() << endl;
+        } else {
+          throw "Nomor skill tidak valid";
+        }
+      }
+    } else {
+      throw "Tipe engimon tidak kompatibel";
+    }
+  } else {
+    throw "Engimon sudah memiliki skill tersebut";
+  }
+}
 
 float Engimon::calcTypeAdvantage(Engimon& e) {
   std::vector<Element> otherElements = e.getElements();
@@ -135,10 +158,41 @@ Engimon Engimon::Breed(Engimon& e) {
   }
 }
 
+void Engimon::printSkills() {
+  for (auto i = skills.begin(); i != skills.end(); i++) {
+    cout << "Skill " << i - skills.begin() + 1 << endl;
+    (*i).printSkillInfo();
+    cout << endl;
+  }
+}
+
+void Engimon::printInfo() {
+  cout << "Name: " << name << endl
+       << "Species: " << species << endl
+       << "Slogan: " << slogan << endl
+       << "Parent Names: " << parentNames[0] << ", " << parentNames[1] << endl
+       << "Parent Species: " << parentSpecies[0] << ", " << parentSpecies[1]
+       << endl
+       << "ELements: " << elements[0] << endl
+       << "Skills: " << endl;
+  printSkills();
+}
+
 bool Engimon::isSkillLearned(const Skill& s) {
   for (auto i = skills.begin(); i != skills.end(); i++) {
     if ((*i).getName() == s.getName()) {
       return true;
+    }
+  }
+  return false;
+}
+
+bool Engimon::canLearn(const Skill& s) {
+  for (auto i = elements.begin(); i != elements.end(); i++) {
+    for (auto j = 0; j < s.getnSkillElmt(); j++) {
+      if (ElementTypes[(*i)] == s.getSkillElements()[j]) {
+        return true;
+      }
     }
   }
   return false;

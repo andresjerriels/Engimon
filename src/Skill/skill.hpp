@@ -71,8 +71,9 @@ class Skill {
   string getName() const;
   int getBasePower() const;
   int getMastery() const;
-  string getSkillElements() const;
+  string* getSkillElements() const;
   int getnSkillElmt() const;
+  Skill& operator=(const Skill&);
 };
 
 Skill returnSkill(string name);

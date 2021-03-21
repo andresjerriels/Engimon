@@ -8,6 +8,12 @@
 
 enum Element { NONE = -1, FIRE, WATER, ELECTRIC, GROUND, ICE };
 
+// const std::map<Element, string> elementString = {{FIRE, "Fire"},
+//                                                  {WATER, "Water"},
+//                                                  {ELECTRIC, "Electric"},
+//                                                  {GROUND, "Ground"},
+//                                                  {ICE, "Ice"}};
+
 const float typeAdvTable[5][5] = {{1, 0, 1, 0.5, 2},
                                   {2, 1, 0, 1, 1},
                                   {1, 2, 1, 0, 1.5},
@@ -52,6 +58,8 @@ class Engimon {
   void addSkill(Skill);
   float calcTypeAdvantage(Engimon&);
   Engimon Breed(Engimon&);
+  void printSkills();
+  void printInfo();
 
  private:
   bool isSkillLearned(const Skill&);

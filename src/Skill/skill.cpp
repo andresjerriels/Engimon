@@ -131,11 +131,25 @@ int Skill::getBasePower() const {
 int Skill::getMastery() const {
   return basepower;
 }
-string Skill::getSkillElements() const {
-  return *elements;
+string* Skill::getSkillElements() const {
+  return elements;
 }
 int Skill::getnSkillElmt() const {
   return n_elmt;
+}
+
+Skill& Skill::operator=(const Skill& s) {
+  this->name = s.name;
+  this->basepower = s.basepower;
+  this->mastery = s.mastery;
+  this->n_elmt = s.n_elmt;
+  this->maxElm = s.maxElm;
+  delete[] this->elements;
+  this->elements = new string[maxElm];
+  for (int i = 0; i < n_elmt; i++) {
+    this->elements[i] = s.elements[i];
+  }
+  return *this;
 }
 
 Skill returnSkill(string name) {
