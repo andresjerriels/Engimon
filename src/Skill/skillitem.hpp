@@ -1,10 +1,9 @@
 #include "skill.hpp"
-#include "../Player/Inventory.hpp"
-#include "../Engimon/Engimon.h"
+
 
 class SkillItem {
     private :
-        Skill *skill;
+        Skill skill;
         int amount;
     public :
         // Constructor
@@ -18,18 +17,20 @@ class SkillItem {
         ~SkillItem();
 
         // Getters
-        int getItemAmount();
-        Skill getSkill();
+        int getItemAmount() const;
+        Skill getSkill() const;
 
         // Setters
-        void setSkill(Skill*);
+        void setSkill(Skill);
         void setAmount(int);
 
         // Methods
         void incrementItemAmount();
         void decrementItemAmount();
         void printSkillItem();
-        void learn(int invenItemIdx, int invenEngiIdx);
+        // void learn(int EngiInvenIdx,
+        //               Inventory<Engimon> EngiInventory,
+        //               Inventory<SkillItem> SIinventory);
 };
 
 SkillItem returnSkillItem(int amount, string skillname);

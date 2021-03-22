@@ -66,7 +66,7 @@ void Player::addToInvSkill(string _skill) {
     bool found = false;
 
     while (!found && it != inventorySkill.getContainer().end()) {
-      if (_skill == inventorySkill[i].getSkill()->getName()) {
+      if (_skill == inventorySkill[i].getSkill().getName()) {
         found = true;
       }
 

@@ -4,7 +4,7 @@ Skill::Skill() {
   this->name = "NONE";
   this->basepower = 0;
   this->mastery = 0;
-  this->elements = new string[total_element_in_game];
+  this->elements = vector<string>();
   this->n_elmt = 0;
   this->maxElm = total_element_in_game;
 }
@@ -35,8 +35,8 @@ Skill::Skill(string name) {
     this->mastery = 0;
     this->n_elmt = 1;
     this->maxElm = total_element_in_game;
-    this->elements = new string[maxElm];
-    this->elements[0] = EngimonBaseInfo[k][2];
+    this->elements = vector<string>();
+    this->elements.push_back(EngimonBaseInfo[k][2]);
 
   }
   // Bukan nama Engimon atau unique skill, berarti nama learnable skill atau
@@ -45,7 +45,7 @@ Skill::Skill(string name) {
     bool isSkillName = false;
     int jName;
     int countElm = 0;
-    this->elements = new string[total_element_in_game];
+    this->elements = vector<string>();
     //
     // total_element_in_game digunakan karena skill diklasifikasikan berdasarkan
     // elemen.
@@ -59,7 +59,7 @@ Skill::Skill(string name) {
                                  // setidaknya 1 kali.
             jName = j;
           }
-          addElTypeToElArr(ElementTypes[i]);
+          this->elements.push_back(ElementTypes[i]);
           countElm++;
           break;
         }
@@ -72,8 +72,6 @@ Skill::Skill(string name) {
       this->n_elmt = countElm;
       this->maxElm = total_element_in_game;
 
-    } else {
-      delete elements;
     }
   }
 }
@@ -84,35 +82,35 @@ Skill::Skill(const Skill& s) {
   this->mastery = s.mastery;
   this->n_elmt = s.n_elmt;
   this->maxElm = s.maxElm;
-  this->elements = new string[maxElm];
+  this->elements = vector<string>();
   for (int i = 0; i < n_elmt; i++) {
-    this->elements[i] = s.elements[i];
+    this->elements.push_back(s.elements[i]);
   }
 }
 
 // Destruktor
 Skill::~Skill() {
-  delete elements;
+
 }
 
 // Getters
-string Skill::getName() {
+string Skill::getName() const {
   return name;
 }
 
-int Skill::getBasePower() {
+int Skill::getBasePower() const {
   return basepower;
 }
 
-int Skill::getMastery() {
+int Skill::getMastery() const {
   return mastery;
 }
 
-string Skill::getSkillElements() {
-  return *elements;
+vector<string> Skill::getSkillElements() const {
+  return elements;
 }
 
-int Skill::getnSkillElmt() {
+int Skill::getnSkillElmt() const {
   return n_elmt;
 }
 
@@ -129,8 +127,7 @@ void Skill::setMastery(int mastery) {
   this->mastery = mastery;
 }
 
-void Skill::setSkillElements(string* elements) {
-  delete this->elements;
+void Skill::setSkillElements(vector<string> elements) {
   this->elements = elements;
 }
 void Skill::setnSkillElmt(int n_elmt) {
@@ -163,16 +160,15 @@ void Skill::printSkillInfo() {
   cout << "- Basepower   : " << basepower << endl;
   cout << "- Mastery     : " << mastery << endl;
   cout << "- Element(s)  : ";
-  for (int i = 0; i < total_element_in_game; i++) {
+  for (int i = 0; i < elements.size(); i++) {
     cout << elements[i];
-    if (elements[i + 1].compare("") != 0) {
-      if (i != total_element_in_game - 1 && elements[i + 1].compare("") != 0) {
+    if (i != elements.size()-1) {
         cout << ", ";
-      }
     }
   }
-  cout << endl;
+  cout << endl << endl;
 }
 
 Skill returnSkill(string name) {
   return Skill(name);
+}
