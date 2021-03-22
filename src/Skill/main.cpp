@@ -8,12 +8,14 @@ int main(){
     // ash.setActiveEngimon(charmamon);
     // ash.addToInvSkill("Hydro Cannon");
 
+    cout << "Construct skill and Print" << endl;
     Skill a("Hydro Cannon");
     a.printSkillInfo();
 
     Skill b("Cold Burn");
     b.printSkillInfo();
 
+    cout << "Construct skillItem and Print" << endl;
     SkillItem siTremor(5, "Tremor");
     SkillItem siIBlast(4, "Ice Blast");
 
@@ -24,7 +26,12 @@ int main(){
     invsi.addToInventory(siTremor);
     invsi.addToInventory(siIBlast);
 
+    siTremor.learn();
+    siIBlast.learn();
     
+    cout << "After learn" << endl;
+    cout << siTremor;
+    cout << siIBlast;
 
 
 }

@@ -56,5 +56,8 @@ ostream& operator<<(ostream &os, const SkillItem& si){
 }
 
 void SkillItem::learn(){
-  decrementItemAmount();
+  if (amount > 0){
+    decrementItemAmount();
+  }
+  else throw "You don't have the skill item";
 }
