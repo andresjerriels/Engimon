@@ -206,19 +206,18 @@ Engimon Engimon::Breed(Engimon& e) {
              j != sortedParentBSkills.end()) {
         // Mastery skill parent A > parent B
         if ((*i).getMastery() > (*j).getMastery()) {
-          if (!child.isSkillLearned(*i)) {
+          if (!child.isSkillLearned(*i) && child.canLearn(*i)) {
             child.addSkill(*i);
           }
           i++;
-        } else if ((*i).getMastery() <
-                   (*j).getMastery()) {  // Mastery skill parent A > parent B
-          if (!child.isSkillLearned(*j)) {
+        } else if ((*i).getMastery() < (*j).getMastery()) {  // Mastery skill parent A < parent B
+          if (!child.isSkillLearned(*j) && child.canLearn(*j)) {
             child.addSkill(*j);
           }
           j++;
         } else {  // Mastery skill parent A = parent B
           string skillName = (*i).getName();
-          if (!child.isSkillLearned(*i)) {
+          if (!child.isSkillLearned(*i) && child.canLearn(*i)) {
             if (e.isSkillLearned(*i)) {
               Skill newSkill = (*i);
               newSkill.setMastery(newSkill.getMastery() + 1);
@@ -233,17 +232,15 @@ Engimon Engimon::Breed(Engimon& e) {
 
       if (child.getSkills().size() < 4) {
         if (i == sortedParentASkills.end()) {
-          while (child.getSkills().size() < 4 &&
-                 j != sortedParentBSkills.end()) {
-            if (!child.isSkillLearned(*j)) {
+          while (child.getSkills().size() < 4 && j != sortedParentBSkills.end()) {
+            if (!child.isSkillLearned(*j) && child.canLearn(*j)) {
               child.addSkill(*j);
             }
             j++;
           }
         } else {
-          while (child.getSkills().size() < 4 &&
-                 i != sortedParentASkills.end()) {
-            if (!child.isSkillLearned(*i)) {
+          while (child.getSkills().size() < 4 && i != sortedParentASkills.end()) {
+            if (!child.isSkillLearned(*i) && child.canLearn(*i)) {
               child.addSkill(*i);
             }
             i++;
