@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <vector>
 
@@ -18,8 +19,8 @@ Engimon::Engimon(std::string _name, Element elmt1, Element elmt2) {
   this->level = 1;
   this->exp = 0;
   this->cum_exp = 0;
-  this->parentNames = {"", ""};
-  this->parentSpecies = {"", ""};
+  this->parentNames = {"None", "None"};
+  this->parentSpecies = {"None", "None"};
 }
 
 void Engimon::setName(std::string _name) {
@@ -77,6 +78,10 @@ int Engimon::getCumExp() const {
 
 std::vector<Element> Engimon::getElements() const {
   return this->elements;
+}
+
+std::vector<Skill> Engimon::getSkills() const {
+  return this->skills;
 }
 
 void Engimon::gainExp(int xp) {
@@ -177,10 +182,76 @@ Engimon Engimon::Breed(Engimon& e) {
 
       child.setParents(*this, e);
 
-      // Add skill parentnya
+      // Hapus skill unik anak
+      child.clearSkills();
+
+      // Urut skill parent A sesuai mastery
+      vector<Skill> sortedParentASkills = skills;
+      sort(sortedParentASkills.begin(), sortedParentASkills.end(),
+           [](const Skill& l, const Skill& r) {
+             return l.getMastery() > r.getMastery();
+           });
+
+      // Urut skill parent B sesuai mastery
+      vector<Skill> sortedParentBSkills = e.getSkills();
+      sort(sortedParentBSkills.begin(), sortedParentBSkills.end(),
+           [](Skill const& l, Skill const& r) {
+             return l.getMastery() > r.getMastery();
+           });
+
+      auto i = sortedParentASkills.begin();
+      auto j = sortedParentBSkills.begin();
+
+      while (child.getSkills().size() < 4 && i != sortedParentASkills.end() &&
+             j != sortedParentBSkills.end()) {
+        // Mastery skill parent A > parent B
+        if ((*i).getMastery() > (*j).getMastery()) {
+          if (!child.isSkillLearned(*i)) {
+            child.addSkill(*i);
+          }
+          i++;
+        } else if ((*i).getMastery() <
+                   (*j).getMastery()) {  // Mastery skill parent A > parent B
+          if (!child.isSkillLearned(*j)) {
+            child.addSkill(*j);
+          }
+          j++;
+        } else {  // Mastery skill parent A = parent B
+          string skillName = (*i).getName();
+          if (!child.isSkillLearned(*i)) {
+            if (e.isSkillLearned(*i)) {
+              Skill newSkill = (*i);
+              newSkill.setMastery(newSkill.getMastery() + 1);
+              child.addSkill(newSkill);
+            } else {
+              child.addSkill(*i);
+            }
+          }
+          i++;
+        }
+      }
+
+      if (child.getSkills().size() < 4) {
+        if (i == sortedParentASkills.end()) {
+          while (child.getSkills().size() < 4 &&
+                 j != sortedParentBSkills.end()) {
+            if (!child.isSkillLearned(*j)) {
+              child.addSkill(*j);
+            }
+            j++;
+          }
+        } else {
+          while (child.getSkills().size() < 4 &&
+                 i != sortedParentASkills.end()) {
+            if (!child.isSkillLearned(*i)) {
+              child.addSkill(*i);
+            }
+            i++;
+          }
+        }
+      }
 
       return child;
-
     } else {
       throw "Level parent < 30";
     }
@@ -189,11 +260,14 @@ Engimon Engimon::Breed(Engimon& e) {
   }
 }
 
+void Engimon::clearSkills() {
+  skills.clear();
+}
+
 void Engimon::printSkills() {
   for (auto i = skills.begin(); i != skills.end(); i++) {
     cout << "Skill " << i - skills.begin() + 1 << endl;
     (*i).printSkillInfo();
-    cout << endl;
   }
 }
 

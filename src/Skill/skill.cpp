@@ -3,7 +3,7 @@
 Skill::Skill() {
   this->name = "NONE";
   this->basepower = 0;
-  this->mastery = 0;
+  this->mastery = 1;
   this->elements = vector<string>();
   this->n_elmt = 0;
   this->maxElm = total_element_in_game;
@@ -32,7 +32,7 @@ Skill::Skill(string name) {
   if (isEngimonNameOrUniqueSkill) {
     this->name = EngimonBaseInfo[k][1];
     this->basepower = USkillBP[k];
-    this->mastery = 0;
+    this->mastery = 1;
     this->n_elmt = 1;
     this->maxElm = total_element_in_game;
     this->elements = vector<string>();
@@ -68,7 +68,7 @@ Skill::Skill(string name) {
     if (isSkillName) {
       this->name = name;
       this->basepower = LearnableSkillBP[jName];
-      this->mastery = 0;
+      this->mastery = 1;
       this->n_elmt = countElm;
       this->maxElm = total_element_in_game;
 
