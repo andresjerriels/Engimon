@@ -169,6 +169,4 @@ void Skill::printSkillInfo() {
   cout << endl << endl;
 }
 
-Skill returnSkill(string name) {
-  return Skill(name);
-}
+

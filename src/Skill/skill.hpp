@@ -2,10 +2,12 @@
 #include <cstring>
 #include <iostream>
 #include <vector>
+#include "../Engimon/Engimon.h"
 using namespace std;
 
 #ifndef __SKILL_HPP__
 #define __SKILL_HPP__
+
 
 const string ElementTypes[5] = {"Fire","Water","Electric","Ground","Ice"};
 const string EngimonBaseInfo[10][3] =   {  // Enginame, UniqueSkill, EngimonElement
@@ -81,9 +83,6 @@ class Skill{
         void printSkillInfo();
 
 };
-
-// Fungsi yang mengconstruct dan mengembalikan Skill.
-Skill returnSkill(string name);
 
 
 

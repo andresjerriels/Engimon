@@ -17,13 +17,14 @@ int main(){
     SkillItem siTremor(5, "Tremor");
     SkillItem siIBlast(4, "Ice Blast");
 
-    siTremor.printSkillItem();
-    siIBlast.printSkillItem();
+    cout << siTremor;
+    cout << siIBlast;
 
     Inventory<SkillItem> invsi = Inventory<SkillItem>();
     invsi.addToInventory(siTremor);
     invsi.addToInventory(siIBlast);
-    //invsi.printInventory()
+
+    
 
 
 }

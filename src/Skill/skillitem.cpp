@@ -50,31 +50,11 @@ void SkillItem::decrementItemAmount() {
   amount--;
 }
 
-void SkillItem::printSkillItem() {
-  cout << amount << " " << skill.getName() << endl;
+ostream& operator<<(ostream &os, const SkillItem& si){
+  os << si.getItemAmount() << " " << si.getSkill().getName() << endl;
+  return os;
 }
 
-// void SkillItem::learn(int EngiInvenIdx,
-//                       Inventory<Engimon> EngiInventory,
-//                       Inventory<SkillItem> SIinventory)
-// {
-//     vector<Element> vectorEngiElmt = EngiInventory.itemInIventory(EngiInvenIdx).getElements();
-//     string elemtSkill = this->skill->getSkillElements();
-//     if (amount > 0)
-//     {
-//         for (int i=0; i<vectorEngiElmt.size(); i++){
-//             for (int j=0; j < skill->getnSkillElmt(); j++){
-//                 if (vectorEngiElmt[i] == skill->getSkillElements()[j] ){
-//                   EngiInventory.itemInIventory(EngiInvenIdx).addSkill(returnSkill(skill->getName()));
-//                   if(amount==1){
-//                     SIinventory.removeFromInventory(*this);
-//                   }
-//                 }
-//             }
-//         }
-//     }
-// }
-
-SkillItem returnSkillItem(int amount, string skillname) {
-  return SkillItem(amount, skillname);
+void SkillItem::learn(){
+  decrementItemAmount();
 }

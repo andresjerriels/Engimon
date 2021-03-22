@@ -1,5 +1,5 @@
 #include "skill.hpp"
-
+#include "../Player/Inventory.hpp"
 
 class SkillItem {
     private :
@@ -16,6 +16,9 @@ class SkillItem {
         // Destructor
         ~SkillItem();
 
+        // Operator
+        friend ostream& operator<<(ostream&, const SkillItem&);
+
         // Getters
         int getItemAmount() const;
         Skill getSkill() const;
@@ -27,10 +30,7 @@ class SkillItem {
         // Methods
         void incrementItemAmount();
         void decrementItemAmount();
-        void printSkillItem();
-        // void learn(int EngiInvenIdx,
-        //               Inventory<Engimon> EngiInventory,
-        //               Inventory<SkillItem> SIinventory);
+        void learn();
 };
 
-SkillItem returnSkillItem(int amount, string skillname);
+// SkillItem returnSkillItem(int amount, string skillname);
