@@ -2,7 +2,7 @@
 
 Tile::Tile(string _type) {
   type = _type;
-  isEngimonOccupied = false;
+  //isEngimonOccupied = false;
   wild_engimon = NULL;
 }
 
@@ -13,7 +13,7 @@ Tile::Tile(string _type, Engimon* _wild_engimon) {
 
 Tile::Tile(const Tile& other) {
   this->type = other.type;
-  this->isEngimonOccupied = other.isEngimonOccupied;
+  //this->isEngimonOccupied = other.isEngimonOccupied;
   this->wild_engimon = other.wild_engimon;
 }
 
@@ -37,8 +37,14 @@ void Tile::setType(string _type) {
   type = _type;
 }
 
+/*
 void Tile::setIsEngimonOccupied(bool _isEngimonOccupied) {
   isEngimonOccupied = _isEngimonOccupied;
+}
+*/
+
+bool Tile::isEngimonOccupied(){
+  return wild_engimon != NULL;
 }
 
 void Tile::setWildEngimon(Engimon* _wild_engimon) {
