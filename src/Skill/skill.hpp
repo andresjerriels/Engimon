@@ -2,10 +2,12 @@
 #include <cstring>
 #include <iostream>
 #include <vector>
+#include "../Engimon/Engimon.h"
 using namespace std;
 
 #ifndef __SKILL_HPP__
 #define __SKILL_HPP__
+
 
 const string ElementTypes[5] = {"Fire","Water","Electric","Ground","Ice"};
 const string EngimonBaseInfo[10][3] =   {  // Enginame, UniqueSkill, EngimonElement
@@ -47,7 +49,7 @@ class Skill{
         string name;
         int basepower;
         int mastery;
-        string *elements;
+        vector<string> elements;
         int n_elmt;
         int maxElm; 
     public:
@@ -62,27 +64,25 @@ class Skill{
         ~Skill();
 
         // Getters
-        string getName();
-        int getBasePower();
-        int getMastery();
-        string getSkillElements();
-        int getnSkillElmt();
+        string getName() const;
+        int getBasePower() const;
+        int getMastery() const;
+        vector<string> getSkillElements() const;
+        int getnSkillElmt() const;
 
         // Setters
         void setName(string);
         void setBasePower(int);
         void setMastery(int);
-        void setSkillElements(string *);
+        void setSkillElements(vector<string>);
         void setnSkillElmt(int);
 
         // Methods
         bool isSkillElement(string element);
         void addElTypeToElArr(string element);
         void printSkillInfo();
-};
 
-// Fungsi yang mengconstruct dan mengembalikan Skill.
-Skill returnSkill(string name);
+};
 
 
 

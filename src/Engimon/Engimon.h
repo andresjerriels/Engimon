@@ -53,6 +53,7 @@ class Engimon {
   int getExp() const;
   int getCumExp() const;
   std::vector<Element> getElements() const;
+  std::vector<Skill> getSkills() const;
 
   // Methods
   void gainExp(int);
@@ -60,6 +61,7 @@ class Engimon {
   void addSkill(Skill);
   float calcTypeAdvantage(const Engimon&);
   Engimon Breed(Engimon&);
+  void clearSkills();
   void printSkills();
   void printInfo();
   float getPowerLevel(const Engimon&);
