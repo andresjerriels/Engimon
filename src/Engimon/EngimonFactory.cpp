@@ -34,6 +34,33 @@ Engimon EngimonFactory::createEngimon(string name, int species) {
   }
 }
 
+Engimon EngimonFactory::createEngimon(int species) {
+  switch (species) {
+    case 0:
+      return Charmamon("Wild Charmamon");
+    case 1:
+      return Pikamon("Wild Pikamon");
+    case 2:
+      return Electromon("Wild Electromon");
+    case 3:
+      return Molemon("Wild Molemon");
+    case 4:
+      return Torchimon("Wild Torchimon");
+    case 5:
+      return Dittimon("Wild Dittimon");
+    case 6:
+      return Mamomon("Wild Mamomon");
+    case 7:
+      return Tentamon("Wild Tentamon");
+    case 8:
+      return Yetimon("Wild Yetimon");
+    case 9:
+      return Tortomon("Wild Tortomon");
+    default:
+      throw "Invalid species";
+  }
+}
+
 Engimon EngimonFactory::createEngimon(string name, string species) {
   if (speciesMap.count(species)) {
     return createEngimon(name, speciesMap[species]);

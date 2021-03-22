@@ -12,6 +12,7 @@ class EngimonFactory {
   static map<string, int> speciesMap;
 
  public:
+  static Engimon createEngimon(int species);
   static Engimon createEngimon(string name, int species);
   static Engimon createEngimon(string name, string species);
 };
