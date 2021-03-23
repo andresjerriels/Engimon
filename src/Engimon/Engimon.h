@@ -66,6 +66,8 @@ class Engimon {
   void printInfo();
   float getPowerLevel(const Engimon&);
 
+  friend ostream& operator<<(ostream&, const Engimon&);
+
  protected:
   bool isSkillLearned(const Skill&);
   bool canLearn(const Skill&);

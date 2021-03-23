@@ -4,21 +4,23 @@
 #include "Engimons.h"
 
 int main(int argc, char const* argv[]) {
-  Engimon test = EngimonFactory::createEngimon("P1", "Charmamon");
-  Engimon test2 = EngimonFactory::createEngimon("P2", "Charmamon");
+  Engimon test = EngimonFactory::createEngimon("P1", "Tortomon");
+  Engimon test2 = EngimonFactory::createEngimon("P2", "Dittimon");
 
-  test.setLevel(30);
-  test2.setLevel(30);
+  test.setLevel(31);
+  test2.setLevel(31);
+  cout << test;
 
   try {
 
-    test.addSkill(Skill("Flame Claw"));
+    test2.addSkill(Skill("Tremor"));
+    test2.addSkill(Skill("Water Spill"));
 
     // test.addSkill(Skill("Fire Breath"));
     // test.addSkill(Skill("Fire Bolt"));
 
-    test.addSkill(Skill("Flame Punch"));
-    test2.addSkill(Skill("Flame Punch"));
+    // test.addSkill(Skill("Flame Punch"));
+    test.addSkill(Skill("Frostbite"));
 
     Engimon anak = test.Breed(test2);
     anak.printInfo();

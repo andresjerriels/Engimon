@@ -147,7 +147,7 @@ Engimon Engimon::Breed(Engimon& e) {
   // program untuk dual element parent bisa jadi redundan terhadap fungsi
   // calcTypeAdvantage
   if (&e != this) {
-    if (level >= 30 && e.getLevel() >= 30) {
+    if (level > 30 && e.getLevel() > 30) {
       float adv1 = calcTypeAdvantage(e);
       float adv2 = e.calcTypeAdvantage(*this);
       std::string nm;
@@ -250,7 +250,7 @@ Engimon Engimon::Breed(Engimon& e) {
 
       return child;
     } else {
-      throw "Level parent < 30";
+      throw "Level parent <= 30";
     }
   } else {
     throw "Cannot breed with self";
@@ -313,4 +313,11 @@ bool Engimon::canLearn(const Skill& s) {
     }
   }
   return false;
+}
+
+ostream& operator<<(ostream &os, const Engimon& e){
+  vector<Element> el = e.getElements();
+  os << e.getName() << " (" << ElementTypes[el[0]] << (el.size() == 2 ? (", " + ElementTypes[el[1]] + ")") : ")") 
+     << " Lvl " << e.getLevel() << endl;
+  return os;
 }
