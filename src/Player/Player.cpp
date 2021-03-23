@@ -25,6 +25,10 @@ Engimon Player::getActiveEngimon() const {
   return this->activeEngimon;
 }
 
+int Player::getMaxCapacity() {
+  return this->MaxCapacity;
+}
+
 // set activeEngimon -> asumsi parameter valid
 void Player::setActiveEngimon(Engimon _engimon) {
   this->activeEngimon = _engimon;
@@ -82,6 +86,17 @@ void Player::addToInvSkill(string _skill) {
       SkillItem temp_skillitem(
           1, _skill);  // nanti di SkillItem buat constructor user define
       inventorySkill.addToInventory(temp_skillitem);
+    }
+  }
+}
+
+void Player::removeFromInvSkill() { //menghapus jika amount dari skillitem dalam inventory habis
+  if (this->getMaxCapacity() > 0) {
+    for (auto it = inventorySkill.getContainer().begin(); it != inventorySkill.getContainer().end(); ++it) {
+      if (inventorySkill[it].getItemAmount() == 0) {
+        inventorySkill.erase(it);
+        i--;
+      }
     }
   }
 }

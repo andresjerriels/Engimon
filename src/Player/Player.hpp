@@ -24,6 +24,7 @@ public:
 	Inventory<Engimon> getInventoryEngimon() const;
 	Inventory<SkillItem> getInventorySkill() const;
 	Engimon getActiveEngimon() const;
+	int getMaxCapacity() const;
 
 	//set activeEngimon
 	void setActiveEngimon(Engimon); // asumsi Engimon valid
@@ -31,6 +32,8 @@ public:
 	bool isInventoryFull();
 	void addToInvEngimon(Engimon engi);
 	void addToInvSkill(std::string _skill);
+
+	void removeFromInvSkill(); //menghapus jika amount dari skillitem dalam inventory habis
 
 	~Player();
 	
