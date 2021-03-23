@@ -1,14 +1,17 @@
 #include "Player.hpp"
 #include <iostream>
-#include "../Engimon/Engimons.h"
 #include "../Engimon/Engimon.h"
+#include "../Engimon/EngimonFactory.h"
 #include "../Skill/skill.hpp"
 #include "../Skill/skillitem.hpp"
 #include "Inventory.hpp"
 using namespace std;
 
-Player::Player(std::string starter_name) : MaxCapacity(20) {
-  Charmamon starterEngimon(starter_name);  // <- ini engimon starter, bisa dipilih atau engga(?)
+Player::Player() : MaxCapacity(20) {
+}
+
+Player::Player(std::string starter_name, int species) : MaxCapacity(20) {
+  Engimon starterEngimon = EngimonFactory::createEngimon(starter_name, species);  // <- ini engimon starter, bisa dipilih atau engga(?)
   this->activeEngimon = starterEngimon;
 }
 
@@ -25,7 +28,7 @@ Engimon Player::getActiveEngimon() const {
   return this->activeEngimon;
 }
 
-int Player::getMaxCapacity() {
+int Player::getMaxCapacity() const{
   return this->MaxCapacity;
 }
 
@@ -90,13 +93,22 @@ void Player::addToInvSkill(string _skill) {
   }
 }
 
-void Player::removeFromInvSkill() { //menghapus jika amount dari skillitem dalam inventory habis
-  if (this->getMaxCapacity() > 0) {
-    for (auto it = inventorySkill.getContainer().begin(); it != inventorySkill.getContainer().end(); ++it) {
-      if (inventorySkill[it].getItemAmount() == 0) {
-        inventorySkill.erase(it);
-        i--;
-      }
-    }
-  }
+// Eror
+// void Player::removeFromInvSkill() { //menghapus jika amount dari skillitem dalam inventory habis
+//   if (this->getMaxCapacity() > 0) {
+//     for (auto it = inventorySkill.getContainer().begin(); it != inventorySkill.getContainer().end(); ++it) {
+//       if (inventorySkill[it].getItemAmount() == 0) {
+//         inventorySkill.erase(it);
+//         i--;
+//       }
+//     }
+//   }
+// }
+
+Player& Player::operator=(const Player& p) {
+  inventoryEngimon = p.inventoryEngimon;
+  inventorySkill = p.inventorySkill;
+  activeEngimon = p.activeEngimon;
+
+  return *this;
 }

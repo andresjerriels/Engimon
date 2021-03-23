@@ -1,7 +1,7 @@
 #ifndef _TILE_H_
 #define _TILE_H_
 
-#define NULL -1
+// #define NULL -1
 
 #include <string>
 #include "../Engimon/Engimon.h"

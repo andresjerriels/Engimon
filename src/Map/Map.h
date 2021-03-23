@@ -4,6 +4,26 @@
 #include <bits/stdc++.h> //ini ntar diubah mager soalnya tadi
 using namespace std;
 
+class Position{
+private:
+    int x;
+    int y;
+
+public:
+    //ctor
+    Position();
+    Position(int _x, int _y);
+    //getter
+    int getX() const;
+    int getY() const;
+    //setter
+    void setX(int _x);
+    void setY(int _y);
+    //overload operator + dan -
+    Position operator+(Position const& other);
+    Position operator-(Position const& other);
+};
+
 class Map
 {
 private:
@@ -16,6 +36,7 @@ private:
 
 public:
     //ctor
+    Map();
     Map(string);
     //dtor
     ~Map();
@@ -31,26 +52,6 @@ public:
     bool isPlayerPosition(int x, int y);
     //move player
     void move(char direction);
-};
-
-class Position{
-private:
-    int x;
-    int y;
-
-public:
-    //ctor
-    Position();
-    Position::Position(int _x, int _y);
-    //getter
-    int getX();
-    int getY();
-    //setter
-    void setX(int _x);
-    void setY(int _y);
-    //overload operator + dan -
-    Position operator+(Position& const other);
-    Position operator-(Position& const other);
 };
 
 #endif

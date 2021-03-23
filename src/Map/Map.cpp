@@ -9,6 +9,12 @@ map<char, Position*> Map::moveMap = {
 };
 
 // ctor
+Map::Map() {
+    width = 0;
+    length = 0;
+    nWildEngimon = 0;
+}
+
 Map::Map(string filename)
 {
     string line;
@@ -78,6 +84,7 @@ void Map::PrintMap(){
             else if(mapMatrix[i][j].isEngimonOccupied()) cout << "E";
             else if(mapMatrix[i][j].getType() == "Sea") cout << "o";
             else cout << "-";
+            cout << " ";
         }
         cout << endl;
     }
@@ -97,7 +104,8 @@ void Map::GenerateEngimon(){
     int level = rand() % 5;
 
     if (!mapMatrix[y][x].getIsEngimonOccupied()){
-        mapMatrix[y][x].setWildEngimon(&EngimonFactory::createEngimon(species));
+        Engimon wild = EngimonFactory::createEngimon(species);
+        mapMatrix[y][x].setWildEngimon(&wild);
         mapMatrix[y][x].getWildEngimon().gainExp(level*100);
     }
 
@@ -112,13 +120,13 @@ void Map::move(char direction){
     Position *moveDirection = moveMap[direction];
     playerPosition = playerPosition + *moveDirection;
 
-    if(playerPosition.getX() < 0 || playerPosition.getY() < 0){
+    if(playerPosition.getX() < 0 || playerPosition.getX() >= width || playerPosition.getY() < 0 || playerPosition.getY() >= length){
         playerPosition = playerPosition - *moveDirection;
-        delete moveDirection;
+        // delete moveDirection;
         throw "Position out of bound";
     }
 
-    delete moveDirection;
+    // delete moveDirection;
 }
 
 Position::Position(){
@@ -131,11 +139,11 @@ Position::Position(int _x, int _y){
     y = _y;
 }
 
-int Position::getX(){
+int Position::getX() const{
     return x;
 }
 
-int Position::getY(){
+int Position::getY() const{
     return y;
 }
 
@@ -147,12 +155,12 @@ void Position::setY(int _y){
     y = _y;
 }
 
-Position Position::operator+(Position& const other){
+Position Position::operator+(Position const& other){
     Position newPosition((this->x + other.getX()), (this->y + other.getY()));
     return newPosition;
 }
 
-Position Position::operator-(Position& const other){
+Position Position::operator-(Position const& other){
     Position newPosition((this->x - other.getX()), (this->y - other.getY()));
     return newPosition;
 }

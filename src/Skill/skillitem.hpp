@@ -1,3 +1,6 @@
+#ifndef SKILLITEM_HPP
+#define SKILLITEM_HPP
+
 #include "skill.hpp"
 #include "../Player/Inventory.hpp"
 
@@ -34,3 +37,5 @@ class SkillItem {
 };
 
 // SkillItem returnSkillItem(int amount, string skillname);
+
+#endif

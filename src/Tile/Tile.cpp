@@ -26,7 +26,7 @@ string Tile::getType() {
 }
 
 bool Tile::getIsEngimonOccupied() {
-  return isEngimonOccupied;
+  return isEngimonOccupied();
 }
 
 Engimon Tile::getWildEngimon() {

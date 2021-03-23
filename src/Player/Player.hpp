@@ -18,7 +18,8 @@ protected:
 	const int MaxCapacity;
 
 public:
-	Player(std::string starter_name);
+	Player();
+	Player(std::string starter_name , int species);
 	
 	//getter
 	Inventory<Engimon> getInventoryEngimon() const;
@@ -35,7 +36,9 @@ public:
 
 	void removeFromInvSkill(); //menghapus jika amount dari skillitem dalam inventory habis
 
-	~Player();
+	// ~Player();
+
+	Player& operator=(const Player&);
 	
 };
 

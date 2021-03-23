@@ -216,7 +216,6 @@ Engimon Engimon::Breed(Engimon& e) {
           }
           j++;
         } else {  // Mastery skill parent A = parent B
-          string skillName = (*i).getName();
           if (!child.isSkillLearned(*i) && child.canLearn(*i)) {
             if (e.isSkillLearned(*i)) {
               Skill newSkill = (*i);
