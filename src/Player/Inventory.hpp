@@ -32,7 +32,7 @@ public:
 			counter++;
 			it++;
 		}
-		return counter;
+		return counter+1;
 	}
 
 	int searchIndexItemInInventory(T item) {
