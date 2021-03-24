@@ -84,7 +84,7 @@ void Game::start() {
       std::cerr << e.what() << '\n';
     } 
     
-    map->setLevelCapslock(player.getActiveEngimon()->getLevel());
+    map->setLevelCapslock(player->getActiveEngimon()->getLevel());
   } while (cmd != 'x');
 }
 
@@ -178,12 +178,12 @@ void Game::BreedingConfirmation(){
 void Game::changeActiveEngimonConfirmation(){
   int i;
   cout << "Your Engimon(s):\n";
-  player.getInventoryEngimon().printInventory();
+  player->getInventoryEngimon().printInventory();
 
   cout << "Choose an engimon: ";
   cin >> i;
-  if(i <= player.getInventoryEngimon().countItemInInventory()){
-    player.setActiveEngimon(i-1);
+  if(i <= player->getInventoryEngimon().countItemInInventory()){
+    player->setActiveEngimon(i-1);
   } else {
     throw "Index out of range";
   }

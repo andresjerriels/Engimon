@@ -65,7 +65,9 @@ bool Player::isInventoryFull() {  // true kalo udah gabisa ditambahin -> otomati
 
 void Player::addToInvEngimon(Engimon engi) {
   if (!isInventoryFull()) {
+    int index = activeEngimon - &inventoryEngimon[0];
     this->inventoryEngimon.addToInventory(engi);
+    activeEngimon = &inventoryEngimon[index];
   } else {
     std::cout << "Inventory Full!" << std::endl;
   }
