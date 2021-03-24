@@ -34,6 +34,20 @@ Engimon::Engimon(const Engimon& other){
   parentSpecies = other.parentSpecies;
 }
 
+Engimon& Engimon::operator=(const Engimon& other){
+  if(this != &other){
+    name = other.name;
+    elements.clear();
+    elements = other.elements;
+    level = other.level;
+    exp = other.exp;
+    cum_exp = other.cum_exp;
+    parentNames = other.parentNames;
+    parentSpecies = other.parentSpecies;
+  }
+  return *this;
+}
+
 void Engimon::setName(std::string _name) {
   this->name = _name;
 }

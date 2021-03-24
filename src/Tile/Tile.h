@@ -23,6 +23,8 @@ class Tile {
   // cctor
   Tile(const Tile&);
 
+  //assignment operator
+  Tile operator=(const Tile&);
   // dtor
   ~Tile();
 

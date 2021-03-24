@@ -37,6 +37,7 @@ class Engimon {
   Engimon();
   Engimon(std::string, Element, Element = NONE);
   Engimon(const Engimon& other);
+  Engimon& operator=(const Engimon& other);
 
   // Setters
   void setName(std::string);

@@ -5,11 +5,40 @@
 using namespace std;
 
 Game::Game(string filename) {
-  map = Map(filename);
+  map = new Map(filename);
   state = EXPLORE;
 }
 
+Game::~Game(){
+  delete map;
+}
+
+void Game::printCommandList(){
+  cout << "Here are the available commands:\n";
+  cout << "w/a/s/d: Move\n";
+  cout << "i: Interact with active engimon\n";
+  cout << "b: Battle with a nearby wild engimon\n";
+  cout << "x: Quit the game\n";
+  //lanjut
+}
+void Game::processCommand(char cmd){
+  try{
+    if(cmd == 'w' || cmd == 'a' || cmd == 's' || cmd == 'd') map->move(cmd);
+    else if(cmd == 'i') player.getActiveEngimon().interact();
+    else if(cmd ==  'x'){
+      cout << "Thank you for playing with us!\n";
+      cout << "       See you soon!\n"; 
+    } 
+    else if(cmd == 'b') cout << "battling\n";
+    else throw "Command not available!";
+  } catch (const char* err) {
+    cerr << err << endl;
+  }
+
+}
+
 void Game::start() {
+  char cmd;
   cout << "Welcome Player, please choose your starting Engimon." << endl
        << "1. Charmamon (Fire)" << endl
        << "2. Pikamon (Electric)" << endl
@@ -27,20 +56,16 @@ void Game::start() {
   Player newPlayer(engiName, engiChoice);
   player = newPlayer;
 
-  while (true) {
+  do {
+    map->PrintMap();
+    cin >> cmd;
     try {
-      char cmd;
-      map.PrintMap();
-      cin >> cmd;
-      if (cmd == 'i') {
-        player.getActiveEngimon().interact();
-      } else if (cmd == 'x') {
-        break;
-      } else {
-        map.move(cmd);
-      }
+      processCommand(cmd);
     } catch (const char* e) {
       std::cerr << e << '\n';
+      printCommandList();
     }
-  }
+  } while (cmd != 'x');
 }
+
+

@@ -9,6 +9,19 @@ Position::Position(int _x, int _y){
     y = _y;
 }
 
+Position::Position(const Position& other){
+    x = other.x;
+    y = other.y;
+}
+
+Position& Position::operator=(const Position& other){
+    if(this != &other){
+        x = other.x;
+        y = other.y;
+    }
+    return *this;
+}
+
 int Position::getX() const{
     return x;
 }

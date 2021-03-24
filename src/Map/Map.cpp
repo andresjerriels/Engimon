@@ -3,8 +3,8 @@
 
 // map<vector<Element>, char> Map::ElementCode = {
 //     {{WATER}, 'w'}, {{ICE}, 'i'},  {{FIRE}, 'f'}, {{GROUND}, 'g'},
-//     {{ELECTRIC, NONE}, 'e'}, {{FIRE, ELECTRIC}, 'l'}, {{WATER, ICE}, 's'}, {{WATER, GROUND}, 'n'},
-//     {{NONE, ELECTRIC}, 'e'}, {{ELECTRIC, FIRE}, 'l'}, {{ICE, WATER}, 's'}, {{GROUND, WATER}, 'n'}};
+//     {{ELECTRIC}, 'e'}, {{FIRE, ELECTRIC}, 'l'}, {{WATER, ICE}, 's'}, {{WATER, GROUND}, 'n'},
+//     {{ELECTRIC, FIRE}, 'l'}, {{ICE, WATER}, 's'}, {{GROUND, WATER}, 'n'}};
 
 int Map::maxWildEngimon = 10;
 
@@ -19,7 +19,9 @@ Map::Map(string filename)
 
     length = 0;
     
+    
     ifstream mapfile(filename);
+    
     while(getline(mapfile, line)){ //ambil line
         width = line.length();
         vector<Tile> linevector;
@@ -38,16 +40,16 @@ Map::Map(string filename)
         length++;
         initializeElementCode();
     }
-
     // random spawn point player
     int x = rand() % 12;
     int y = rand() % 10;
-
+    
     playerPosition.setX(x);
     playerPosition.setY(y);
-
+    
     nWildEngimon = 0;
     while(nWildEngimon < 5) GenerateEngimon();
+    
     levelCapslock = 3;
 }
 
@@ -56,22 +58,28 @@ Map::~Map()
 {
 
 }
-
 // cctor
 Map::Map(const Map& other){
-    this->mapMatrix = other.mapMatrix;
-    this->width = other.width;
-    this->length = other.length;
-    this->nWildEngimon = other.nWildEngimon;
+    mapMatrix = other.mapMatrix;
+    width = other.width;
+    length = other.length;
+    nWildEngimon = other.nWildEngimon;
+    playerPosition = other.playerPosition;
+    levelCapslock = other.levelCapslock;
+    initializeElementCode();
 }
 
 // assignment operator
 Map& Map::operator= (const Map& other){
     if (this != &other) {
-        this->mapMatrix = other.mapMatrix;
-        this->width = other.width;
-        this->length = other.length;
+        mapMatrix = other.mapMatrix;
+        width = other.width;
+        length = other.length;
+        nWildEngimon = other.nWildEngimon;
+        playerPosition = other.playerPosition;
+        levelCapslock = other.levelCapslock;
     }
+    initializeElementCode();
     return *this;
 }
 
@@ -117,7 +125,7 @@ void Map::GenerateEngimon(){
         // random level
         int level = rand() % 5; // ini belom fix
         Tile* tile = &mapMatrix[y][x];
-        if (!tile->isEngimonOccupied()){
+        if (!tile->isEngimonOccupied() && !isTilePlayerPosition(x,y)){
             if(tile->getType() == "sea") species = rand() % 6; //species grassland: 0 - 5
             else species = rand() % 5 + 5; // species sea: 5 - 9
 
@@ -137,7 +145,7 @@ void Map::move(char direction){
     playerPosition.setXY(direction);
     if(isPlayerPositionOutOfRange()) {
         playerPosition.resetXY(direction);
-        throw "Kamu menabrak tembok!\n";
+        throw "Kamu menabrak tembok!";
     } 
     moveWildEngimon();
     GenerateEngimon();
@@ -164,7 +172,7 @@ void Map::moveWildEngimon(){
                 switch (direction)
                 {
                 case 0: // ke atas
-                    if(i-1 >= 0 && i < length && !mapMatrix[i-1][j].isEngimonOccupied()){
+                    if(i-1 >= 0 && i < length && !mapMatrix[i-1][j].isEngimonOccupied() && !isTilePlayerPosition(j,i)){
                         mapMatrix[i-1][j].setWildEngimon(mapMatrix[i][j].getWildEngimonPointer());
                         mapMatrix[i][j].deleteWildEngimon();
                     }

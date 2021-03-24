@@ -9,13 +9,16 @@ enum State { EXPLORE, BATTLE, INVENTORY };
 class Game {
  private:
   State state;
-  Map map;
+  Map* map;
   Player player;
 
  public:
   Game(string);
+  ~Game();
   void getInput();
   void start();
+  void printCommandList();
+  void processCommand(char cmd);
 };
 
 #endif

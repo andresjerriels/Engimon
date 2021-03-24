@@ -15,6 +15,14 @@ Tile::Tile(const Tile& other) {
   wild_engimon = other.wild_engimon;
 }
 
+Tile Tile::operator=(const Tile& other){
+  if(this != &other){
+    type = other.type;
+    wild_engimon = other.wild_engimon;
+  }
+  return *this;
+}
+
 Tile::~Tile() {
   delete wild_engimon;
 }

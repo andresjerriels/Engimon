@@ -12,6 +12,8 @@ public:
     //ctor
     Position();
     Position(int _x, int _y);
+    Position(const Position& other);
+    Position& operator=(const Position& other);
     //getter
     int getX() const;
     int getY() const;
