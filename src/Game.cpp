@@ -18,6 +18,9 @@ void Game::printCommandList(){
   cout << "w/a/s/d: Move\n";
   cout << "i: Interact with active engimon\n";
   cout << "b: Battle with a nearby wild engimon\n";
+  cout << "e: Open engimon inventory\n";
+  cout << "t: Open skill inventory\n";
+  cout << "r: Breed two of your engimons\n";
   cout << "x: Quit the game\n";
   //lanjut
 }
@@ -31,6 +34,15 @@ void Game::processCommand(char cmd){
     } 
     else if(cmd == 'b') battle();
     else if(cmd == 'l') printCommandList();
+    else if(cmd == 'e'){
+      player.getInventoryEngimon().openEngimonInventory();
+    }
+    else if(cmd == 't'){
+      cout << "Your Skill(s):\n";
+      player.getInventorySkill().printInventory();
+    } else if (cmd == 'r'){
+      BreedingConfirmation();
+    }
     else throw "Command not available!\nEnter 'l' to see command list!";
   } catch (const char* err) {
     cerr << err << endl;
@@ -132,3 +144,26 @@ Tile* Game::battleConfirmation(){
   return tileswithEngimon[selection - 1];
 }
 
+void Game::BreedingConfirmation(){
+  int eng1, eng2;
+  cout << "Your Engimon(s):\n";
+  player.getInventoryEngimon().printInventory();
+
+  if(player.getInventoryEngimon().countItemInInventory() <= 1){
+    cout << "You only have " << player.getInventoryEngimon().countItemInInventory() << " engimon.\nYou need at least 2 of them to breed\n";
+  } else {
+    bool valid = false;
+    while(!valid){
+      cout << "Choose your first engimon: ";
+      cin >> eng1;
+      cout << "Choose your second engimon: ";
+      cin >> eng2;
+
+      // try{
+      //   player.getInventoryEngimon()[eng1].Breed((player.getInventoryEngimon()[eng2]));
+      // }
+      valid = true;
+    }
+
+  }
+}

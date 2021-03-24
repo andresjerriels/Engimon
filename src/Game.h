@@ -21,6 +21,7 @@ class Game {
   void processCommand(char cmd);
   void battle();
   Tile* battleConfirmation();
+  void BreedingConfirmation();
 };
 
 #endif
