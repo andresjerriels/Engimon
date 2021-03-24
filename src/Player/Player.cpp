@@ -37,7 +37,7 @@ void Player::setActiveEngimon(Engimon _engimon) {
   this->activeEngimon = _engimon;
 }
 
-bool Player::isInventoryFull() {  // true kalo boleh ditambahin -> otomatis
+bool Player::isInventoryFull() {  // true kalo udah gabisa ditambahin -> otomatis
                                   // maksimum MaxCapacity - 1
   int count = 0;
   count += inventoryEngimon.countItemInInventory();
@@ -51,7 +51,7 @@ bool Player::isInventoryFull() {  // true kalo boleh ditambahin -> otomatis
     it++;
   }
 
-  if (count < MaxCapacity) {
+  if (count >= MaxCapacity) {
     return true;
   } else {
     return false;
