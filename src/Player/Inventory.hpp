@@ -103,7 +103,7 @@ public:
 
 			if(cmd != "c"){
 				int i = stoi(cmd);
-				if(i < container.size()) container[i-1].printInfo();
+				if(i <= container.size()) container[i-1].printInfo();
 				else cout << "Number invalid" << endl;
 			}
 		} while (cmd != "c");
@@ -122,7 +122,7 @@ public:
 
 			if(cmd != "c"){
 				int i = stoi(cmd);
-				if(i < container.size()) cout << "using skill..\n";
+				if(i <= container.size()) cout << "using skill..\n";
 				else cout << "Number invalid" << endl;
 			}
 		} while (cmd != "c");

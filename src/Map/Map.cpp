@@ -131,7 +131,7 @@ void Map::GenerateEngimon(int minLvl, int maxLvl){
         int y = rand() % 10;
 
         // random level
-        int level = rand() % (maxLvl - minLvl) + minLvl; // ini belom fix
+        int level = rand() % (maxLvl - minLvl + 1) + minLvl; // ini belom fix
         Tile* tile = &mapMatrix[y][x];
         if (!tile->isEngimonOccupied() && !isTilePlayerPosition(x,y)){
             if(tile->getType() == "Grassland") species = rand() % 6; //species grassland: 0 - 5
