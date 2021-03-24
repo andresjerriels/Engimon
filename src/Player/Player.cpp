@@ -165,3 +165,11 @@ void Player::openSkillInventory(){
   } while (cmd != "c");
 
 }
+
+Engimon& Player::getEngiRefFromIndex(int i) {
+  if ( 0 <= i && i < inventoryEngimon.countItemInInventory()) {
+    return inventoryEngimon[i];
+  } else {
+    throw "Index out of range";
+  }
+}

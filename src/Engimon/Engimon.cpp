@@ -210,10 +210,11 @@ Engimon Engimon::Breed(Engimon& e) {
         }
       }
 
-      cout << adv1 << ", " << adv2 << endl;
+      cout << "You hatched a new " << spc << "!" << endl 
+           << "Please enter a name for your new engimon: ";
 
-      cout << "You hatched a new " << spc << "!" << endl << "Name: ";
-      cin >> nm;
+      cin.ignore();
+      getline(cin, nm);
 
       Engimon child = EngimonFactory::createEngimon(nm, spc);
 

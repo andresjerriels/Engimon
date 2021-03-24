@@ -81,7 +81,7 @@ public:
 		else {
 			for (iterator = container.begin(); 
 			iterator != container.end(); iterator++) {
-				cout << *iterator << endl;
+				cout << iterator - container.begin() + 1 << ". " << *iterator << endl;
 			}
 		}
 		cout << endl;

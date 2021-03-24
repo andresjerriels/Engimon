@@ -81,7 +81,8 @@ void Game::start() {
   cout << "* * * * * * * * * * * * * * * * * * * * *\n"
        << "* Enter your engimon's name:            *\n"
        << "* ";
-  cin >> engiName;
+  cin.ignore();
+  getline(cin, engiName);
 
   player = new Player(engiName, engiChoice - 1);
 
@@ -192,27 +193,25 @@ Tile* Game::battleConfirmation(){
 }
 
 void Game::BreedingConfirmation(){
-  int eng1, eng2;
-  printFormatKiri("Your Engimon(s):");
-  player->getInventoryEngimon().printInventory();
+  if (!player->isInventoryFull()) {
+    int eng1, eng2;
+    printFormatKiri("Your Engimon(s):");
+    player->getInventoryEngimon().printInventory();
 
-  if(player->getInventoryEngimon().countItemInInventory() <= 1){
-    printFormatKiri("You only have " + to_string(player->getInventoryEngimon().countItemInInventory()) + " engimon.");
-    printFormatKiri("You need at least 2 of them to breed.");
-  } else {
-    bool valid = false;
-    while(!valid){
+    if(player->getInventoryEngimon().countItemInInventory() <= 1){
+      printFormatKiri("You only have " + to_string(player->getInventoryEngimon().countItemInInventory()) + " engimon.");
+      printFormatKiri("You need at least 2 of them to breed.");
+    } else {
       cout << "* Choose your first engimon: ";
       cin >> eng1;
       cout << "* Choose your second engimon: ";
       cin >> eng2;
-
-      // try{
-      //   player->getInventoryEngimon()[eng1].Breed((player->getInventoryEngimon()[eng2]));
-      // }
-      valid = true;
+      
+      Engimon child = player->getEngiRefFromIndex(eng1-1).Breed(player->getEngiRefFromIndex(eng2-1));
+      player->addToInvEngimon(child);
     }
-
+  } else {
+    throw "Cannot breed with full inventory";
   }
 }
 
