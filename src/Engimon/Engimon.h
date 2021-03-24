@@ -67,7 +67,6 @@ class Engimon {
   void printSkills();
   void printInfo();
   float getPowerLevel(const Engimon&);
-
   friend ostream& operator<<(ostream&, const Engimon&);
 
  protected:
