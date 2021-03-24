@@ -53,7 +53,7 @@ Map::Map(string filename)
     nWildEngimon = 0;
     while(nWildEngimon < 5) GenerateEngimon(1, 3);
     
-    levelCapslock = 3;
+    levelCapslock = 1;
 }
 
 // dtor
@@ -247,6 +247,10 @@ vector <Tile*> Map::getTilesWithEngimonAroundPlayer(){
     if(x != 0 && mapMatrix[y][x - 1].isEngimonOccupied()) tilesWithEngimon.push_back(&mapMatrix[y][x - 1]);
     if(x != width - 1 && mapMatrix[y][x + 1].isEngimonOccupied()) tilesWithEngimon.push_back(&mapMatrix[y][x + 1]);
     return tilesWithEngimon;
+}
+
+void Map::decrementNWildEngimon(){
+    nWildEngimon--;
 }
 
 void Map::initializeElementCode(){
