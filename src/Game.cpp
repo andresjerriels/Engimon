@@ -92,13 +92,9 @@ void Game::battle(){
   Tile* tileWithEngimon = battleConfirmation();
 
   int playerPowerLevel, wildPowerLevel;
-  // float playerAdvantage = 0, wildAdvantage = 0;
 
   Engimon playerEngimon = *(player->getActiveEngimon());
   Engimon wildEngimon = tileWithEngimon->getWildEngimon();
-  
-  // vector<Element> playerELements = playerEngimon.getElements();
-  // vector<Element> wildELements = wildEngimon.getElements();
 
   playerPowerLevel = playerEngimon.getPowerLevel(wildEngimon);
   wildPowerLevel = wildEngimon.getPowerLevel(playerEngimon);
@@ -107,17 +103,6 @@ void Game::battle(){
 
   cout << playerEngimon.getName() << " power level: " << playerPowerLevel << endl;
   cout <<  wildEngimon.getName() << " power level: " << wildPowerLevel << endl;
-
-  // for (int i = 0; i < playerELements.size(); i++){
-  //     for (int j = 0; j < wildELements.size(); j++){
-  //         playerAdvantage = max(playerAdvantage, typeAdvTable[playerELements[i]][wildELements[j]]);
-  //         wildAdvantage = max(wildAdvantage, typeAdvTable[wildELements[j]][playerELements[i]]);
-  //     }
-  // }
-  // // power: level * element advantage + SUM(every skill’s base power * Mastery Level)
-  // // belom consider skilll
-  // playerPowerLevel = playerAdvantage * playerEngimon.getLevel();
-  // wildPowerLevel = wildAdvantage * wildEngimon.getLevel();
 
   if(playerPowerLevel > wildPowerLevel){
     cout << playerEngimon.getName() << " won!!\n";
@@ -133,6 +118,7 @@ void Game::battle(){
 
 Tile* Game::battleConfirmation(){
   int selection;
+  char continueSelection;
   
   vector<Tile*> tileswithEngimon = map->getTilesWithEngimonAroundPlayer();
   if(tileswithEngimon.size() > 1){
@@ -148,6 +134,16 @@ Tile* Game::battleConfirmation(){
     throw "There is no wild engimon around you!";
   }
 
+  cout << "Wild engimon info:\n";
+  tileswithEngimon[selection-1]->getWildEngimon().printInfo();
+  cout << "Continue battle (y/n)? ";
+  cin >> continueSelection;
+  
+
+  if (toupper(continueSelection) != 'Y') {
+    throw "Cancelling battle";
+  }
+  
   return tileswithEngimon[selection - 1];
 }
 
