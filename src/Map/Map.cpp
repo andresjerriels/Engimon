@@ -54,7 +54,6 @@ Map::Map(string filename)
     while(nWildEngimon < 5) GenerateEngimon(1, 3);
     
     levelCapslock = 3;
-
 }
 
 // dtor
