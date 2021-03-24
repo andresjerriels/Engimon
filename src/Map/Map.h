@@ -35,6 +35,7 @@ public:
     Map& operator= (const Map&);
     //method untuk mencetak peta
     void PrintMap();
+    void PrintNavigation();
     //method untuk generate wild engimon
     void GenerateEngimon(int minLvl, int maxLvl);
     //cek posisi player
@@ -63,8 +64,8 @@ public:
 // *                                 *
 // * * * * * * * * * * * * * * * * * *
 // *        Exploration Mode         *
-// * * * * * * * * * * * * * * * * * *
-// * * * - - - - - - o o o o o o * * *
+// * * * * * * * * * * * * * * * * * * * * *
+// *       - - - - - - o o o o o o         *
 // * * * - - - - - - o o o o o o * * *
 // * * * - - - - - - o o o o o o * * *
 // * * * - - - - - - o o o o o o * * *

@@ -94,11 +94,11 @@ public:
 	void openEngimonInventory(){
 		string cmd;
 		do{
-			cout << "Your Engimon(s):\n";
+			printFormatKiri("Your Engimon(s):");
 			printInventory();
-			cout << "- To see an engimon's detail, select a number\n";
-			cout << "- To close inventory, select 'c'\n\n";
-			cout << "What do you want to do?\n\n";
+			printFormatKiri("- To see an engimon's detail, select a number");
+			printFormatKiri("- To close inventory, select 'c'\n");
+			printFormatKiri("What do you want to do?\n");
 			cin >> cmd;
 
 			if(cmd != "c"){
@@ -113,11 +113,11 @@ public:
 	void openSkillInventory(){
 		string cmd;
 		do{
-			cout << "Your Skill(s):\n";
+			printFormatKiri("Your Skill(s):");
 			printInventory();
-			cout << "- To use a skill, select a number\n";
-			cout << "- To close inventory, select 'c'\n\n";
-			cout << "What do you want to do?\n\n";
+			printFormatKiri("- To use a skill, select a number");
+			printFormatKiri("- To close inventory, select 'c'\n");
+			printFormatKiri("What do you want to do?\n");
 			cin >> cmd;
 
 			if(cmd != "c"){
@@ -127,6 +127,14 @@ public:
 			}
 		} while (cmd != "c");
 
+	}
+
+	void printFormatKiri(string str){
+		cout << "* " << str << string((38-str.length()), ' ') << "*\n";
+	}
+
+	void printFormatKanan(string str){
+		cout << "* " << string((37-str.length()), ' ') << str << " *\n";
 	}
 	
 };

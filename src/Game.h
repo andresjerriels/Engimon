@@ -23,6 +23,8 @@ class Game {
   Tile* battleConfirmation();
   void BreedingConfirmation();
   void changeActiveEngimonConfirmation();
+  void printFormatKiri(string str);
+  void printFormatKanan(string str);
 };
 
 #endif

@@ -86,12 +86,27 @@ Map& Map::operator= (const Map& other){
     return *this;
 }
 
+void Map::PrintNavigation(){
+    cout << "* Navigation:                           *\n"
+         << "* W/w: Water engimon                    *\n"
+         << "* I/i: Ice engimon                      *\n"
+         << "* F/f: Fire engimon                     *\n"
+         << "* G/g: Ground engimon                   *\n"
+         << "* E/e: Electric engimon                 *\n"
+         << "* L/l: Fire/Electric engimon            *\n"
+         << "* S/s: Water/Ice engimon                *\n"
+         << "* N.n: Water/Ground engimon             *\n"
+         << "*                                       *\n"
+         << "* P: Player    X: Active Engimon        *\n";
+
+}
 void Map::PrintMap(){
     for (int i = -1; i <= length; i++){
-        for (int j = -1; j <= width; j++){
+        for (int j = -4; j <= width + 4; j++){
             // if (ada engimon) print blablabla
-            if(isPositionOutOfRange(j,i)){
-                cout << "*";
+            if(j == -4 || j == width + 4) cout << "*";
+            else if(isPositionOutOfRange(j,i)){
+                cout << " ";
             }
             else if (isTilePlayerPosition(j, i)){
                 printf("\033[1;33m");
@@ -158,10 +173,10 @@ void Map::move(const Player& player, char direction){
     playerPosition.setXY(direction);
     if(isPlayerPositionOutOfRange()) {
         playerPosition.resetXY(direction);
-        throw "Auch, you hit an invisible wall!";
+        throw "* * * * * * * * * * * * * * * * * * * * *\n* Ouch, you hit an invisible wall!      *";
     } else if(isPlayerTileContainEngimon()) {
         playerPosition.resetXY(direction);
-        throw "Auch, a wild engimon bit you!";
+        throw "* * * * * * * * * * * * * * * * * * * * *\n* Ouch, a wild engimon bit you!         *";
     }
     activeEngimonPosition = playerPosition;
     activeEngimonPosition.resetXY(direction);

@@ -14,15 +14,16 @@ Game::~Game(){
 }
 
 void Game::printCommandList(){
-  cout << "Here are the available commands:\n";
-  cout << "w/a/s/d: Move\n";
-  cout << "i: Interact with active engimon\n";
-  cout << "h: Change active engimon\n";
-  cout << "b: Battle with a nearby wild engimon\n";
-  cout << "e: Open engimon inventory\n";
-  cout << "t: Open skill inventory\n";
-  cout << "r: Breed two of your engimons\n";
-  cout << "x: Quit the game\n";
+  cout << "* * * * * * * * * * * * * * * * * * * * *\n";
+  cout << "* Here are the available commands:      *\n";
+  cout << "* w/a/s/d: Move                         *\n";
+  cout << "* i: Interact with active engimon       *\n";
+  cout << "* h: Change active engimon              *\n";
+  cout << "* b: Battle with a nearby wild engimon  *\n";
+  cout << "* e: Open engimon inventory             *\n";
+  cout << "* t: Open skill inventory               *\n";
+  cout << "* r: Breed two of your engimons         *\n";
+  cout << "* x: Quit the game                      *\n";
   //lanjut
 }
 void Game::processCommand(char cmd){
@@ -30,8 +31,9 @@ void Game::processCommand(char cmd){
     if(cmd == 'w' || cmd == 'a' || cmd == 's' || cmd == 'd') map->move(player, cmd);
     else if(cmd == 'i') player.getActiveEngimon()->interact();
     else if(cmd ==  'x'){
-      cout << "Thank you for playing with us!\n";
-      cout << "       See you soon!\n"; 
+      cout << "* * * * * * * * * * * * * * * * * * * * *\n";
+      cout << "*     Thank you for playing with us!    *\n";
+      cout << "*              See you soon!            *\n";
     } 
     else if(cmd == 'b') battle();
     else if(cmd == 'l') printCommandList();
@@ -53,26 +55,49 @@ void Game::processCommand(char cmd){
 }
 
 void Game::start() {
+  cout << "* * * * * * * * * * * * * * * * * * * * *\n"
+          "*                                       *\n"
+          "*         !! ENGIMON FACTORY !!         *\n"
+          "*                                       *\n"
+          "* * * * * * * * * * * * * * * * * * * * *\n"
+          "*               NEW GAME                *\n"
+          "* * * * * * * * * * * * * * * * * * * * *\n";
   char cmd;
-  cout << "Welcome Player, please choose your starting Engimon." << endl
-       << "1. Charmamon (Fire)" << endl
-       << "2. Pikamon (Electric)" << endl
+  cout << "* Welcome Player.                       *" << endl
+       << "* Choose your starting Engimon          *\n"
+       << "* 1. Charmamon (Fire)                   *" << endl
+       << "* 2. Pikamon (Electric)                 *" << endl
+       << "* * * * * * * * * * * * * * * * * * * * *"
        << endl;
 
   int engiChoice;
-  do {
-    cout << "Pilihan (1/2): ";
+  do {   
+    cout << "* Pilihan (1/2): ";
     cin >> engiChoice;
   } while (engiChoice < 1 || engiChoice > 2);
 
   string engiName;
-  cout << "Enter your engimon's name: ";
+  cout << "* * * * * * * * * * * * * * * * * * * * *\n"
+       << "* Enter your engimon's name:            *\n"
+       << "* ";
   cin >> engiName;
+  cout << "* * * * * * * * * * * * * * * * * * * * *\n\n";
   Player newPlayer(engiName, engiChoice - 1);
   player = newPlayer;
 
   do {
+    cout << "* * * * * * * * * * * * * * * * * * * * *\n"
+            "*                                       *\n"
+            "*         !! ENGIMON FACTORY !!         *\n"
+            "*                                       *\n"
+            "* * * * * * * * * * * * * * * * * * * * *\n"
+            "*            Exploration Mode           *\n"
+            "* * * * * * * * * * * * * * * * * * * * *\n";
     map->PrintMap();
+    cout << "* * * * * * * * * * * * * * * * * * * * *\n";
+    map->PrintNavigation();
+    cout << "* * * * * * * * * * * * * * * * * * * * *\n";
+    cout << "* Enter next command: ";
     cin >> cmd;
 
     try {
@@ -84,10 +109,19 @@ void Game::start() {
     } 
     
     map->setLevelCapslock(player.getActiveEngimon()->getLevel());
+    cout << "* * * * * * * * * * * * * * * * * * * * *\n\n";
   } while (cmd != 'x');
 }
 
 void Game::battle(){
+    cout << "* * * * * * * * * * * * * * * * * * * * *\n\n"
+          "* * * * * * * * * * * * * * * * * * * * *\n"
+          "*                                       *\n"
+          "*         !! ENGIMON FACTORY !!         *\n"
+          "*                                       *\n"
+          "* * * * * * * * * * * * * * * * * * * * *\n"
+          "*                BATTLE                 *\n"
+          "* * * * * * * * * * * * * * * * * * * * *\n";
   Tile* tileWithEngimon = battleConfirmation();
 
   int playerPowerLevel, wildPowerLevel;
@@ -96,16 +130,15 @@ void Game::battle(){
   Engimon playerEngimon = *player.getActiveEngimon();
   Engimon wildEngimon = tileWithEngimon->getWildEngimon();
   
-  // vector<Element> playerELements = playerEngimon.getElements();
-  // vector<Element> wildELements = wildEngimon.getElements();
-
   playerPowerLevel = playerEngimon.getPowerLevel(wildEngimon);
   wildPowerLevel = wildEngimon.getPowerLevel(playerEngimon);
   
-  cout << playerEngimon.getName() << " vs " << wildEngimon.getName() << endl;
-
-  cout << playerEngimon.getName() << " power level: " << playerPowerLevel << endl;
-  cout <<  wildEngimon.getName() << " power level: " << wildPowerLevel << endl;
+  printFormatKiri(playerEngimon.getName());
+  printFormatKiri("Power level: " + to_string(playerPowerLevel));
+  cout << "\n*                  vs                   *\n";
+  printFormatKanan(wildEngimon.getName()); cout << "\n";
+  printFormatKanan("Power level: " + to_string(wildPowerLevel));
+  cout << "* * * * * * * * * * * * * * * * * * * * *\n";
 
   // for (int i = 0; i < playerELements.size(); i++){
   //     for (int j = 0; j < wildELements.size(); j++){
@@ -119,15 +152,23 @@ void Game::battle(){
   // wildPowerLevel = wildAdvantage * wildEngimon.getLevel();
 
   if(playerPowerLevel > wildPowerLevel){
-    cout << playerEngimon.getName() << " won!!\n";
+    printFormatKiri(playerEngimon.getName() + " won!!");
     player.gainActiveEngimonExp(15*wildEngimon.getLevel());
     player.addToInvEngimon(wildEngimon);
     tileWithEngimon->deleteWildEngimon();
     map->decrementNWildEngimon();
   } else {
-    cout << wildEngimon.getName() << " won!!\n";
+    printFormatKiri(wildEngimon.getName() + " won!!");
     // player.removeFromInvEngimon(*playerEngimon);
   }
+}
+
+void Game::printFormatKiri(string str){
+cout << "* " << str << string((38-str.length()), ' ') << "*\n";
+}
+
+void Game::printFormatKanan(string str){
+cout << "* " << string((37-str.length()), ' ') << str << " *\n";
 }
 
 Tile* Game::battleConfirmation(){
@@ -135,16 +176,16 @@ Tile* Game::battleConfirmation(){
   
   vector<Tile*> tileswithEngimon = map->getTilesWithEngimonAroundPlayer();
   if(tileswithEngimon.size() > 1){
-    cout << "Choose a wild engimon:\n";
+    printFormatKiri("Choose a wild engimon:"); cout << endl;
     for (int i = 0; i < tileswithEngimon.size(); i++){
       cout << i + 1 << ". " << tileswithEngimon[i]->getWildEngimon().getName() << endl;
     }
-    cout << "Insert number: ";
+    cout << "* Insert number: ";
     cin >> selection;
   } else if (tileswithEngimon.size() == 1) {
     selection = 1;
   } else {
-    throw "There is no wild engimon around you!";
+    throw "* There is no wild engimon around you!  *";
   }
 
   return tileswithEngimon[selection - 1];
@@ -152,17 +193,18 @@ Tile* Game::battleConfirmation(){
 
 void Game::BreedingConfirmation(){
   int eng1, eng2;
-  cout << "Your Engimon(s):\n";
+  printFormatKiri("Your Engimon(s):");
   player.getInventoryEngimon().printInventory();
 
   if(player.getInventoryEngimon().countItemInInventory() <= 1){
-    cout << "You only have " << player.getInventoryEngimon().countItemInInventory() << " engimon.\nYou need at least 2 of them to breed\n";
+    printFormatKiri("You only have " + to_string(player.getInventoryEngimon().countItemInInventory()) + " engimon.");
+    printFormatKiri("You need at least 2 of them to breed.");
   } else {
     bool valid = false;
     while(!valid){
-      cout << "Choose your first engimon: ";
+      cout << "* Choose your first engimon: ";
       cin >> eng1;
-      cout << "Choose your second engimon: ";
+      cout << "* Choose your second engimon: ";
       cin >> eng2;
 
       // try{
@@ -176,10 +218,10 @@ void Game::BreedingConfirmation(){
 
 void Game::changeActiveEngimonConfirmation(){
   int i;
-  cout << "Your Engimon(s):\n";
+  printFormatKiri("Your Engimon(s):");
   player.getInventoryEngimon().printInventory();
-
-  cout << "Choose an engimon: ";
+  
+  cout << "* Choose an engimon: ";
   cin >> i;
   if(i <= player.getInventoryEngimon().countItemInInventory()){
     player.setActiveEngimon(i-1);
