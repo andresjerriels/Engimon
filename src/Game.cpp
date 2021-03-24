@@ -54,8 +54,8 @@ void Game::start() {
   string engiName;
   cout << "Enter your engimon's name: ";
   cin >> engiName;
-  Player newPlayer(engiName, engiChoice);
-  player = newPlayer;
+  
+  player = Player(engiName, engiChoice-1);
 
   do {
     map->PrintMap();
