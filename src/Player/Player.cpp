@@ -38,6 +38,10 @@ void Player::setActiveEngimon(Engimon* _engimon) {
   this->activeEngimon = _engimon;
 }
 
+void Player::setActiveEngimon(int i){
+  setActiveEngimon(&inventoryEngimon[i]);
+}
+
 bool Player::isInventoryFull() {  // true kalo udah gabisa ditambahin -> otomatis
                                   // maksimum MaxCapacity - 1
   int count = 0;

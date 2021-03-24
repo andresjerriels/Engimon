@@ -48,9 +48,10 @@ public:
     bool isPlayerTileContainEngimon();
     void initializeElementCode();
     void moveWildEngimon();
-    void changeLevelCapslock();
+    void setLevelCapslock(int _levelCapslock);
     vector <Tile*> getTilesWithEngimonAroundPlayer();
     bool isSpeciesAndGroundTypeValid(Engimon engimon, Tile tile);
+    void decrementNWildEngimon();
 };
 
 #endif

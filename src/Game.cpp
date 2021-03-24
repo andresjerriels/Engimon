@@ -18,6 +18,7 @@ void Game::printCommandList(){
   cout << "Here are the available commands:\n";
   cout << "w/a/s/d: Move\n";
   cout << "i: Interact with active engimon\n";
+  cout << "h: Change active engimon\n";
   cout << "b: Battle with a nearby wild engimon\n";
   cout << "e: Open engimon inventory\n";
   cout << "t: Open skill inventory\n";
@@ -43,6 +44,8 @@ void Game::processCommand(char cmd){
       player->getInventorySkill().printInventory();
     } else if (cmd == 'r'){
       BreedingConfirmation();
+    } else if (cmd == 'h'){
+      changeActiveEngimonConfirmation();
     }
     else throw "Command not available!\nEnter 'l' to see command list!";
   } catch (const char* err) {
@@ -81,6 +84,7 @@ void Game::start() {
       std::cerr << e.what() << '\n';
     } 
     
+    map->setLevelCapslock(player.getActiveEngimon()->getLevel());
   } while (cmd != 'x');
 }
 
@@ -120,6 +124,7 @@ void Game::battle(){
     player->gainActiveEngimonExp(15*wildEngimon.getLevel());
     player->addToInvEngimon(wildEngimon);
     tileWithEngimon->deleteWildEngimon();
+    map->decrementNWildEngimon();
   } else {
     cout << wildEngimon.getName() << " won!!\n";
     // player->removeFromInvEngimon(*playerEngimon);
@@ -167,5 +172,19 @@ void Game::BreedingConfirmation(){
       valid = true;
     }
 
+  }
+}
+
+void Game::changeActiveEngimonConfirmation(){
+  int i;
+  cout << "Your Engimon(s):\n";
+  player.getInventoryEngimon().printInventory();
+
+  cout << "Choose an engimon: ";
+  cin >> i;
+  if(i <= player.getInventoryEngimon().countItemInInventory()){
+    player.setActiveEngimon(i-1);
+  } else {
+    throw "Index out of range";
   }
 }

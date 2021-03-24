@@ -22,6 +22,7 @@ class Game {
   void battle();
   Tile* battleConfirmation();
   void BreedingConfirmation();
+  void changeActiveEngimonConfirmation();
 };
 
 #endif
