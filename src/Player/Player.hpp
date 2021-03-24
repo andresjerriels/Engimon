@@ -38,7 +38,8 @@ public:
 	void removeFromInvSkill(); //menghapus jika amount dari skillitem dalam inventory habis
 	void gainActiveEngimonExp(int exp);
 	// ~Player();
-
+	void openEngimonInventory();
+	void openSkillInventory();
 	Player& operator=(const Player&);
 	
 };

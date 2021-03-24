@@ -65,7 +65,9 @@ bool Player::isInventoryFull() {  // true kalo udah gabisa ditambahin -> otomati
 
 void Player::addToInvEngimon(Engimon engi) {
   if (!isInventoryFull()) {
+    int index = activeEngimon - &inventoryEngimon[0];
     this->inventoryEngimon.addToInventory(engi);
+    activeEngimon = &inventoryEngimon[index];
   } else {
     std::cout << "Inventory Full!" << std::endl;
   }
@@ -123,4 +125,43 @@ Player& Player::operator=(const Player& p) {
   activeEngimon = p.activeEngimon;
 
   return *this;
+}
+
+void Player::openEngimonInventory(){
+  string cmd;
+  do{
+    cout << "Your Engimon(s):\n";
+    inventoryEngimon.printInventory();
+    cout << "- To see an engimon's detail, select a number\n";
+    cout << "- To close inventory, select 'c'\n\n";
+    cout << "What do you want to do?\n\n";
+    cin >> cmd;
+
+    if(cmd != "c"){
+      int i = stoi(cmd);
+      if(i <= inventoryEngimon.getContainer().size()) inventoryEngimon[i-1].printInfo();
+      else cout << "Number invalid" << endl;
+    }
+  } while (cmd != "c");
+}
+
+
+
+void Player::openSkillInventory(){
+  string cmd;
+  do{
+    cout << "Your Skill(s):\n";
+    inventorySkill.printInventory();
+    cout << "- To use a skill, select a number\n";
+    cout << "- To close inventory, select 'c'\n\n";
+    cout << "What do you want to do?\n\n";
+    cin >> cmd;
+
+    if(cmd != "c"){
+      int i = stoi(cmd);
+      if(i <= inventorySkill.getContainer().size()) cout << "using skill..\n";
+      else cout << "Number invalid" << endl;
+    }
+  } while (cmd != "c");
+
 }
