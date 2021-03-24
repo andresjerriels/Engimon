@@ -30,7 +30,8 @@ void Game::processCommand(char cmd){
       cout << "       See you soon!\n"; 
     } 
     else if(cmd == 'b') cout << "battling\n";
-    else throw "Command not available!";
+    else if(cmd == 'l') printCommandList();
+    else throw "Command not available!\nEnter 'l' to see command list!";
   } catch (const char* err) {
     cerr << err << endl;
   }
@@ -63,7 +64,6 @@ void Game::start() {
       processCommand(cmd);
     } catch (const char* e) {
       std::cerr << e << '\n';
-      printCommandList();
     }
   } while (cmd != 'x');
 }
