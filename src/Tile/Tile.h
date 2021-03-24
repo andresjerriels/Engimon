@@ -37,6 +37,7 @@ class Tile {
   void setType(string _type);
   void setWildEngimon(Engimon* _wild_engimon);
   void deleteWildEngimon();
+  void moveWildEngimon();
 };
 
 #endif

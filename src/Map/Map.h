@@ -4,6 +4,7 @@
 #include "../Tile/Tile.h"
 #include "Position.h"
 #include "../Player/Player.hpp"
+#include "../Engimon/EngimonFactory.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctime>
@@ -40,10 +41,65 @@ public:
     //move player
     void move(char direction);
     bool isPlayerPositionOutOfRange();
+    bool isPositionOutOfRange(int x, int y);
     bool isPlayerTileContainEngimon();
     void initializeElementCode();
     void moveWildEngimon();
     void changeLevelCapslock();
+    vector <Tile*> getTilesWithEngimonAroundPlayer();
 };
 
 #endif
+
+// KALO SEMPET MAU NGEHIAS GINI WKWK
+// * * * * * * * * * * * * * * * * * *
+// *                                 *
+// *      !! ENGIMON FACTORY !!      *
+// *                                 *
+// * * * * * * * * * * * * * * * * * *
+// *        Exploration Mode         *
+// * * * * * * * * * * * * * * * * * *
+// * * * - - - - - - o o o o o o * * *
+// * * * - - - - - - o o o o o o * * *
+// * * * - - - - - - o o o o o o * * *
+// * * * - - - - - - o o o o o o * * *
+// * * * - - - - - - I o o o w o * * *
+// * * * - - - - - - o o o o o o * * *
+// * * * - - i - - - - - - - - - * * *
+// * * * I - - - - - - - - w - - * * *
+// * * * - - - - - - - - - - - - * * *
+// * * * - - - - - P - - - - - - * * *
+// * * * * * * * * * * * * * * * * * *
+// * Enter command: l                *
+// * * * * * * * * * * * * * * * * * *
+// * Here are the available commands:*
+// * w/a/s/d: Move;                  *
+// * i: Interact with active engimon *
+// * b: Battle with a nearby engimon *
+// * x: Quit the game                *
+// * * * * * * * * * * * * * * * * * *
+// * Auch, you hit an invisible wall!*
+// * * * * * * * * * * * * * * * * * *
+// *  Auch, a wild engimon bit you!  *
+// * * * * * * * * * * * * * * * * * *
+
+
+// * * * * * * * * * * * * * * * * * * 
+// *                                 *
+// *      !! ENGIMON FACTORY !!      *
+// *                                 *
+// * * * * * * * * * * * * * * * * * * 
+// *           Battle Mode           *
+// * * * * * * * * * * * * * * * * * *
+// * Miu                             *
+// * Power level: 75                 *
+// *                                 *
+// *              vs.                *
+// *                                 *
+// *                  Wild Charmamon *
+// *                Power level: 100 *
+// * * * * * * * * * * * * * * * * * *
+// *                                 *
+// *     ! WILD CHARMAMON WON !      *
+// *                                 *
+// * * * * * * * * * * * * * * * * * *

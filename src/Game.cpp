@@ -29,7 +29,7 @@ void Game::processCommand(char cmd){
       cout << "Thank you for playing with us!\n";
       cout << "       See you soon!\n"; 
     } 
-    else if(cmd == 'b') cout << "battling\n";
+    else if(cmd == 'b') battle();
     else if(cmd == 'l') printCommandList();
     else throw "Command not available!\nEnter 'l' to see command list!";
   } catch (const char* err) {
@@ -54,8 +54,8 @@ void Game::start() {
   string engiName;
   cout << "Enter your engimon's name: ";
   cin >> engiName;
-  
-  player = Player(engiName, engiChoice-1);
+  Player newPlayer(engiName, engiChoice);
+  player = newPlayer;
 
   do {
     map->PrintMap();
@@ -70,4 +70,58 @@ void Game::start() {
   } while (cmd != 'x');
 }
 
+void Game::battle(){
+  Tile* tileWithEngimon = battleConfirmation();
+
+  int playerPowerLevel, wildPowerLevel;
+  float playerAdvantage = 0, wildAdvantage = 0;
+
+  Engimon playerEngimon = player.getActiveEngimon();
+  Engimon wildEngimon = tileWithEngimon->getWildEngimon();
+  
+  vector<Element> playerELements = playerEngimon.getElements();
+  vector<Element> wildELements = wildEngimon.getElements();
+
+  cout << playerEngimon.getName() << " vs " << wildEngimon.getName();
+  for (int i = 0; i < playerELements.size(); i++){
+      for (int j = 0; j < wildELements.size(); j++){
+          playerAdvantage = max(playerAdvantage, typeAdvTable[playerELements[i]][wildELements[j]]);
+          wildAdvantage = max(wildAdvantage, typeAdvTable[wildELements[j]][playerELements[i]]);
+      }
+  }
+  // power: level * element advantage + SUM(every skill’s base power * Mastery Level)
+  // belom consider skilll
+  playerPowerLevel = playerAdvantage * playerEngimon.getLevel();
+  wildPowerLevel = wildAdvantage * wildEngimon.getLevel();
+
+  if(playerPowerLevel > wildPowerLevel){
+    cout << playerEngimon.getName() << " won!!\n";
+    player.gainActiveEngimonExp(15*wildEngimon.getLevel());
+    player.addToInvEngimon(wildEngimon);
+    tileWithEngimon->deleteWildEngimon();
+  } else {
+    cout << wildEngimon.getName() << " won!!\n";
+    // player.removeFromInvEngimon(*playerEngimon);
+  }
+}
+
+Tile* Game::battleConfirmation(){
+  int selection;
+  
+  vector<Tile*> tileswithEngimon = map->getTilesWithEngimonAroundPlayer();
+  if(tileswithEngimon.size() > 1){
+    cout << "Choose a wild engimon:\n";
+    for (int i = 0; i < tileswithEngimon.size(); i++){
+      cout << i + 1 << ". " << tileswithEngimon[i]->getWildEngimon().getName() << endl;
+    }
+    cout << "Insert number: ";
+    cin >> selection;
+  } else if (tileswithEngimon.size() == 1) {
+    selection = 1;
+  } else {
+    throw "There is no wild engimon around you!";
+  }
+
+  return tileswithEngimon[selection - 1];
+}
 

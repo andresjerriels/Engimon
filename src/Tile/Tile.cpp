@@ -52,5 +52,10 @@ void Tile::setWildEngimon(Engimon* _wild_engimon) {
 }
 
 void Tile::deleteWildEngimon(){
+  delete wild_engimon;
+  wild_engimon = NULL;
+}
+
+void Tile::moveWildEngimon(){
   wild_engimon = NULL;
 }

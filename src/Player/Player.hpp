@@ -35,7 +35,7 @@ public:
 	void addToInvSkill(std::string _skill);
 
 	void removeFromInvSkill(); //menghapus jika amount dari skillitem dalam inventory habis
-
+	void gainActiveEngimonExp(int exp);
 	// ~Player();
 
 	Player& operator=(const Player&);

@@ -93,6 +93,10 @@ void Player::addToInvSkill(string _skill) {
   }
 }
 
+void Player::gainActiveEngimonExp(int exp){
+  activeEngimon.gainExp(exp);
+}
+
 // Eror
 // void Player::removeFromInvSkill() { //menghapus jika amount dari skillitem dalam inventory habis
 //   if (this->getMaxCapacity() > 0) {

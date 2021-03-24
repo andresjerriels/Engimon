@@ -19,6 +19,8 @@ class Game {
   void start();
   void printCommandList();
   void processCommand(char cmd);
+  void battle();
+  Tile* battleConfirmation();
 };
 
 #endif
