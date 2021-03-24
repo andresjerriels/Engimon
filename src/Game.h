@@ -10,7 +10,7 @@ class Game {
  private:
   State state;
   Map* map;
-  Player player;
+  Player* player;
 
  public:
   Game(string);

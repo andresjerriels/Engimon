@@ -11,6 +11,7 @@ Game::Game(string filename) {
 
 Game::~Game(){
   delete map;
+  delete player;
 }
 
 void Game::printCommandList(){
@@ -26,8 +27,8 @@ void Game::printCommandList(){
 }
 void Game::processCommand(char cmd){
   try{
-    if(cmd == 'w' || cmd == 'a' || cmd == 's' || cmd == 'd') map->move(player, cmd);
-    else if(cmd == 'i') player.getActiveEngimon()->interact();
+    if(cmd == 'w' || cmd == 'a' || cmd == 's' || cmd == 'd') map->move(*player, cmd);
+    else if(cmd == 'i') player->getActiveEngimon()->interact();
     else if(cmd ==  'x'){
       cout << "Thank you for playing with us!\n";
       cout << "       See you soon!\n"; 
@@ -35,11 +36,11 @@ void Game::processCommand(char cmd){
     else if(cmd == 'b') battle();
     else if(cmd == 'l') printCommandList();
     else if(cmd == 'e'){
-      player.getInventoryEngimon().openEngimonInventory();
+      player->openEngimonInventory();
     }
     else if(cmd == 't'){
       cout << "Your Skill(s):\n";
-      player.getInventorySkill().printInventory();
+      player->getInventorySkill().printInventory();
     } else if (cmd == 'r'){
       BreedingConfirmation();
     }
@@ -65,8 +66,8 @@ void Game::start() {
   string engiName;
   cout << "Enter your engimon's name: ";
   cin >> engiName;
-  Player newPlayer(engiName, engiChoice - 1);
-  player = newPlayer;
+
+  player = new Player(engiName, engiChoice - 1);
 
   do {
     map->PrintMap();
@@ -89,7 +90,7 @@ void Game::battle(){
   int playerPowerLevel, wildPowerLevel;
   // float playerAdvantage = 0, wildAdvantage = 0;
 
-  Engimon playerEngimon = *player.getActiveEngimon();
+  Engimon playerEngimon = *(player->getActiveEngimon());
   Engimon wildEngimon = tileWithEngimon->getWildEngimon();
   
   // vector<Element> playerELements = playerEngimon.getElements();
@@ -116,12 +117,12 @@ void Game::battle(){
 
   if(playerPowerLevel > wildPowerLevel){
     cout << playerEngimon.getName() << " won!!\n";
-    player.gainActiveEngimonExp(15*wildEngimon.getLevel());
-    player.addToInvEngimon(wildEngimon);
+    player->gainActiveEngimonExp(15*wildEngimon.getLevel());
+    player->addToInvEngimon(wildEngimon);
     tileWithEngimon->deleteWildEngimon();
   } else {
     cout << wildEngimon.getName() << " won!!\n";
-    // player.removeFromInvEngimon(*playerEngimon);
+    // player->removeFromInvEngimon(*playerEngimon);
   }
 }
 
@@ -148,10 +149,10 @@ Tile* Game::battleConfirmation(){
 void Game::BreedingConfirmation(){
   int eng1, eng2;
   cout << "Your Engimon(s):\n";
-  player.getInventoryEngimon().printInventory();
+  player->getInventoryEngimon().printInventory();
 
-  if(player.getInventoryEngimon().countItemInInventory() <= 1){
-    cout << "You only have " << player.getInventoryEngimon().countItemInInventory() << " engimon.\nYou need at least 2 of them to breed\n";
+  if(player->getInventoryEngimon().countItemInInventory() <= 1){
+    cout << "You only have " << player->getInventoryEngimon().countItemInInventory() << " engimon.\nYou need at least 2 of them to breed\n";
   } else {
     bool valid = false;
     while(!valid){
@@ -161,7 +162,7 @@ void Game::BreedingConfirmation(){
       cin >> eng2;
 
       // try{
-      //   player.getInventoryEngimon()[eng1].Breed((player.getInventoryEngimon()[eng2]));
+      //   player->getInventoryEngimon()[eng1].Breed((player->getInventoryEngimon()[eng2]));
       // }
       valid = true;
     }

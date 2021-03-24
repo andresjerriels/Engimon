@@ -351,6 +351,6 @@ bool Engimon::canLearn(const Skill& s) {
 ostream& operator<<(ostream &os, const Engimon& e){
   vector<Element> el = e.getElements();
   os << e.getName() << " (" << ElementTypes[el[0]] << (el.size() == 2 ? (", " + ElementTypes[el[1]] + ")") : ")") 
-     << " Lvl " << e.getLevel();
+     << " Lvl " << e.getLevel() << " " << e.getSpecies();
   return os;
 }

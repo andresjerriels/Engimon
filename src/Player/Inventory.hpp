@@ -90,44 +90,6 @@ public:
 	T& operator[](int i) { //operator overloading elemen inventory
 		return container[i];
 	}
-
-	void openEngimonInventory(){
-		string cmd;
-		do{
-			cout << "Your Engimon(s):\n";
-			printInventory();
-			cout << "- To see an engimon's detail, select a number\n";
-			cout << "- To close inventory, select 'c'\n\n";
-			cout << "What do you want to do?\n\n";
-			cin >> cmd;
-
-			if(cmd != "c"){
-				int i = stoi(cmd);
-				if(i <= container.size()) container[i-1].printInfo();
-				else cout << "Number invalid" << endl;
-			}
-		} while (cmd != "c");
-
-	}
-
-	void openSkillInventory(){
-		string cmd;
-		do{
-			cout << "Your Skill(s):\n";
-			printInventory();
-			cout << "- To use a skill, select a number\n";
-			cout << "- To close inventory, select 'c'\n\n";
-			cout << "What do you want to do?\n\n";
-			cin >> cmd;
-
-			if(cmd != "c"){
-				int i = stoi(cmd);
-				if(i <= container.size()) cout << "using skill..\n";
-				else cout << "Number invalid" << endl;
-			}
-		} while (cmd != "c");
-
-	}
 	
 };
 
