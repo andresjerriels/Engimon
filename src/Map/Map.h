@@ -1,7 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 // #include "../Tile/Tile.h"
-#include "../Tile/Tile.h"
+#include "Tile.h"
 #include "Position.h"
 #include "../Player/Player.hpp"
 #include "../Engimon/EngimonFactory.h"
