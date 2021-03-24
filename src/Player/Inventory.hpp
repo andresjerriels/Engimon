@@ -32,7 +32,7 @@ public:
 			counter++;
 			it++;
 		}
-		return counter;
+		return counter+1;
 	}
 
 	int searchIndexItemInInventory(T item) {
@@ -87,7 +87,7 @@ public:
 		cout << endl;
 	}
 
-	T operator[](int i) { //operator overloading elemen inventory
+	T& operator[](int i) { //operator overloading elemen inventory
 		return container[i];
 	}
 

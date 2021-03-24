@@ -23,7 +23,7 @@ const string EngimonBaseInfo[10][3] =   {  // Enginame, UniqueSkill, EngimonElem
                                         {"Mamomon", "Ice Skewer", "Ice"}
                                         };
 
-const float USkillBP[10] = {35,45,35,45,35,45,35,45,35,45};
+const float USkillBP[10] = {40,45,35,45,40,45,35,45,35,45};
 
 // const string FireSkill[6] = {"Flame Claw", "Fire Breath", "Fire Bolt", "Flame Punch", "Fiery Explosion", "Magma Spill"};
 // const string WaterSkill[6] = {"Water Spill", "Water Slice", "Water Burst", "Surf Wave", "Hydro Cannon", "Tsunami"};

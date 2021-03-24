@@ -26,8 +26,8 @@ void Game::printCommandList(){
 }
 void Game::processCommand(char cmd){
   try{
-    if(cmd == 'w' || cmd == 'a' || cmd == 's' || cmd == 'd') map->move(cmd);
-    else if(cmd == 'i') player.getActiveEngimon().interact();
+    if(cmd == 'w' || cmd == 'a' || cmd == 's' || cmd == 'd') map->move(player, cmd);
+    else if(cmd == 'i') player.getActiveEngimon()->interact();
     else if(cmd ==  'x'){
       cout << "Thank you for playing with us!\n";
       cout << "       See you soon!\n"; 
@@ -88,7 +88,7 @@ void Game::battle(){
   int playerPowerLevel, wildPowerLevel;
   // float playerAdvantage = 0, wildAdvantage = 0;
 
-  Engimon playerEngimon = player.getActiveEngimon();
+  Engimon playerEngimon = *player.getActiveEngimon();
   Engimon wildEngimon = tileWithEngimon->getWildEngimon();
   
   // vector<Element> playerELements = playerEngimon.getElements();

@@ -12,7 +12,8 @@ Player::Player() : MaxCapacity(20) {
 
 Player::Player(std::string starter_name, int species) : MaxCapacity(20) {
   Engimon starterEngimon = EngimonFactory::createEngimon(starter_name, species);  // <- ini engimon starter, bisa dipilih atau engga(?)
-  this->activeEngimon = starterEngimon;
+  inventoryEngimon.addToInventory(starterEngimon);
+  this->activeEngimon = &inventoryEngimon[0];
 }
 
 // getter
@@ -24,7 +25,7 @@ Inventory<SkillItem> Player::getInventorySkill() const {
   return this->inventorySkill;
 }
 
-Engimon Player::getActiveEngimon() const {
+Engimon* Player::getActiveEngimon() const {
   return this->activeEngimon;
 }
 
@@ -33,7 +34,7 @@ int Player::getMaxCapacity() const{
 }
 
 // set activeEngimon -> asumsi parameter valid
-void Player::setActiveEngimon(Engimon _engimon) {
+void Player::setActiveEngimon(Engimon* _engimon) {
   this->activeEngimon = _engimon;
 }
 
@@ -94,7 +95,7 @@ void Player::addToInvSkill(string _skill) {
 }
 
 void Player::gainActiveEngimonExp(int exp){
-  activeEngimon.gainExp(exp);
+  activeEngimon->gainExp(exp);
 }
 
 void Player::removeFromInvSkill() { //menghapus jika amount dari skillitem dalam inventory habis

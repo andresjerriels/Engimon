@@ -41,14 +41,17 @@ Map::Map(string filename)
         initializeElementCode();
     }
     // random spawn point player
-    int x = rand() % 12;
+    int x = rand() % 11 + 1;
     int y = rand() % 10;
     
     playerPosition.setX(x);
     playerPosition.setY(y);
     
+    activeEngimonPosition.setX(x-1);
+    activeEngimonPosition.setY(y);
+
     nWildEngimon = 0;
-    while(nWildEngimon < 5) GenerateEngimon();
+    while(nWildEngimon < 5) GenerateEngimon(1, 3);
     
     levelCapslock = 3;
 }
@@ -94,9 +97,13 @@ void Map::PrintMap(){
                 printf("\033[1;33m");
                 cout << "P";
             }
+            else if (isTileActiveEngimonPosition(j, i)){
+                cout << "\033[1;33m";
+                cout << "X";
+            }
             else if(mapMatrix[i][j].isEngimonOccupied()){
-                printf("\033[1;31m");
-                if(mapMatrix[i][j].getWildEngimon().getLevel() > levelCapslock) cout << (char) (toupper(ElementCode[mapMatrix[i][j].getWildEngimon().getElements()]));
+                cout << "\033[1;31m";
+                if(mapMatrix[i][j].getWildEngimon().getLevel() >= levelCapslock) cout << (char) (toupper(ElementCode[mapMatrix[i][j].getWildEngimon().getElements()]));
                 else cout << ElementCode[mapMatrix[i][j].getWildEngimon().getElements()];
             }
             else if(mapMatrix[i][j].getType() == "Sea"){
@@ -113,7 +120,7 @@ void Map::PrintMap(){
     }
 }
 
-void Map::GenerateEngimon(){
+void Map::GenerateEngimon(int minLvl, int maxLvl){
     if(nWildEngimon < maxWildEngimon && (rand() % 5)){
         srand((unsigned) time(0));
         int species;
@@ -124,14 +131,15 @@ void Map::GenerateEngimon(){
         int y = rand() % 10;
 
         // random level
-        int level = rand() % 5; // ini belom fix
+        int level = rand() % (maxLvl - minLvl) + minLvl; // ini belom fix
         Tile* tile = &mapMatrix[y][x];
         if (!tile->isEngimonOccupied() && !isTilePlayerPosition(x,y)){
             if(tile->getType() == "Grassland") species = rand() % 6; //species grassland: 0 - 5
             else species = rand() % 5 + 5; // species sea: 5 - 9
 
             Engimon *wild = EngimonFactory::createEngimon(species);
-            wild->gainExp(level*100 + rand() % 99);
+            wild->setLevel(level);
+            wild->setExp(rand() % 99);
             tile->setWildEngimon(wild);
             nWildEngimon++;
         }
@@ -142,21 +150,26 @@ bool Map::isTilePlayerPosition(int x, int y){
     return playerPosition.getX() == x && playerPosition.getY() == y;
 }
 
-void Map::move(char direction){
+bool Map::isTileActiveEngimonPosition(int x, int y) {
+    return activeEngimonPosition.getX() == x && activeEngimonPosition.getY() == y;
+}
+
+void Map::move(const Player& player, char direction){
     playerPosition.setXY(direction);
     if(isPlayerPositionOutOfRange()) {
         playerPosition.resetXY(direction);
         throw "Auch, you hit an invisible wall!";
-    } else if(mapMatrix[playerPosition.getY()][playerPosition.getX()].isEngimonOccupied()) {
+    } else if(isPlayerTileContainEngimon()) {
         playerPosition.resetXY(direction);
         throw "Auch, a wild engimon bit you!";
     }
+    activeEngimonPosition = playerPosition;
+    activeEngimonPosition.resetXY(direction);
+
+    int actEngiLvl = player.getActiveEngimon()->getLevel();
+
     moveWildEngimon();
-    GenerateEngimon();
-    
-    if (isPlayerTileContainEngimon()) {
-        cout << "Do you want to do a battle?" << endl;
-    }
+    GenerateEngimon(max(1, actEngiLvl - 2), actEngiLvl + 2);
 }
 
 bool Map::isPositionOutOfRange(int x, int y){
@@ -175,7 +188,7 @@ bool Map::isSpeciesAndGroundTypeValid(Engimon engimon, Tile tile){
     return (tile.getType() == "Sea" && 
     EngimonFactory::getSpeciesNumber(engimon.getSpecies()) >= 5 
     && EngimonFactory::getSpeciesNumber(engimon.getSpecies()) <= 9) || (tile.getType() == "Grassland" && 
-    EngimonFactory::getSpeciesNumber(engimon.getSpecies()) <= 4);
+    EngimonFactory::getSpeciesNumber(engimon.getSpecies()) <= 5);
 }
 
 void Map::moveWildEngimon(){
@@ -187,25 +200,27 @@ void Map::moveWildEngimon(){
                 switch (direction)
                 {
                 case 0: // ke atas
-                    if(i-1 >= 0 && i < length && !mapMatrix[i-1][j].isEngimonOccupied() && !isTilePlayerPosition(j,i-1) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i-1][j])){
+                    if(i-1 >= 0 && i < length && !mapMatrix[i-1][j].isEngimonOccupied() && !isTilePlayerPosition(j,i-1) 
+                       && !isTileActiveEngimonPosition(j,i-1)
+                       && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i-1][j])){
                         mapMatrix[i-1][j].setWildEngimon(mapMatrix[i][j].getWildEngimonPointer());
                         mapMatrix[i][j].moveWildEngimon();
                     }
                     break;
                 case 1: // ke kiri
-                    if(j < width && j-1 >= 0 && !mapMatrix[i][j-1].isEngimonOccupied() && !isTilePlayerPosition(j-1,i) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i][j-1])){
+                    if(j < width && j-1 >= 0 && !mapMatrix[i][j-1].isEngimonOccupied() && !isTilePlayerPosition(j-1,i) && !isTileActiveEngimonPosition(j-1,i) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i][j-1])){
                         mapMatrix[i][j-1].setWildEngimon(mapMatrix[i][j].getWildEngimonPointer());
                         mapMatrix[i][j].moveWildEngimon();
                     }
                     break;
                 case 2: // ke bawah
-                    if(i+1 < length && i >= 0 && !mapMatrix[i+1][j].isEngimonOccupied() && !isTilePlayerPosition(j,i+1) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i+1][j])){
+                    if(i+1 < length && i >= 0 && !mapMatrix[i+1][j].isEngimonOccupied() && !isTilePlayerPosition(j,i+1) && !isTileActiveEngimonPosition(j,i+1) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i+1][j])){
                         mapMatrix[i+1][j].setWildEngimon(mapMatrix[i][j].getWildEngimonPointer());
                         mapMatrix[i][j].moveWildEngimon();
                     }
                     break;
                 case 3: // ke kanan
-                    if(j >= 0 && j+1 < width && !mapMatrix[i][j+1].isEngimonOccupied() && !isTilePlayerPosition(j+1,i) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i][j+1])){
+                    if(j >= 0 && j+1 < width && !mapMatrix[i][j+1].isEngimonOccupied() && !isTilePlayerPosition(j+1,i) && !isTileActiveEngimonPosition(j+1,i) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i][j+1])){
                         mapMatrix[i][j+1].setWildEngimon(mapMatrix[i][j].getWildEngimonPointer());
                         mapMatrix[i][j].moveWildEngimon();
                     }
@@ -217,7 +232,6 @@ void Map::moveWildEngimon(){
             }
         }
     }
-
 }
 
 void Map::changeLevelCapslock(){
