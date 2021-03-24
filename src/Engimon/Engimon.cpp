@@ -119,11 +119,13 @@ std::vector<Skill> Engimon::getSkills() const {
 
 void Engimon::gainExp(int xp) {
   this->cum_exp += xp;
-  this->exp += xp;
-  if (this->exp >= 100) {
-    this->exp %= 100;
-    this->level += 1;
-  if(cum_exp%100 + xp >= 100) cout << name << " Leveled up to level " << level << endl;
+
+  int newLvlAdd = (exp + xp) / 100;
+  int newExp = (exp + xp) % 100;
+  this->exp = newExp;
+  this->level += newLvlAdd;
+
+  if(newLvlAdd > 0) cout << name << " Leveled up to level " << level << endl;
 }
 
 void Engimon::interact() {
