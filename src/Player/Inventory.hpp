@@ -77,14 +77,15 @@ public:
 
 	void printInventory() {
 		typename std::vector<T>::const_iterator iterator;
+		cout << "Inventory:" << endl;
 		for (iterator = container.begin(); 
 			iterator != container.end(); iterator++) {
-			cout << iterator << ' ';
+			cout << (*iterator) << endl;
 		}
 		cout << endl;
 	}
 
-	T operator[](int i) { //operator overloading elemen inventory
+	T& operator[](int i) { //operator overloading elemen inventory
 		return container[i];
 	}
 	

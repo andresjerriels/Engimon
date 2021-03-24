@@ -14,7 +14,7 @@ class Player
 protected:
 	Inventory<Engimon> inventoryEngimon;
 	Inventory<SkillItem> inventorySkill;
-	Engimon activeEngimon;
+	Engimon* activeEngimon;
 	const int MaxCapacity;
 
 public:
@@ -24,11 +24,11 @@ public:
 	//getter
 	Inventory<Engimon> getInventoryEngimon() const;
 	Inventory<SkillItem> getInventorySkill() const;
-	Engimon getActiveEngimon() const;
+	Engimon* getActiveEngimon() const;
 	int getMaxCapacity() const;
 
 	//set activeEngimon
-	void setActiveEngimon(Engimon); // asumsi Engimon valid
+	void setActiveEngimon(Engimon*); // asumsi Engimon valid
 
 	bool isInventoryFull();
 	void addToInvEngimon(Engimon engi);

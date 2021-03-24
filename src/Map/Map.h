@@ -19,6 +19,7 @@ private:
     int length;
     int nWildEngimon;
     Position playerPosition;
+    Position activeEngimonPosition;
     map<vector<Element>, char> ElementCode;
     int levelCapslock;
     static int maxWildEngimon;
@@ -35,11 +36,13 @@ public:
     //method untuk mencetak peta
     void PrintMap();
     //method untuk generate wild engimon
-    void GenerateEngimon();
+    void GenerateEngimon(int minLvl, int maxLvl);
     //cek posisi player
     bool isTilePlayerPosition(int x, int y);
+    //cek posisi active engimon
+    bool isTileActiveEngimonPosition(int x, int y);
     //move player
-    void move(char direction);
+    void move(const Player& player, char direction);
     bool isPlayerPositionOutOfRange();
     bool isPositionOutOfRange(int x, int y);
     bool isPlayerTileContainEngimon();
