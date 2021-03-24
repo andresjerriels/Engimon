@@ -93,17 +93,21 @@ void Player::addToInvSkill(string _skill) {
   }
 }
 
-// Eror
-// void Player::removeFromInvSkill() { //menghapus jika amount dari skillitem dalam inventory habis
-//   if (this->getMaxCapacity() > 0) {
-//     for (auto it = inventorySkill.getContainer().begin(); it != inventorySkill.getContainer().end(); ++it) {
-//       if (inventorySkill[it].getItemAmount() == 0) {
-//         inventorySkill.erase(it);
-//         i--;
-//       }
-//     }
-//   }
-// }
+
+void Player::removeFromInvSkill() { //menghapus jika amount dari skillitem dalam inventory habis
+  typename std::vector<SkillItem>::iterator it = inventorySkill.getContainer().begin();
+  int i = 0;
+
+  while (it != inventorySkill.getContainer().end()) {
+    if (inventorySkill[i].getItemAmount() == 0) {
+      inventorySkill.getContainer().erase(it);
+    }
+    else {
+      i++;
+      it++;
+    }
+  }
+}
 
 Player& Player::operator=(const Player& p) {
   inventoryEngimon = p.inventoryEngimon;
