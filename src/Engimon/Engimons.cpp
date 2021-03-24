@@ -14,7 +14,7 @@ Pikamon::Pikamon(std::string name) : Engimon(name, ELECTRIC) {
 
 Electromon::Electromon(std::string name) : Engimon(name, ELECTRIC) {
   this->species = "Electromon";
-  this->slogan = "{Blm kepikiran slogan}";
+  this->slogan = "Ada engimon listrik";
   this->skills.push_back(Skill("Electromon"));
 }
 
@@ -26,13 +26,13 @@ Molemon::Molemon(std::string name) : Engimon(name, GROUND) {
 
 Torchimon::Torchimon(std::string name) : Engimon(name, FIRE, ELECTRIC) {
   this->species = "Torchimon";
-  this->slogan = "{Blm kepikiran slogan}";
+  this->slogan = "Engimon ini overloaded";
   this->skills.push_back(Skill("Torchimon"));
 }
 
 Dittimon::Dittimon(std::string name) : Engimon(name, WATER, GROUND) {
   this->species = "Dittimon";
-  this->slogan = "{Blm kepikiran slogan}";
+  this->slogan = "Ada engimon lumpur";
   this->skills.push_back(Skill("Dittimon"));
 }
 
@@ -50,7 +50,7 @@ Tentamon::Tentamon(std::string name) : Engimon(name, WATER) {
 
 Yetimon::Yetimon(std::string name) : Engimon(name, ICE) {
   this->species = "Yetimon";
-  this->slogan = "{Blm kepikiran slogan}";
+  this->slogan = "Ada raksasa salju";
   this->skills.push_back(Skill("Yetimon"));
 }
 
