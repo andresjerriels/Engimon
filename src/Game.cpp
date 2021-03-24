@@ -46,8 +46,7 @@ void Game::processCommand(char cmd){
     else throw "Command not available!\nEnter 'l' to see command list!";
   } catch (const char* err) {
     cerr << err << endl;
-  }
-
+  } 
 }
 
 void Game::start() {
@@ -77,7 +76,9 @@ void Game::start() {
       processCommand(cmd);
     } catch (const char* e) {
       std::cerr << e << '\n';
-    }
+    } catch(const std::exception& e) {
+      std::cerr << e.what() << '\n';
+    } 
     
   } while (cmd != 'x');
 }
