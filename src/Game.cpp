@@ -123,6 +123,7 @@ void Game::battle(){
     player.gainActiveEngimonExp(15*wildEngimon.getLevel());
     player.addToInvEngimon(wildEngimon);
     tileWithEngimon->deleteWildEngimon();
+    map->decrementNWildEngimon();
   } else {
     cout << wildEngimon.getName() << " won!!\n";
     // player.removeFromInvEngimon(*playerEngimon);
