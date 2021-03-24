@@ -25,8 +25,12 @@ Engimon::Engimon(std::string _name, Element elmt1, Element elmt2) {
 
 Engimon::Engimon(const Engimon& other){
   name = other.name;
+  species = other.species;
+  slogan = other.slogan;
   elements.clear();
   elements = other.elements;
+  skills.clear();
+  skills = other.skills;
   level = other.level;
   exp = other.exp;
   cum_exp = other.cum_exp;
@@ -37,8 +41,12 @@ Engimon::Engimon(const Engimon& other){
 Engimon& Engimon::operator=(const Engimon& other){
   if(this != &other){
     name = other.name;
+    species = other.species;
+    slogan = other.slogan;
     elements.clear();
     elements = other.elements;
+    skills.clear();
+    skills = other.skills;
     level = other.level;
     exp = other.exp;
     cum_exp = other.cum_exp;
