@@ -1,9 +1,13 @@
 #ifndef MAP_H
 #define MAP_H
 // #include "../Tile/Tile.h"
-#include "DummyTile.h"
+#include "../Tile/Tile.h"
 #include "Position.h"
-#include <bits/stdc++.h> //ini ntar diubah mager soalnya tadi
+#include "../Player/Player.hpp"
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctime>
+#include <fstream>
 using namespace std;
 
 class Map
@@ -14,10 +18,11 @@ private:
     int length;
     int nWildEngimon;
     Position playerPosition;
-
+    map<vector<Element>, char> ElementCode;
+    int levelCapslock;
+    static int maxWildEngimon;
 public:
     //ctor
-    Map();
     Map(string);
     //dtor
     ~Map();
@@ -35,6 +40,9 @@ public:
     void move(string direction);
     bool isPlayerPositionOutOfRange();
     bool isPlayerTileContainEngimon();
+    void initializeElementCode();
+    void moveWildEngimon();
+    void changeLevelCapslock();
 };
 
 #endif

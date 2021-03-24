@@ -6,10 +6,15 @@ int main(){
     do{
         map.PrintMap();
         cin >> command;
-        if(command == "w" || command == "a" || command == "s" || command == "d") map.move(command);
+        if(command == "w" || command == "a" || command == "s" || command == "d"){
+            try{
+                map.move(command);
+            }catch(const char* err){
+                cout << err;
+            }
+        }
+        else if (command == "clc") map.changeLevelCapslock();
     } while (command != "exit");
+    printf("\033[0m");
     return 0;
 }
-
-// g++ drivermap.cpp Map.cpp ../Tile/Tile.cpp -o map
-// g++ drivermap.cpp Map.cpp DummyTile.cpp Position.cpp -o map
