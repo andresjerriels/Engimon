@@ -8,6 +8,10 @@
 
 int Map::maxWildEngimon = 10;
 
+Map::Map(){
+
+}
+
 Map::Map(string filename)
 {
     srand((unsigned) time(0));
@@ -129,7 +133,7 @@ bool Map::isTilePlayerPosition(int x, int y){
     return playerPosition.getX() == x && playerPosition.getY() == y;
 }
 
-void Map::move(string direction){
+void Map::move(char direction){
     playerPosition.setXY(direction);
     if(isPlayerPositionOutOfRange()) {
         playerPosition.resetXY(direction);

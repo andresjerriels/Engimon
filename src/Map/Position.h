@@ -19,8 +19,8 @@ public:
     void setX(int _x);
     void setY(int _y);
     void setXY(int _x, int _y);
-    void setXY(string direction);
-    void resetXY(string direction);
+    void setXY(char direction);
+    void resetXY(char direction);
 };
 
 #endif

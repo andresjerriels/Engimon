@@ -22,26 +22,26 @@ void Position::setXY(int _x, int _y){
     y = _y;
 }
 
-void Position::setXY(string direction){
-    if(direction == "w"){
+void Position::setXY(char direction){
+    if(direction == 'w'){
         y--;
-    } else if (direction == "a"){
+    } else if (direction == 'a'){
         x--;
-    } else if(direction == "s"){
+    } else if(direction == 's'){
         y++;
-    } else if (direction == "d"){
+    } else if (direction == 'd'){
         x++;
     }
 }
 
-void Position::resetXY(string direction){
-    if(direction == "w"){
+void Position::resetXY(char direction){
+    if(direction == 'w'){
         y++;
-    } else if (direction == "a"){
+    } else if (direction == 'a'){
         x++;
-    } else if(direction == "s"){
+    } else if(direction == 's'){
         y--;
-    } else if (direction == "d"){
+    } else if (direction == 'd'){
         x--;
     }
 }

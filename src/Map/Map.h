@@ -23,6 +23,7 @@ private:
     static int maxWildEngimon;
 public:
     //ctor
+    Map();
     Map(string);
     //dtor
     ~Map();
@@ -37,7 +38,7 @@ public:
     //cek posisi player
     bool isTilePlayerPosition(int x, int y);
     //move player
-    void move(string direction);
+    void move(char direction);
     bool isPlayerPositionOutOfRange();
     bool isPlayerTileContainEngimon();
     void initializeElementCode();
