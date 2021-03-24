@@ -122,7 +122,7 @@ void Engimon::gainExp(int xp) {
   this->exp += xp;
   this->exp %= 100;
   this->level = (this->cum_exp / 100) + 1;
-  if(cum_exp%100 + exp >= 100) cout << name << " Leveled up to level " << level << endl;
+  if(cum_exp%100 + xp >= 100) cout << name << " Leveled up to level " << level << endl;
 }
 
 void Engimon::interact() {
