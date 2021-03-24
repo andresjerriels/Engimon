@@ -29,6 +29,7 @@ public:
 
 	//set activeEngimon
 	void setActiveEngimon(Engimon*); // asumsi Engimon valid
+	void setActiveEngimon(int i); // asumsi Engimon valid
 
 	bool isInventoryFull();
 	void addToInvEngimon(Engimon engi);

@@ -103,7 +103,7 @@ void Map::PrintMap(){
             }
             else if(mapMatrix[i][j].isEngimonOccupied()){
                 cout << "\033[1;31m";
-                if(mapMatrix[i][j].getWildEngimon().getLevel() >= levelCapslock) cout << (char) (toupper(ElementCode[mapMatrix[i][j].getWildEngimon().getElements()]));
+                if(mapMatrix[i][j].getWildEngimon().getLevel() > levelCapslock) cout << (char) (toupper(ElementCode[mapMatrix[i][j].getWildEngimon().getElements()]));
                 else cout << ElementCode[mapMatrix[i][j].getWildEngimon().getElements()];
             }
             else if(mapMatrix[i][j].getType() == "Sea"){
@@ -234,9 +234,8 @@ void Map::moveWildEngimon(){
     }
 }
 
-void Map::changeLevelCapslock(){
-    cout << "Masukkan level baru: ";
-    cin >> levelCapslock;
+void Map::setLevelCapslock(int _levelCapslock){
+    levelCapslock = _levelCapslock;
 }
 
 vector <Tile*> Map::getTilesWithEngimonAroundPlayer(){
