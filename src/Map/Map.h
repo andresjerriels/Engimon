@@ -47,6 +47,7 @@ public:
     void moveWildEngimon();
     void changeLevelCapslock();
     vector <Tile*> getTilesWithEngimonAroundPlayer();
+    bool isSpeciesAndGroundTypeValid(Engimon engimon, Tile tile);
 };
 
 #endif

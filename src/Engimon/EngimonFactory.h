@@ -15,6 +15,7 @@ class EngimonFactory {
   static Engimon* createEngimon(int species);
   static Engimon createEngimon(string name, int species);
   static Engimon createEngimon(string name, string species);
+  static int getSpeciesNumber(string species);
 };
 
 #endif

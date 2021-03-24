@@ -6,6 +6,9 @@ map<string, int> EngimonFactory::speciesMap = {
     {"Torchimon", 4}, {"Dittimon", 5}, {"Mamomon", 6},    {"Tentamon", 7},
     {"Yetimon", 8},   {"Tortomon", 9}};
 
+int EngimonFactory::getSpeciesNumber(string species){
+  return speciesMap[species];
+}
 // Engimon creator nerima int (mempermudah randomizer)
 Engimon EngimonFactory::createEngimon(string name, int species) {
   switch (species) {
