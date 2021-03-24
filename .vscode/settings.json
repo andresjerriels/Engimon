@@ -70,7 +70,10 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "typeindex": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "any": "cpp",
+        "bit": "cpp",
+        "variant": "cpp"
     },
     "editor.formatOnSave": false,
     "C_Cpp.clang_format_fallbackStyle": "Chromium"
