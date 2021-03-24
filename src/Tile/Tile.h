@@ -11,7 +11,6 @@ using namespace std;
 class Tile {
  private:
   string type;
-  //bool isEngimonOccupied;
   Engimon* wild_engimon;
 
  public:
@@ -29,14 +28,13 @@ class Tile {
 
   // getter
   string getType();
-  bool getIsEngimonOccupied();
+  bool isEngimonOccupied();
   Engimon getWildEngimon();
-
+  Engimon* getWildEngimonPointer();
   // setter
   void setType(string _type);
-  void setIsEngimonOccupied(bool _isEngimonOccupied);
   void setWildEngimon(Engimon* _wild_engimon);
-  bool isEngimonOccupied();
+  void deleteWildEngimon();
 };
 
 #endif

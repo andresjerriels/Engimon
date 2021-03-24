@@ -23,6 +23,17 @@ Engimon::Engimon(std::string _name, Element elmt1, Element elmt2) {
   this->parentSpecies = {"None", "None"};
 }
 
+Engimon::Engimon(const Engimon& other){
+  name = other.name;
+  elements.clear();
+  elements = other.elements;
+  level = other.level;
+  exp = other.exp;
+  cum_exp = other.cum_exp;
+  parentNames = other.parentNames;
+  parentSpecies = other.parentSpecies;
+}
+
 void Engimon::setName(std::string _name) {
   this->name = _name;
 }

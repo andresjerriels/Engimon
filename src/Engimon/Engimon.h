@@ -36,6 +36,7 @@ class Engimon {
  public:
   Engimon();
   Engimon(std::string, Element, Element = NONE);
+  Engimon(const Engimon& other);
 
   // Setters
   void setName(std::string);
