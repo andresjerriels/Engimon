@@ -54,7 +54,7 @@ void Game::start() {
   string engiName;
   cout << "Enter your engimon's name: ";
   cin >> engiName;
-  Player newPlayer(engiName, engiChoice);
+  Player newPlayer(engiName, engiChoice - 1);
   player = newPlayer;
 
   do {
@@ -74,25 +74,32 @@ void Game::battle(){
   Tile* tileWithEngimon = battleConfirmation();
 
   int playerPowerLevel, wildPowerLevel;
-  float playerAdvantage = 0, wildAdvantage = 0;
+  // float playerAdvantage = 0, wildAdvantage = 0;
 
   Engimon playerEngimon = player.getActiveEngimon();
   Engimon wildEngimon = tileWithEngimon->getWildEngimon();
   
-  vector<Element> playerELements = playerEngimon.getElements();
-  vector<Element> wildELements = wildEngimon.getElements();
+  // vector<Element> playerELements = playerEngimon.getElements();
+  // vector<Element> wildELements = wildEngimon.getElements();
 
-  cout << playerEngimon.getName() << " vs " << wildEngimon.getName();
-  for (int i = 0; i < playerELements.size(); i++){
-      for (int j = 0; j < wildELements.size(); j++){
-          playerAdvantage = max(playerAdvantage, typeAdvTable[playerELements[i]][wildELements[j]]);
-          wildAdvantage = max(wildAdvantage, typeAdvTable[wildELements[j]][playerELements[i]]);
-      }
-  }
-  // power: level * element advantage + SUM(every skill’s base power * Mastery Level)
-  // belom consider skilll
-  playerPowerLevel = playerAdvantage * playerEngimon.getLevel();
-  wildPowerLevel = wildAdvantage * wildEngimon.getLevel();
+  playerPowerLevel = playerEngimon.getPowerLevel(wildEngimon);
+  wildPowerLevel = wildEngimon.getPowerLevel(playerEngimon);
+  
+  cout << playerEngimon.getName() << " vs " << wildEngimon.getName() << endl;
+
+  cout << playerEngimon.getName() << " power level: " << playerPowerLevel << endl;
+  cout <<  wildEngimon.getName() << " power level: " << wildPowerLevel << endl;
+
+  // for (int i = 0; i < playerELements.size(); i++){
+  //     for (int j = 0; j < wildELements.size(); j++){
+  //         playerAdvantage = max(playerAdvantage, typeAdvTable[playerELements[i]][wildELements[j]]);
+  //         wildAdvantage = max(wildAdvantage, typeAdvTable[wildELements[j]][playerELements[i]]);
+  //     }
+  // }
+  // // power: level * element advantage + SUM(every skill’s base power * Mastery Level)
+  // // belom consider skilll
+  // playerPowerLevel = playerAdvantage * playerEngimon.getLevel();
+  // wildPowerLevel = wildAdvantage * wildEngimon.getLevel();
 
   if(playerPowerLevel > wildPowerLevel){
     cout << playerEngimon.getName() << " won!!\n";

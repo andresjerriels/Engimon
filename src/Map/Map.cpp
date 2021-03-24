@@ -187,25 +187,25 @@ void Map::moveWildEngimon(){
                 switch (direction)
                 {
                 case 0: // ke atas
-                    if(i-1 >= 0 && i < length && !mapMatrix[i-1][j].isEngimonOccupied() && !isTilePlayerPosition(j,i) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i-1][j])){
+                    if(i-1 >= 0 && i < length && !mapMatrix[i-1][j].isEngimonOccupied() && !isTilePlayerPosition(j,i-1) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i-1][j])){
                         mapMatrix[i-1][j].setWildEngimon(mapMatrix[i][j].getWildEngimonPointer());
                         mapMatrix[i][j].moveWildEngimon();
                     }
                     break;
                 case 1: // ke kiri
-                    if(j < width && j-1 >= 0 && !mapMatrix[i][j-1].isEngimonOccupied() && !isTilePlayerPosition(j,i) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i][j-1])){
+                    if(j < width && j-1 >= 0 && !mapMatrix[i][j-1].isEngimonOccupied() && !isTilePlayerPosition(j-1,i) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i][j-1])){
                         mapMatrix[i][j-1].setWildEngimon(mapMatrix[i][j].getWildEngimonPointer());
                         mapMatrix[i][j].moveWildEngimon();
                     }
                     break;
                 case 2: // ke bawah
-                    if(i+1 < length && i >= 0 && !mapMatrix[i+1][j].isEngimonOccupied() && !isTilePlayerPosition(j,i) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i+1][j])){
+                    if(i+1 < length && i >= 0 && !mapMatrix[i+1][j].isEngimonOccupied() && !isTilePlayerPosition(j,i+1) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i+1][j])){
                         mapMatrix[i+1][j].setWildEngimon(mapMatrix[i][j].getWildEngimonPointer());
                         mapMatrix[i][j].moveWildEngimon();
                     }
                     break;
                 case 3: // ke kanan
-                    if(j >= 0 && j+1 < width && !mapMatrix[i][j+1].isEngimonOccupied() && !isTilePlayerPosition(j,i) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i][j+1])){
+                    if(j >= 0 && j+1 < width && !mapMatrix[i][j+1].isEngimonOccupied() && !isTilePlayerPosition(j+1,i) && isSpeciesAndGroundTypeValid(mapMatrix[i][j].getWildEngimon(), mapMatrix[i][j+1])){
                         mapMatrix[i][j+1].setWildEngimon(mapMatrix[i][j].getWildEngimonPointer());
                         mapMatrix[i][j].moveWildEngimon();
                     }
