@@ -60,11 +60,13 @@ void Game::start() {
   do {
     map->PrintMap();
     cin >> cmd;
+
     try {
       processCommand(cmd);
     } catch (const char* e) {
       std::cerr << e << '\n';
     }
+    
   } while (cmd != 'x');
 }
 
