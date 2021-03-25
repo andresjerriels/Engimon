@@ -4,11 +4,8 @@
 #include "Map/map.h"
 #include "Player/Player.hpp"
 
-enum State { EXPLORE, BATTLE, INVENTORY };
-
 class Game {
  private:
-  State state;
   Map* map;
   Player* player;
 
@@ -22,6 +19,7 @@ class Game {
   void battle();
   Tile* battleConfirmation();
   void BreedingConfirmation();
+  void learnSkillConfirmation();
   void changeActiveEngimonConfirmation();
   void printFormatKiri(string str);
   void printFormatKanan(string str);

@@ -51,13 +51,15 @@ void SkillItem::decrementItemAmount() {
 }
 
 ostream& operator<<(ostream &os, const SkillItem& si){
-  os << si.getItemAmount() << " " << si.getSkill().getName() << endl;
+  os << si.getItemAmount() << " " << si.getSkill().getName();
   return os;
 }
 
-void SkillItem::learn(){
+int SkillItem::learn(Engimon& e){
   if (amount > 0){
+    e.addSkill(skill);
     decrementItemAmount();
+    return amount;
   }
   else throw "You don't have the skill item";
 }

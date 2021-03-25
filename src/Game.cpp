@@ -6,7 +6,6 @@ using namespace std;
 
 Game::Game(string filename) {
   map = new Map(filename);
-  state = EXPLORE;
 }
 
 Game::~Game(){
@@ -24,6 +23,7 @@ void Game::printCommandList(){
   cout << "* e: Open engimon inventory             *\n";
   cout << "* t: Open skill inventory               *\n";
   cout << "* r: Breed two of your engimons         *\n";
+  cout << "* u: Learn a skill                      *\n";
   cout << "* x: Quit the game                      *\n";
   //lanjut
 }
@@ -40,14 +40,14 @@ void Game::processCommand(char cmd){
     else if(cmd == 'l') printCommandList();
     else if(cmd == 'e'){
       player->openEngimonInventory();
-    }
-    else if(cmd == 't'){
-      cout << "Your Skill(s):\n";
-      player->getInventorySkill().printInventory();
+    } else if(cmd == 't'){
+      player->openSkillInventory();
     } else if (cmd == 'r'){
       BreedingConfirmation();
     } else if (cmd == 'h'){
       changeActiveEngimonConfirmation();
+    } else if (cmd == 'u'){
+      learnSkillConfirmation();
     }
     else throw "Command not available!\nEnter 'l' to see command list!";
   } catch (const char* err) {
@@ -227,6 +227,32 @@ void Game::BreedingConfirmation(){
     }
   } else {
     throw "Cannot breed with full inventory";
+  }
+}
+
+void Game::learnSkillConfirmation(){
+  if (player->getInventorySkill().countItemInInventory() > 0) {
+    int engiChoice, skillChoice;
+    printFormatKiri("Your Engimon(s):");
+    player->getInventoryEngimon().printInventory();
+
+    cout << "* Choose your engimon: ";
+    cin >> engiChoice;
+
+    Engimon &engi = player->getEngiRefFromIndex(engiChoice-1);
+
+    printFormatKiri("Your Skill Item(s):");
+    player->getInventorySkill().printInventory();
+    cout << "* Choose a skill item: ";
+    cin >> skillChoice;
+
+    SkillItem &skill = player->getSkillRefFromIndex(skillChoice-1);
+      
+    if (skill.learn(engi) == 0) {
+      player->removeSkillByIndex(skillChoice-1);
+    }
+  } else {
+    throw "You don't have any skill items";
   }
 }
 

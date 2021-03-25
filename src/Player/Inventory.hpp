@@ -59,10 +59,6 @@ public:
 		}
 	}
 
-	T itemInIventory(int index) {
-		return container[index];
-	}
-
 	void removeFromInventory(T item) {
 		int index = searchIndexItemInInventory(item);
 		typename std::vector<T>::iterator it;
@@ -73,6 +69,17 @@ public:
 
 		container.erase(it);
 
+	}
+
+	void removeByindex(int idx) {
+		if (0 <= idx && idx < container.size())
+		{
+			typename std::vector<T>::iterator it;
+			it = container.begin() + idx;
+			container.erase(it);
+		} else {
+			throw "Invalid index";
+		}
 	}
 
 	void printInventory() {
@@ -89,52 +96,6 @@ public:
 
 	T& operator[](int i) { //operator overloading elemen inventory
 		return container[i];
-	}
-
-	void openEngimonInventory(){
-		string cmd;
-		do{
-			printFormatKiri("Your Engimon(s):");
-			printInventory();
-			printFormatKiri("- To see an engimon's detail, select a number");
-			printFormatKiri("- To close inventory, select 'c'\n");
-			printFormatKiri("What do you want to do?\n");
-			cin >> cmd;
-
-			if(cmd != "c"){
-				int i = stoi(cmd);
-				if(i <= container.size()) container[i-1].printInfo();
-				else cout << "Number invalid" << endl;
-			}
-		} while (cmd != "c");
-
-	}
-
-	void openSkillInventory(){
-		string cmd;
-		do{
-			printFormatKiri("Your Skill(s):");
-			printInventory();
-			printFormatKiri("- To use a skill, select a number");
-			printFormatKiri("- To close inventory, select 'c'\n");
-			printFormatKiri("What do you want to do?\n");
-			cin >> cmd;
-
-			if(cmd != "c"){
-				int i = stoi(cmd);
-				if(i <= container.size()) cout << "using skill..\n";
-				else cout << "Number invalid" << endl;
-			}
-		} while (cmd != "c");
-
-	}
-
-	void printFormatKiri(string str){
-		cout << "* " << str << string((38-str.length()), ' ') << "*\n";
-	}
-
-	void printFormatKanan(string str){
-		cout << "* " << string((37-str.length()), ' ') << str << " *\n";
 	}
 	
 };

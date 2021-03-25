@@ -2,15 +2,11 @@
 #include <iostream>
 #include "../Engimon/Engimon.h"
 #include "../Engimon/EngimonFactory.h"
-#include "../Skill/skill.hpp"
 #include "../Skill/skillitem.hpp"
 #include "Inventory.hpp"
 using namespace std;
 
-Player::Player() : MaxCapacity(20) {
-}
-
-Player::Player(std::string starter_name, int species) : MaxCapacity(20) {
+Player::Player(std::string starter_name, int species) : MaxCapacity(30) {
   Engimon starterEngimon = EngimonFactory::createEngimon(starter_name, species);  // <- ini engimon starter, bisa dipilih atau engga(?)
   inventoryEngimon.addToInventory(starterEngimon);
   this->activeEngimon = &inventoryEngimon[0];
@@ -34,12 +30,8 @@ int Player::getMaxCapacity() const{
 }
 
 // set activeEngimon -> asumsi parameter valid
-void Player::setActiveEngimon(Engimon* _engimon) {
-  this->activeEngimon = _engimon;
-}
-
 void Player::setActiveEngimon(int i){
-  setActiveEngimon(&inventoryEngimon[i]);
+  this->activeEngimon = &inventoryEngimon[i];
 }
 
 bool Player::isInventoryFull() {  // true kalo udah gabisa ditambahin -> otomatis
@@ -104,63 +96,69 @@ void Player::gainActiveEngimonExp(int exp){
   activeEngimon->gainExp(exp);
 }
 
-void Player::removeFromInvSkill() { //menghapus jika amount dari skillitem dalam inventory habis
-  typename std::vector<SkillItem>::iterator it = inventorySkill.getContainer().begin();
-  int i = 0;
+void Player::removeEngimonByIndex(int idx) {
+  inventoryEngimon.removeByindex(idx);
+}
 
-  while (it != inventorySkill.getContainer().end()) {
-    if (inventorySkill[i].getItemAmount() == 0) {
-      inventorySkill.getContainer().erase(it);
-    }
-    else {
-      i++;
-      it++;
-    }
-  }
+void Player::removeSkillByIndex(int idx) {
+  inventorySkill.removeByindex(idx);
 }
 
 void Player::openEngimonInventory(){
   string cmd;
   do{
-    cout << "Your Engimon(s):\n";
+    printFormatKiri("Your Engimon(s):");
     inventoryEngimon.printInventory();
-    cout << "- To see an engimon's detail, select a number\n";
-    cout << "- To close inventory, select 'c'\n\n";
-    cout << "What do you want to do?\n\n";
+    printFormatKiri("- To see details, select a number");
+    printFormatKiri("- To close inventory, select 'c'");
+    printFormatKiri("What do you want to do?");
     cin >> cmd;
 
     if(cmd != "c"){
       int i = stoi(cmd);
-      if(i <= inventoryEngimon.getContainer().size()) inventoryEngimon[i-1].printInfo();
+      if(1 <= i && i <= inventoryEngimon.getContainer().size()) inventoryEngimon[i-1].printInfo();
       else cout << "Number invalid" << endl;
     }
   } while (cmd != "c");
 }
 
-
-
 void Player::openSkillInventory(){
   string cmd;
   do{
-    cout << "Your Skill(s):\n";
+    printFormatKiri("Your Skill Item(s):");
     inventorySkill.printInventory();
-    cout << "- To use a skill, select a number\n";
-    cout << "- To close inventory, select 'c'\n\n";
-    cout << "What do you want to do?\n\n";
+    printFormatKiri("- To see details, select a number");
+    printFormatKiri("- To close inventory, select 'c");
+    printFormatKiri("What do you want to do?");
     cin >> cmd;
 
     if(cmd != "c"){
       int i = stoi(cmd);
-      if(i <= inventorySkill.getContainer().size()) cout << "using skill..\n";
+      if(1 <= i && i <= inventorySkill.getContainer().size()) inventorySkill[i-1].getSkill().printSkillInfo();
       else cout << "Number invalid" << endl;
     }
   } while (cmd != "c");
+}
 
+void Player::printFormatKiri(string str){
+  cout << "* " << str << string((38-str.length()), ' ') << "*\n";
+}
+
+void Player::printFormatKanan(string str){
+  cout << "* " << string((37-str.length()), ' ') << str << "*\n";
 }
 
 Engimon& Player::getEngiRefFromIndex(int i) {
   if ( 0 <= i && i < inventoryEngimon.countItemInInventory()) {
     return inventoryEngimon[i];
+  } else {
+    throw "Index out of range";
+  }
+}
+
+SkillItem& Player::getSkillRefFromIndex(int i) {
+  if ( 0 <= i && i < inventorySkill.countItemInInventory()) {
+    return inventorySkill[i];
   } else {
     throw "Index out of range";
   }

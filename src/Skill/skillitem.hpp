@@ -33,7 +33,7 @@ class SkillItem {
         // Methods
         void incrementItemAmount();
         void decrementItemAmount();
-        void learn();
+        int learn(Engimon&);
 };
 
 // SkillItem returnSkillItem(int amount, string skillname);

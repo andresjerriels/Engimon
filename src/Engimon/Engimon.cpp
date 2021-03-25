@@ -140,27 +140,27 @@ void Engimon::addSkill(Skill s) {
       // Jika skill kurang dari 4
       if (skills.size() < 4) {
         skills.push_back(s);
-        cout << name << " berhasil mempelajari skill " << s.getName() << endl;
+        cout << name << " learned " << s.getName() << endl;
       } else {  // Skill sudah 4
         int pilihan;
-        cout << "Skill engimon sudah penuh, pilih skill untuk ditukar" << endl;
+        cout << "Engimon's skill full, choose a skill to replace" << endl;
         printSkills();
-        cout << "Masukkan pilihan (1/2/3/4): ";
+        cout << "Enter choice (1/2/3/4): ";
         cin >> pilihan;
         if (1 <= pilihan && pilihan <= 4) {
           string oldSkillName = skills[pilihan - 1].getName();
           skills[pilihan - 1] = s;
-          cout << name << " berhasil melupakan skill " << oldSkillName
-               << " dan mempelajari skill " << s.getName() << endl;
+          cout << name << " forgot " << oldSkillName
+               << " and learned " << s.getName() << endl;
         } else {
-          throw "Nomor skill tidak valid";
+          throw "Invalid choice";
         }
       }
     } else {
-      throw "Elemen engimon tidak kompatibel";
+      throw "Engimon type is not compatible";
     }
   } else {
-    throw "Engimon sudah memiliki skill tersebut";
+    throw "Engimon already learned skill";
   }
 }
 
