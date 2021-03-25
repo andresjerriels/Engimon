@@ -18,7 +18,6 @@ protected:
 	const int MaxCapacity;
 
 public:
-	Player();
 	Player(std::string starter_name , int species);
 	
 	//getter
@@ -28,20 +27,24 @@ public:
 	int getMaxCapacity() const;
 
 	//set activeEngimon
-	void setActiveEngimon(Engimon*); // asumsi Engimon valid
 	void setActiveEngimon(int i); // asumsi Engimon valid
 
 	bool isInventoryFull();
 	void addToInvEngimon(Engimon engi);
 	void addToInvSkill(std::string _skill);
 
-	void removeFromInvSkill(); //menghapus jika amount dari skillitem dalam inventory habis
+	void removeEngimonByIndex(int idx);
+	void removeSkillByIndex(int idx);
+
 	void gainActiveEngimonExp(int exp);
 	// ~Player();
 	void openEngimonInventory();
 	void openSkillInventory();
-	Engimon& getEngiRefFromIndex(int);
-	
+	Engimon& getEngiRefFromIndex(int idx);
+	SkillItem& getSkillRefFromIndex(int i);
+
+	void printFormatKiri(string str);
+	void printFormatKanan(string str);
 };
 
 
