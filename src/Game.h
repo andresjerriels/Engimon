@@ -8,6 +8,7 @@ class Game {
  private:
   Map* map;
   Player* player;
+  bool gameOver;
 
  public:
   Game(string);

@@ -87,24 +87,24 @@ Map& Map::operator= (const Map& other){
 }
 
 void Map::PrintNavigation(){
-    cout << "* Navigation:                           *\n"
-         << "* W/w: Water engimon                    *\n"
-         << "* I/i: Ice engimon                      *\n"
-         << "* F/f: Fire engimon                     *\n"
-         << "* G/g: Ground engimon                   *\n"
-         << "* E/e: Electric engimon                 *\n"
-         << "* L/l: Fire/Electric engimon            *\n"
-         << "* S/s: Water/Ice engimon                *\n"
-         << "* N.n: Water/Ground engimon             *\n"
-         << "*                                       *\n"
-         << "* P: Player    X: Active Engimon        *\n";
+    cout << "* Navigation:                                       *\n"
+         << "* W/w: Water engimon                                *\n"
+         << "* I/i: Ice engimon                                  *\n"
+         << "* F/f: Fire engimon                                 *\n"
+         << "* G/g: Ground engimon                               *\n"
+         << "* E/e: Electric engimon                             *\n"
+         << "* L/l: Fire/Electric engimon                        *\n"
+         << "* S/s: Water/Ice engimon                            *\n"
+         << "* N/n: Water/Ground engimon                         *\n"
+         << "*                                                   *\n"
+         << "* P: Player    X: Active Engimon                    *\n";
 
 }
 void Map::PrintMap(){
     for (int i = -1; i <= length; i++){
-        for (int j = -4; j <= width + 4; j++){
+        for (int j = -7; j <= width + 7; j++){
             // if (ada engimon) print blablabla
-            if(j == -4 || j == width + 4) cout << "*";
+            if(j == -7 || j == width + 7) cout << "*";
             else if(isPositionOutOfRange(j,i)){
                 cout << " ";
             }

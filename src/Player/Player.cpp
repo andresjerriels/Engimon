@@ -96,6 +96,10 @@ void Player::gainActiveEngimonExp(int exp){
   activeEngimon->gainExp(exp);
 }
 
+int Player::getActiveEngiIndex() {
+  return (activeEngimon - &inventoryEngimon[0]);
+}
+
 void Player::removeEngimonByIndex(int idx) {
   inventoryEngimon.removeByindex(idx);
 }
@@ -107,7 +111,7 @@ void Player::removeSkillByIndex(int idx) {
 void Player::openEngimonInventory(){
   string cmd;
   do{
-    cout << "*****************************************";
+    cout << "*****************************************************\n";
     Util::printFormatKiri("Your Engimon(s):");
     inventoryEngimon.printInventory();
     Util::printFormatKiri("- To see details, select a number");
@@ -129,7 +133,7 @@ void Player::openSkillInventory(){
     Util::printFormatKiri("Your Skill Item(s):");
     inventorySkill.printInventory();
     Util::printFormatKiri("- To see details, select a number");
-    Util::printFormatKiri("- To close inventory, select 'c");
+    Util::printFormatKiri("- To close inventory, select 'c'");
     Util::printFormatKiri("What do you want to do?");
     cin >> cmd;
 

@@ -37,7 +37,8 @@ public:
 	void removeSkillByIndex(int idx);
 
 	void gainActiveEngimonExp(int exp);
-	// ~Player();
+	int getActiveEngiIndex();
+
 	void openEngimonInventory();
 	void openSkillInventory();
 	Engimon& getEngiRefFromIndex(int idx);

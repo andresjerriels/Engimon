@@ -316,9 +316,9 @@ void Engimon::printInfo() {
   Util::printFormatKiri("                " + parentSpecies[1]);
   Util::printFormatKiri("ELement(s): " + ElementTypes[elements[0]]);
   if(elements.size() == 2) Util::printFormatKiri(("            " + ElementTypes[elements[1]]));
-  Util::printFormatKiri("Level: " + level);
-  Util::printFormatKiri("Exp: " + exp);
-  Util::printFormatKiri("Cumulative Exp: " + cum_exp);
+  Util::printFormatKiri("Level: " + to_string(level));
+  Util::printFormatKiri("Exp: " + to_string(exp));
+  Util::printFormatKiri("Cumulative Exp: " + to_string(cum_exp));
   Util::printFormatKiri("Skills: ");
   // cout << "Name: " << name << endl
   //      << "Species: " << species << endl

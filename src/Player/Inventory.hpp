@@ -68,7 +68,6 @@ public:
 		}
 
 		container.erase(it);
-
 	}
 
 	void removeByindex(int idx) {
