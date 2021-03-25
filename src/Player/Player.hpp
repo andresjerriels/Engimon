@@ -42,9 +42,6 @@ public:
 	void openSkillInventory();
 	Engimon& getEngiRefFromIndex(int idx);
 	SkillItem& getSkillRefFromIndex(int i);
-
-	void printFormatKiri(string str);
-	void printFormatKanan(string str);
 };
 
 

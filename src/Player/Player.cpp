@@ -61,7 +61,7 @@ void Player::addToInvEngimon(Engimon engi) {
     this->inventoryEngimon.addToInventory(engi);
     activeEngimon = &inventoryEngimon[index];
   } else {
-    std::cout << "Inventory Full!" << std::endl;
+    Util::printFormatKiri("Inventory Full!");
   }
 }
 
@@ -107,17 +107,18 @@ void Player::removeSkillByIndex(int idx) {
 void Player::openEngimonInventory(){
   string cmd;
   do{
-    printFormatKiri("Your Engimon(s):");
+    cout << "*****************************************";
+    Util::printFormatKiri("Your Engimon(s):");
     inventoryEngimon.printInventory();
-    printFormatKiri("- To see details, select a number");
-    printFormatKiri("- To close inventory, select 'c'");
-    printFormatKiri("What do you want to do?");
+    Util::printFormatKiri("- To see details, select a number");
+    Util::printFormatKiri("- To close inventory, select 'c'");
+    Util::printFormatKiri("What do you want to do?");
     cin >> cmd;
 
     if(cmd != "c"){
       int i = stoi(cmd);
       if(1 <= i && i <= inventoryEngimon.getContainer().size()) inventoryEngimon[i-1].printInfo();
-      else cout << "Number invalid" << endl;
+      else Util::printFormatKiri("Number invalid");
     }
   } while (cmd != "c");
 }
@@ -125,27 +126,19 @@ void Player::openEngimonInventory(){
 void Player::openSkillInventory(){
   string cmd;
   do{
-    printFormatKiri("Your Skill Item(s):");
+    Util::printFormatKiri("Your Skill Item(s):");
     inventorySkill.printInventory();
-    printFormatKiri("- To see details, select a number");
-    printFormatKiri("- To close inventory, select 'c");
-    printFormatKiri("What do you want to do?");
+    Util::printFormatKiri("- To see details, select a number");
+    Util::printFormatKiri("- To close inventory, select 'c");
+    Util::printFormatKiri("What do you want to do?");
     cin >> cmd;
 
     if(cmd != "c"){
       int i = stoi(cmd);
       if(1 <= i && i <= inventorySkill.getContainer().size()) inventorySkill[i-1].getSkill().printSkillInfo();
-      else cout << "Number invalid" << endl;
+      else Util::printFormatKiri("Number invalid");
     }
   } while (cmd != "c");
-}
-
-void Player::printFormatKiri(string str){
-  cout << "* " << str << string((38-str.length()), ' ') << "*\n";
-}
-
-void Player::printFormatKanan(string str){
-  cout << "* " << string((37-str.length()), ' ') << str << "*\n";
 }
 
 Engimon& Player::getEngiRefFromIndex(int i) {

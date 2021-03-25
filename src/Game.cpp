@@ -49,7 +49,7 @@ void Game::processCommand(char cmd){
     } else if (cmd == 'u'){
       learnSkillConfirmation();
     }
-    else throw "Command not available!\nEnter 'l' to see command list!";
+    else throw "* Command not available!                *\n* Enter 'l' to see command list!        *";
   } catch (const char* err) {
     cerr << err << endl;
   } 
@@ -108,9 +108,8 @@ void Game::start() {
     } catch(const std::exception& e) {
       std::cerr << e.what() << '\n';
     } 
-    
     map->setLevelCapslock(player->getActiveEngimon()->getLevel());
-    cout << "* * * * * * * * * * * * * * * * * * * * *\n\n";
+    cout << "* * * * * * * * * * * * * * * * * * * * *\n";
   } while (cmd != 'x');
 }
 
@@ -194,14 +193,14 @@ Tile* Game::battleConfirmation(){
     throw "* There is no wild engimon around you!  *";
   }
 
-  cout << "Wild engimon info:\n";
+  Util::printFormatKiri("* Wild engimon info:");
   tileswithEngimon[selection-1]->getWildEngimon().printInfo();
-  cout << "Continue battle (y/n)? ";
+  cout << "* Continue battle (y/n)? ";
   cin >> continueSelection;
   
 
   if (toupper(continueSelection) != 'Y') {
-    throw "Cancelling battle";
+    throw "* Cancelling battle                     *";
   }
   
   return tileswithEngimon[selection - 1];
@@ -213,8 +212,9 @@ void Game::BreedingConfirmation(){
     printFormatKiri("Your Engimon(s):");
     player->getInventoryEngimon().printInventory();
 
-    if(player->getInventoryEngimon().countItemInInventory() <= 1){
-      printFormatKiri("You only have " + to_string(player->getInventoryEngimon().countItemInInventory()) + " engimon.");
+    if(player->getInventoryEngimon().countItemInInventory() == 1){
+      cout << "\n";
+      printFormatKiri("You only have 1 engimon.");
       printFormatKiri("You need at least 2 of them to breed.");
     } else {
       cout << "* Choose your first engimon: ";
@@ -252,7 +252,7 @@ void Game::learnSkillConfirmation(){
       player->removeSkillByIndex(skillChoice-1);
     }
   } else {
-    throw "You don't have any skill items";
+    throw "* You don't have any skill items        *";
   }
 }
 

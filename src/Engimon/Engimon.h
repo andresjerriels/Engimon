@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include "../Skill/skill.hpp"
+#include "../Utility.h"
 
 enum Element { NONE = -1, FIRE, WATER, ELECTRIC, GROUND, ICE };
 

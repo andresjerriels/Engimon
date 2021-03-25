@@ -4,7 +4,6 @@
 
 #include "Engimon.h"
 #include "EngimonFactory.h"
-
 Engimon::Engimon() {
   Engimon("", NONE, NONE);
 }
@@ -143,15 +142,16 @@ void Engimon::addSkill(Skill s) {
         cout << name << " learned " << s.getName() << endl;
       } else {  // Skill sudah 4
         int pilihan;
-        cout << "Engimon's skill full, choose a skill to replace" << endl;
+        Util::printFormatKiri("Engimon's skill full,");
+        Util::printFormatKiri("choose a skill to be replaced");
         printSkills();
-        cout << "Enter choice (1/2/3/4): ";
+        cout << "* Enter choice (1/2/3/4): ";
         cin >> pilihan;
         if (1 <= pilihan && pilihan <= 4) {
           string oldSkillName = skills[pilihan - 1].getName();
           skills[pilihan - 1] = s;
-          cout << name << " forgot " << oldSkillName
-               << " and learned " << s.getName() << endl;
+          Util::printFormatKiri(name + " forgot " + oldSkillName);
+          Util::printFormatKiri("and learned " + s.getName());
         } else {
           throw "Invalid choice";
         }
@@ -210,8 +210,9 @@ Engimon Engimon::Breed(Engimon& e) {
         }
       }
 
-      cout << "You hatched a new " << spc << "!" << endl 
-           << "Please enter a name for your new engimon: ";
+      Util::printFormatKiri("You hatched a new " + spc + "!");
+      Util::printFormatKiri("Please enter a name for your");
+      cout << "*  new engimon: ";
 
       cin.ignore();
       getline(cin, nm);
@@ -300,25 +301,40 @@ void Engimon::clearSkills() {
 
 void Engimon::printSkills() {
   for (auto i = skills.begin(); i != skills.end(); i++) {
-    cout << "Skill " << i - skills.begin() + 1 << endl;
+    cout << "* Skill " << i - skills.begin() + 1 << endl;
     (*i).printSkillInfo();
   }
 }
 
 void Engimon::printInfo() {
-  cout << "Name: " << name << endl
-       << "Species: " << species << endl
-       << "Slogan: " << slogan << endl
-       << "Parent Names: " << parentNames[0] << ", " << parentNames[1] << endl
-       << "Parent Species: " << parentSpecies[0] << ", " << parentSpecies[1]
-       << endl
-       << "ELement(s): " << ElementTypes[elements[0]]
-       << (elements.size() == 2 ? (", " + ElementTypes[elements[1]]) : "")
-       << endl
-       << "Level: " << level << endl
-       << "Exp: " << exp << endl
-       << "Cumulative Exp: " << cum_exp << endl
-       << "Skills: " << endl;
+  Util::printFormatKiri("Name: " + name);
+  Util::printFormatKiri("Species: " + species);
+  Util::printFormatKiri("Slogan: " + slogan);
+  Util::printFormatKiri("Parent Names: " + parentNames[0]);
+  Util::printFormatKiri("              " + parentNames[1]);
+  Util::printFormatKiri("Parent Species: " + parentSpecies[0]);
+  Util::printFormatKiri("                " + parentSpecies[1]);
+  Util::printFormatKiri("ELement(s): " + ElementTypes[elements[0]]);
+  if(elements.size() == 2) Util::printFormatKiri(("            " + ElementTypes[elements[1]]));
+  Util::printFormatKiri("Level: " + level);
+  Util::printFormatKiri("Exp: " + exp);
+  Util::printFormatKiri("Cumulative Exp: " + cum_exp);
+  Util::printFormatKiri("Skills: ");
+  // cout << "Name: " << name << endl
+  //      << "Species: " << species << endl
+  //      << "Slogan: " << slogan << endl
+  //      << "Parent Names: " << parentNames[0] << endl
+  //      << "              " << parentNames[1] << endl
+  //      << "Parent Species: " << parentSpecies[0] << endl
+  //      << "                " << parentSpecies[1]
+  //      << endl
+  //      << "ELement(s): " << ElementTypes[elements[0]] << endl
+  //      << (elements.size() == 2 ? ("            " + ElementTypes[elements[1]]) : "")
+  //      << endl
+  //      << "Level: " << level << endl
+  //      << "Exp: " << exp << endl
+  //      << "Cumulative Exp: " << cum_exp << endl
+  //      << "Skills: " << endl;
   printSkills();
 }
 

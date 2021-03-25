@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 #include <vector>
-
+#include "../Utility.h"
 template<class T>
 class Inventory
 {
@@ -84,14 +84,14 @@ public:
 
 	void printInventory() {
 		typename std::vector<T>::const_iterator iterator;
-		if(container.begin() == container.end()) cout << "Empty\n";
+		if(container.begin() == container.end()) Util::printFormatKiri("Empty");
 		else {
 			for (iterator = container.begin(); 
 			iterator != container.end(); iterator++) {
+				cout << "* ";
 				cout << iterator - container.begin() + 1 << ". " << *iterator << endl;
 			}
 		}
-		cout << endl;
 	}
 
 	T& operator[](int i) { //operator overloading elemen inventory
