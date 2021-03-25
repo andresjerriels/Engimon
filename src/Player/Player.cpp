@@ -119,14 +119,6 @@ void Player::removeFromInvSkill() { //menghapus jika amount dari skillitem dalam
   }
 }
 
-Player& Player::operator=(const Player& p) {
-  inventoryEngimon = p.inventoryEngimon;
-  inventorySkill = p.inventorySkill;
-  activeEngimon = p.activeEngimon;
-
-  return *this;
-}
-
 void Player::openEngimonInventory(){
   string cmd;
   do{

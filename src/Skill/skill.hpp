@@ -33,9 +33,9 @@ const float USkillBP[10] = {40,45,35,45,40,45,35,45,35,45};
 
 const string LearnableSkill[5][7] ={
                                     {"Flame Claw", "Fire Breath", "Fire Bolt", "Flame Punch", "Fiery Explosion", "Magma Spill", "Cold Burn"},
-                                    {"Water Spill", "Water Slice", "Water Burst", "Surf Wave", "Hydro Cannon", "Tsunami"},
-                                    {"Shock", "Lightning Bolt", "Thunderbolt", "Electric Surge", "Electric Discharge" ,"Storm Hammer"},
-                                    {"Rock Throw", "Tremor", "Stone Cutter", "Earth Spike", "Bury", "Earthquake"},
+                                    {"Water Spill", "Water Slice", "Mud Storm", "Water Burst", "Surf Wave", "Hydro Cannon", "Tsunami"},
+                                    {"Shock", "Lightning Bolt", "Thunderbolt", "Electric Surge", "Electric Discharge", "Zap Cannon" ,"Storm Hammer"},
+                                    {"Rock Throw", "Tremor", "Mud Storm", "Stone Cutter", "Earth Spike", "Bury", "Earthquake"},
                                     {"Frostbite", "Frost Breath", "Ice Spike", "Chilling Touch", "Winter Curse" ,"Ice Blast", "Cold Burn"}
                                     };
 const float LearnableSkillBP[7] = {40,45,55,65,75,75,80};

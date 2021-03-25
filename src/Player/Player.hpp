@@ -40,7 +40,6 @@ public:
 	// ~Player();
 	void openEngimonInventory();
 	void openSkillInventory();
-	Player& operator=(const Player&);
 	Engimon& getEngiRefFromIndex(int);
 	
 };

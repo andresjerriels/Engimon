@@ -142,11 +142,26 @@ void Game::battle(){
   cout << "* * * * * * * * * * * * * * * * * * * * *\n";
 
   if(playerPowerLevel > wildPowerLevel){
+    string engiName;
+    vector<Element> wildElement = wildEngimon.getElements();
     printFormatKiri(playerEngimon.getName() + " won!!");
     player->gainActiveEngimonExp(15*wildEngimon.getLevel());
+    printFormatKiri("You captured a " + wildEngimon.getSpecies());
+    cout << "* * * * * * * * * * * * * * * * * * * * *\n"
+         << "* Enter your new engimon's name:        *\n"
+         << "* ";
+    cin.ignore();
+    getline(cin, engiName);
+    wildEngimon.setName(engiName);
+
+    string newSkillName = LearnableSkill[wildElement[rand() % wildElement.size()]][rand() % 7];
+    printFormatKiri("You get a skill item: " + newSkillName);
+
+    player->addToInvSkill(newSkillName);
     player->addToInvEngimon(wildEngimon);
     tileWithEngimon->deleteWildEngimon();
     map->decrementNWildEngimon();
+
   } else {
     printFormatKiri(wildEngimon.getName() + " won!!");
     // player.removeFromInvEngimon(*playerEngimon);
