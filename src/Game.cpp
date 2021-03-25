@@ -162,7 +162,7 @@ void Game::battle(){
     tileWithEngimon->deleteWildEngimon();
     map->decrementNWildEngimon();
 
-    if (playerEngimon.getCumExp() > 80000) {
+    if (playerEngimon.getCumExp() > 8000) {
       printFormatKiri("Engimon's cumulative EXP has reached its limit");
       player->removeEngimonByIndex(player->getActiveEngiIndex());
       if (player->getInventoryEngimon().countItemInInventory() > 0) {
