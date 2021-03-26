@@ -57,7 +57,6 @@ bool Player::isInventoryFull() {  // true kalo udah gabisa ditambahin -> otomati
 }
 
 void Player::addToInvEngimon(Engimon engi) {
-  cout << "c";
   if (!isInventoryFull()) {
     int index = activeEngimon - &inventoryEngimon[0];
     this->inventoryEngimon.addToInventory(Engimon(engi));
@@ -115,7 +114,7 @@ void Player::removeSkillByIndex(int idx) {
 void Player::openEngimonInventory(){
   string cmd;
   do{
-    cout << "*****************************************************\n";
+    cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
     Util::printFormatKiri("Your Engimon(s):");
     inventoryEngimon.printInventory();
     Util::printFormatKiri("- To see details, select a number");
