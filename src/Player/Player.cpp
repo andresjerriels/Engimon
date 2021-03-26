@@ -38,15 +38,20 @@ bool Player::isInventoryFull() {  // true kalo udah gabisa ditambahin -> otomati
                                   // maksimum MaxCapacity - 1
   int count = 0;
   count += inventoryEngimon.countItemInInventory();
-
+  cout << "x";
   typename std::vector<SkillItem>::iterator it = inventorySkill.getContainer().begin();
-
+cout << "y";
   int i = 0;
-  while (it != inventorySkill.getContainer().end()) {
+
+  for (i = 0; i < inventorySkill.getContainer().size(); i++){
     count += inventorySkill[i].getItemAmount();
-    i++;
-    it++;
   }
+  // while (it != inventorySkill.getContainer().end()) {
+  //   count += inventorySkill[i].getItemAmount();
+  //   i++;
+  //   it++;
+  // }
+  cout << "d";
 
   if (count >= MaxCapacity) {
     return true;
@@ -56,9 +61,13 @@ bool Player::isInventoryFull() {  // true kalo udah gabisa ditambahin -> otomati
 }
 
 void Player::addToInvEngimon(Engimon engi) {
+  cout << "c";
   if (!isInventoryFull()) {
+    cout <<"c";
     int index = activeEngimon - &inventoryEngimon[0];
-    this->inventoryEngimon.addToInventory(engi);
+    cout <<"d";
+    this->inventoryEngimon.addToInventory(Engimon(engi));
+    cout <<"e";
     activeEngimon = &inventoryEngimon[index];
   } else {
     Util::printFormatKiri("Inventory Full!");
@@ -117,6 +126,7 @@ void Player::openEngimonInventory(){
     Util::printFormatKiri("- To see details, select a number");
     Util::printFormatKiri("- To close inventory, select 'c'");
     Util::printFormatKiri("What do you want to do?");
+    cout << "* ";
     cin >> cmd;
 
     if(cmd != "c"){
@@ -135,6 +145,7 @@ void Player::openSkillInventory(){
     Util::printFormatKiri("- To see details, select a number");
     Util::printFormatKiri("- To close inventory, select 'c'");
     Util::printFormatKiri("What do you want to do?");
+    cout << "* ";
     cin >> cmd;
 
     if(cmd != "c"){
