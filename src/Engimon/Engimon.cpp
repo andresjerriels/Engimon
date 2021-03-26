@@ -128,7 +128,7 @@ void Engimon::gainExp(int xp) {
 }
 
 void Engimon::interact() {
-  std::cout << "[" << this->name << "]: " << this->slogan << std::endl;
+  Util::printFormatKiri("[" + this->name + "]: " + this->slogan);
 }
 
 void Engimon::addSkill(Skill s) {
@@ -301,7 +301,7 @@ void Engimon::clearSkills() {
 
 void Engimon::printSkills() {
   for (auto i = skills.begin(); i != skills.end(); i++) {
-    cout << "* Skill " << i - skills.begin() + 1 << endl;
+    Util::printFormatKiri("* Skill " + to_string((i - skills.begin()) + 1));
     (*i).printSkillInfo();
   }
 }
@@ -320,21 +320,6 @@ void Engimon::printInfo() {
   Util::printFormatKiri("Exp: " + to_string(exp));
   Util::printFormatKiri("Cumulative Exp: " + to_string(cum_exp));
   Util::printFormatKiri("Skills: ");
-  // cout << "Name: " << name << endl
-  //      << "Species: " << species << endl
-  //      << "Slogan: " << slogan << endl
-  //      << "Parent Names: " << parentNames[0] << endl
-  //      << "              " << parentNames[1] << endl
-  //      << "Parent Species: " << parentSpecies[0] << endl
-  //      << "                " << parentSpecies[1]
-  //      << endl
-  //      << "ELement(s): " << ElementTypes[elements[0]] << endl
-  //      << (elements.size() == 2 ? ("            " + ElementTypes[elements[1]]) : "")
-  //      << endl
-  //      << "Level: " << level << endl
-  //      << "Exp: " << exp << endl
-  //      << "Cumulative Exp: " << cum_exp << endl
-  //      << "Skills: " << endl;
   printSkills();
 }
 

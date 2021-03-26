@@ -156,17 +156,15 @@ void Skill::addElTypeToElArr(string element) {
 }
 
 void Skill::printSkillInfo() {
-  cout << "- Name        : " << name << endl;
-  cout << "- Basepower   : " << basepower << endl;
-  cout << "- Mastery     : " << mastery << endl;
-  cout << "- Element(s)  : ";
+  Util::printFormatKiri("- Name        : " + name);
+  Util::printFormatKiri("- Basepower   : " + to_string(basepower));
+  Util::printFormatKiri("- Mastery     : " + to_string(mastery));
+  
   for (int i = 0; i < elements.size(); i++) {
-    cout << elements[i];
-    if (i != elements.size()-1) {
-        cout << ", ";
-    }
+    if(i == 0) Util::printFormatKiri("- Element(s)  : " + elements[i]);
+    else Util::printFormatKiri("                " + elements[i]);
   }
-  cout << endl << endl;
+  Util::printFormatKiri("");
 }
 
 

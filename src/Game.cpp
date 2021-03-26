@@ -121,7 +121,7 @@ void Game::battle(){
           "*               !! ENGIMON FACTORY !!               *\n"
           "*                                                   *\n"
           "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
-          "*                      BATTLE                       *\n"
+          "*                 BATTLE CONFIRMATION               *\n"
           "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
   Tile* tileWithEngimon = battleConfirmation();
 
@@ -136,7 +136,7 @@ void Game::battle(){
   
   printFormatKiri(playerEngimon.getName());
   printFormatKiri("Power level: " + to_string(playerPowerLevel));
-  cout << "\n*                        vs                         *\n";
+  cout << "*                        vs                         *\n";
   printFormatKanan(wildEngimon.getName());
   printFormatKanan("Power level: " + to_string(wildPowerLevel));
   cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
@@ -161,7 +161,7 @@ void Game::battle(){
     player->addToInvEngimon(wildEngimon);
     tileWithEngimon->deleteWildEngimon();
     map->decrementNWildEngimon();
-
+    
     if (playerEngimon.getCumExp() > 8000) {
       printFormatKiri("Engimon's cumulative EXP has reached its limit");
       player->removeEngimonByIndex(player->getActiveEngiIndex());
@@ -235,7 +235,7 @@ Tile* Game::battleConfirmation(){
   if(tileswithEngimon.size() > 1){
     printFormatKiri("Choose a wild engimon:"); cout << endl;
     for (int i = 0; i < tileswithEngimon.size(); i++){
-      cout << i + 1 << ". " << tileswithEngimon[i]->getWildEngimon().getName() << endl;
+      Util::printFormatKiri(to_string(i + 1) +  ". " + tileswithEngimon[i]->getWildEngimon().getName());
     }
     cout << "* Insert number: ";
     cin >> selection;
@@ -253,6 +253,15 @@ Tile* Game::battleConfirmation(){
 
   if (toupper(continueSelection) != 'Y') {
     throw "* Cancelling battle                                 *";
+  } else {
+    cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n\n"
+          "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
+          "*                                                   *\n"
+          "*               !! ENGIMON FACTORY !!               *\n"
+          "*                                                   *\n"
+          "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
+          "*                       BATTLE                      *\n"
+          "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
   }
   
   return tileswithEngimon[selection - 1];
