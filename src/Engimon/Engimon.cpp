@@ -124,7 +124,7 @@ void Engimon::gainExp(int xp) {
   this->exp = newExp;
   this->level += newLvlAdd;
 
-  if(newLvlAdd > 0) cout << name << " Leveled up to level " << level << endl;
+  if(newLvlAdd > 0) Util::printFormatKiri(name + " Leveled up to level " + to_string(level));
 }
 
 void Engimon::interact() {
@@ -153,14 +153,14 @@ void Engimon::addSkill(Skill s) {
           Util::printFormatKiri(name + " forgot " + oldSkillName);
           Util::printFormatKiri("and learned " + s.getName());
         } else {
-          throw "Invalid choice";
+          throw "*                  Invalid choice                   *";
         }
       }
     } else {
-      throw "* Engimon type is not compatible        *";
+      throw "*           Engimon type is not compatible          *";
     }
   } else {
-    throw "* Engimon already learned skill         *";
+    throw "*           Engimon already learned skill           *";
   }
 }
 
@@ -288,10 +288,10 @@ Engimon Engimon::Breed(Engimon& e) {
 
       return child;
     } else {
-      throw "Level parent <= 30";
+      throw "*               Level parent <= 30                  *";
     }
   } else {
-    throw "Cannot breed with self";
+    throw "*              Cannot breed with self               *";
   }
 }
 

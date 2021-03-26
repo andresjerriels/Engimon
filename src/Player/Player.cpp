@@ -120,7 +120,7 @@ void Player::removeSkillByIndex(int idx) {
 void Player::openEngimonInventory(){
   string cmd;
   do{
-    cout << "*****************************************************\n";
+    cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
     Util::printFormatKiri("Your Engimon(s):");
     inventoryEngimon.printInventory();
     Util::printFormatKiri("- To see details, select a number");

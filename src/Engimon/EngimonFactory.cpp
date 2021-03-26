@@ -33,7 +33,7 @@ Engimon EngimonFactory::createEngimon(string name, int species) {
     case 9:
       return Tortomon(name);
     default:
-      throw "Invalid species";
+      throw "*                 Invalid species                   *";
   }
 }
 
@@ -60,7 +60,7 @@ Engimon* EngimonFactory::createEngimon(int species) {
     case 9:
       return new Tortomon("Wild Tortomon");
     default:
-      throw "Invalid species";
+      throw "*                 Invalid species                   *";
   }
 }
 
@@ -68,6 +68,6 @@ Engimon EngimonFactory::createEngimon(string name, string species) {
   if (speciesMap.count(species)) {
     return createEngimon(name, speciesMap[species]);
   } else {
-    throw "Invalid species";
+    throw "*                 Invalid species                   *";
   }
 }

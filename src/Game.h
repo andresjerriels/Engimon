@@ -22,8 +22,6 @@ class Game {
   void BreedingConfirmation();
   void learnSkillConfirmation();
   void changeActiveEngimonConfirmation();
-  void printFormatKiri(string str);
-  void printFormatKanan(string str);
 };
 
 #endif

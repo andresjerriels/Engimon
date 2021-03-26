@@ -114,7 +114,7 @@ void Game::start() {
       std::cerr << e.what() << '\n';
     } 
     map->setLevelCapslock(player->getActiveEngimon()->getLevel());
-    cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+    cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n\n";
   } while (cmd != 'x' && !gameOver);
 }
 
@@ -138,19 +138,19 @@ void Game::battle(){
   playerPowerLevel = playerEngimon.getPowerLevel(wildEngimon);
   wildPowerLevel = wildEngimon.getPowerLevel(playerEngimon);
   
-  printFormatKiri(playerEngimon.getName());
-  printFormatKiri("Power level: " + to_string(playerPowerLevel));
+  Util::printFormatKiri(playerEngimon.getName());
+  Util::printFormatKiri("Power level: " + to_string(playerPowerLevel));
   cout << "*                        vs                         *\n";
-  printFormatKanan(wildEngimon.getName());
-  printFormatKanan("Power level: " + to_string(wildPowerLevel));
+  Util::printFormatKanan(wildEngimon.getName());
+  Util::printFormatKanan("Power level: " + to_string(wildPowerLevel));
   cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
 
   if(playerPowerLevel > wildPowerLevel){
     string engiName;
     vector<Element> wildElement = wildEngimon.getElements();
-    printFormatKiri(playerEngimon.getName() + " won!!");
+    Util::printFormatKiri(playerEngimon.getName() + " won!!");
     player->gainActiveEngimonExp(20*wildEngimon.getLevel());
-    printFormatKiri("You captured a " + wildEngimon.getSpecies());
+    Util::printFormatKiri("You captured a " + wildEngimon.getSpecies());
     cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
          << "* Enter your new engimon's name:                    *\n"
          << "* ";
@@ -159,7 +159,7 @@ void Game::battle(){
     wildEngimon.setName(engiName);
 
     string newSkillName = LearnableSkill[wildElement[rand() % wildElement.size()]][rand() % 7];
-    printFormatKiri("You get a skill item: " + newSkillName);
+    Util::printFormatKiri("You get a skill item: " + newSkillName);
 
     cout << "a";
     player->addToInvSkill(newSkillName);
@@ -172,13 +172,14 @@ void Game::battle(){
     cout << "e";
 
     if (playerEngimon.getCumExp() > 8000) {
-      printFormatKiri("Engimon's cumulative EXP has reached its limit");
+      Util::printFormatKiri("Engimon's cumulative EXP");
+      Util::printFormatKiri("has reached its limit");
       player->removeEngimonByIndex(player->getActiveEngiIndex());
       if (player->getInventoryEngimon().countItemInInventory() > 0) {
-        printFormatKiri("Please select another active engimon");
+        Util::printFormatKiri("Please select another active engimon");
 
         int i;
-        printFormatKiri("Your Engimon(s):");
+        Util::printFormatKiri("Your Engimon(s):");
         player->getInventoryEngimon().printInventory();
   
         cout << "* Choose an engimon: " << endl;
@@ -192,7 +193,7 @@ void Game::battle(){
 
         player->setActiveEngimon(i-1);
       } else {
-        printFormatKiri("You don't have any engimons left");
+        Util::printFormatKiri("You don't have any engimons left");
         cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
         cout << "*                     GAME OVER                     *\n";
         cout << "*           Thank you for playing with us!          *\n";
@@ -201,14 +202,14 @@ void Game::battle(){
       }
     }
   } else {
-    printFormatKiri(wildEngimon.getName() + " won!!");
-    printFormatKiri("Your engimon was defeated in battle");
+    Util::printFormatKiri(wildEngimon.getName() + " won!!");
+    Util::printFormatKiri("Your engimon was defeated in battle");
     player->removeEngimonByIndex(player->getActiveEngiIndex());
     if (player->getInventoryEngimon().countItemInInventory() > 0) {
-      printFormatKiri("Please select another active engimon");
+      Util::printFormatKiri("Please select another active engimon");
 
       int i;
-      printFormatKiri("Your Engimon(s):");
+      Util::printFormatKiri("Your Engimon(s):");
       player->getInventoryEngimon().printInventory();
 
       cout << "* Choose an engimon: " << endl;
@@ -222,7 +223,7 @@ void Game::battle(){
 
       player->setActiveEngimon(i-1);
     } else {
-      printFormatKiri("You don't have any engimons left");
+      Util::printFormatKiri("You don't have any engimons left");
       cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
       cout << "*                     GAME OVER                     *\n";
       cout << "*           Thank you for playing with us!          *\n";
@@ -232,23 +233,15 @@ void Game::battle(){
   }
 }
 
-void Game::printFormatKiri(string str){
-cout << "* " << str << string((50-str.length()), ' ') << "*\n";
-}
-
-void Game::printFormatKanan(string str){
-cout << "* " << string((49-str.length()), ' ') << str << " *\n";
-}
-
 Tile* Game::battleConfirmation(){
   int selection;
   char continueSelection;
   
   vector<Tile*> tileswithEngimon = map->getTilesWithEngimonAroundPlayer();
   if(tileswithEngimon.size() > 1){
-    printFormatKiri("Choose a wild engimon:"); cout << endl;
+    Util::printFormatKiri("Choose a wild engimon:"); cout << endl;
     for (int i = 0; i < tileswithEngimon.size(); i++){
-      Util::printFormatKiri(to_string(i + 1) +  ". " + tileswithEngimon[i]->getWildEngimon().getName());
+      Util::Util::printFormatKiri(to_string(i + 1) +  ". " + tileswithEngimon[i]->getWildEngimon().getName());
     }
 
     do
@@ -265,7 +258,7 @@ Tile* Game::battleConfirmation(){
     throw "*       There is no wild engimon around you!        *";
   }
 
-  Util::printFormatKiri("Wild engimon info:");
+  Util::Util::printFormatKiri("Wild engimon info:");
   tileswithEngimon[selection-1]->getWildEngimon().printInfo();
   cout << "* Continue battle (y/n)? ";
   cin >> continueSelection;
@@ -290,13 +283,13 @@ Tile* Game::battleConfirmation(){
 void Game::BreedingConfirmation(){
   if (!player->isInventoryFull()) {
     int eng1, eng2;
-    printFormatKiri("Your Engimon(s):");
+    Util::printFormatKiri("Your Engimon(s):");
     player->getInventoryEngimon().printInventory();
 
     if(player->getInventoryEngimon().countItemInInventory() == 1){
       cout << "\n";
-      printFormatKiri("You only have 1 engimon.");
-      printFormatKiri("You need at least 2 of them to breed.");
+      Util::printFormatKiri("You only have 1 engimon.");
+      Util::printFormatKiri("You need at least 2 of them to breed.");
     } else {
       cout << "* Choose your first engimon: ";
       cin >> eng1;
@@ -307,14 +300,14 @@ void Game::BreedingConfirmation(){
       player->addToInvEngimon(child);
     }
   } else {
-    throw "Cannot breed with full inventory";
+    throw "*         Cannot breed with full inventory          *";
   }
 }
 
 void Game::learnSkillConfirmation(){
   if (player->getInventorySkill().countItemInInventory() > 0) {
     int engiChoice, skillChoice;
-    printFormatKiri("Your Engimon(s):");
+    Util::printFormatKiri("Your Engimon(s):");
     player->getInventoryEngimon().printInventory();
 
     cout << "* Choose your engimon: ";
@@ -322,7 +315,7 @@ void Game::learnSkillConfirmation(){
 
     Engimon &engi = player->getEngiRefFromIndex(engiChoice-1);
 
-    printFormatKiri("Your Skill Item(s):");
+    Util::printFormatKiri("Your Skill Item(s):");
     player->getInventorySkill().printInventory();
     cout << "* Choose a skill item: ";
     cin >> skillChoice;
@@ -333,15 +326,15 @@ void Game::learnSkillConfirmation(){
       player->removeSkillByIndex(skillChoice-1);
     }
   } else {
-    throw "* You don't have any skill items                    *";
+    throw "*         You don't have any skill items            *";
   }
 }
 
 void Game::changeActiveEngimonConfirmation(){
-  printFormatKiri("Current active engimon:");
+  Util::printFormatKiri("Current active engimon:");
   cout << "* " << *(player->getActiveEngimon()) << endl;
   int i;
-  printFormatKiri("Your Engimon(s):");
+  Util::printFormatKiri("Your Engimon(s):");
   player->getInventoryEngimon().printInventory();
   
   cout << "* Choose an engimon: ";
@@ -349,6 +342,6 @@ void Game::changeActiveEngimonConfirmation(){
   if(i <= player->getInventoryEngimon().countItemInInventory()){
     player->setActiveEngimon(i-1);
   } else {
-    throw "Index out of range";
+    throw "*               Index out of range                  *";
   }
 }

@@ -7,11 +7,11 @@ class Util
 {
 public:
     static void printFormatKiri(std::string str){
-        std::cout << "* " << str << std::string((50-str.length()), ' ') << "*\n";
+        std::cout << "* " << str << std::string((49-str.length()), ' ') << " *\n";
     }
 
     static void printFormatKanan(std::string str){
-        std::cout << "* " << std::string((49-str.length()), ' ') << str << "*\n";
+        std::cout << "* " << std::string((49-str.length()), ' ') << str << " *\n";
     }
 };
 #endif
