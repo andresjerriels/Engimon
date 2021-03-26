@@ -109,27 +109,22 @@ void Map::PrintMap(){
                 cout << " ";
             }
             else if (isTilePlayerPosition(j, i)){
-                printf("\033[1;33m");
                 cout << "P";
             }
             else if (isTileActiveEngimonPosition(j, i)){
-                cout << "\033[1;33m";
                 cout << "X";
             }
             else if(mapMatrix[i][j].isEngimonOccupied()){
-                cout << "\033[1;31m";
                 if(mapMatrix[i][j].getWildEngimon().getLevel() > levelCapslock) cout << (char) (toupper(ElementCode[mapMatrix[i][j].getWildEngimon().getElements()]));
                 else cout << ElementCode[mapMatrix[i][j].getWildEngimon().getElements()];
             }
             else if(mapMatrix[i][j].getType() == "Sea"){
-                printf("\033[1;34m");
                 cout << "o";
             }
             else{
-                printf("\033[1;32m");
                 cout << "-";
             }
-            printf(" \033[0m");
+            cout << " ";
         }
         cout << endl;
     }
