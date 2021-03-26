@@ -72,11 +72,13 @@ void Player::addToInvEngimon(Engimon engi) {
 
 void Player::addToInvSkill(string _skill) {
   if (!isInventoryFull()) {  // jika tidak full
-    typename std::vector<SkillItem>::iterator it = inventorySkill.getContainer().begin();
+
+    vector<SkillItem> skillItems = inventorySkill.getContainer();
+    typename std::vector<SkillItem>::iterator it = skillItems.begin();
     int i = 0;
     bool found = false;
 
-    while (!found && it != inventorySkill.getContainer().end()) {
+    while (!found && it != skillItems.end()) {
       if (_skill == inventorySkill[i].getSkill().getName()) {
         found = true;
       }
