@@ -2,8 +2,8 @@
 #include <iostream>
 #include <vector>
 
-#include "Engimon.h"
-#include "EngimonFactory.h"
+#include "Engimon.hpp"
+#include "EngimonFactory.hpp"
 Engimon::Engimon() {
   Engimon("", NONE, NONE);
 }

@@ -1,7 +1,7 @@
-#include "Player.hpp"
 #include <iostream>
-#include "../Engimon/Engimon.h"
-#include "../Engimon/EngimonFactory.h"
+#include "Player.hpp"
+#include "../Engimon/Engimon.hpp"
+#include "../Engimon/EngimonFactory.hpp"
 #include "../Skill/skillitem.hpp"
 #include "Inventory.hpp"
 using namespace std;

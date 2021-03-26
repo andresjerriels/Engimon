@@ -1,7 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Map/map.h"
+#include "Map/map.hpp"
 #include "Player/Player.hpp"
 
 class Game {

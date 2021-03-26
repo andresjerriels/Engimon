@@ -1,5 +1,5 @@
-#include "EngimonFactory.h"
-#include "Engimons.h"
+#include "EngimonFactory.hpp"
+#include "Engimons.hpp"
 
 map<string, int> EngimonFactory::speciesMap = {
     {"Charmamon", 0}, {"Pikamon", 1},  {"Electromon", 2}, {"Molemon", 3},

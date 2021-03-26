@@ -1,7 +1,7 @@
-#ifndef ENGIMONS_H
-#define ENGIMONS_H
+#ifndef ENGIMONS_HPP
+#define ENGIMONS_HPP
 
-#include "Engimon.h"
+#include "Engimon.hpp"
 
 class Charmamon : public Engimon {
  public:

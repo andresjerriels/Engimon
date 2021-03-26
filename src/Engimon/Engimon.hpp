@@ -1,11 +1,11 @@
-#ifndef ENGIMON_H
-#define ENGIMON_H
+#ifndef ENGIMON_HPP
+#define ENGIMON_HPP
 
 #include <map>
 #include <string>
 #include <vector>
 #include "../Skill/skill.hpp"
-#include "../Utility.h"
+#include "../Utility.hpp"
 
 enum Element { NONE = -1, FIRE, WATER, ELECTRIC, GROUND, ICE };
 

@@ -1,4 +1,4 @@
-#include "Position.h"
+#include "Position.hpp"
 Position::Position(){
     x = 0;
     y = 0;

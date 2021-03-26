@@ -2,7 +2,7 @@
 #include <cstring>
 #include <iostream>
 #include <vector>
-#include "../Engimon/Engimon.h"
+#include "../Engimon/Engimon.hpp"
 using namespace std;
 
 #ifndef __SKILL_HPP__

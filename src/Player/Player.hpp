@@ -2,11 +2,11 @@
 #define _PLAYER_HPP_
 
 #include <iostream>
+#include <vector>
 #include "Inventory.hpp"
-#include "../Engimon/Engimon.h"
+#include "../Engimon/Engimon.hpp"
 #include "../Skill/skill.hpp"
 #include "../Skill/skillitem.hpp"
-#include <vector>
 using namespace std;
 
 class Player

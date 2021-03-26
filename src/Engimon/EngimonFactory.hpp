@@ -1,9 +1,9 @@
-#ifndef ENGIMONFACTORY_H
-#define ENGIMONFACTORY_H
-
-#include "Engimon.h"
+#ifndef ENGIMONFACTORY_HPP
+#define ENGIMONFACTORY_HPP
 
 #include <map>
+
+#include "Engimon.hpp"
 
 using namespace std;
 

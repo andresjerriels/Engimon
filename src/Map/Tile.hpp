@@ -1,11 +1,11 @@
-#ifndef _TILE_H_
-#define _TILE_H_
+#ifndef _TILE_HPP_
+#define _TILE_HPP_
 
 // #define NULL -1
 
 #include <string>
-#include "../Engimon/Engimon.h"
-#include "../Engimon/Engimons.h"
+#include "../Engimon/Engimon.hpp"
+#include "../Engimon/Engimons.hpp"
 using namespace std;
 
 class Tile {

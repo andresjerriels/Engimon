@@ -1,4 +1,4 @@
-#include "Map.h"
+#include "Map.hpp"
 #include <stdlib.h>
 
 // map<vector<Element>, char> Map::ElementCode = {

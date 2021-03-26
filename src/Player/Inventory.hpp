@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 #include <vector>
-#include "../Utility.h"
+#include "../Utility.hpp"
 template<class T>
 class Inventory
 {
