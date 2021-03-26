@@ -161,15 +161,10 @@ void Game::battle(){
     string newSkillName = LearnableSkill[wildElement[rand() % wildElement.size()]][rand() % 7];
     Util::printFormatKiri("You get a skill item: " + newSkillName);
 
-    cout << "a";
     player->addToInvSkill(newSkillName);
-    cout << "b";
     player->addToInvEngimon(wildEngimon);
-    cout << "c";
     tileWithEngimon->deleteWildEngimon();
-    cout << "d";
     map->decrementNWildEngimon();
-    cout << "e";
 
     if (playerEngimon.getCumExp() > 8000) {
       Util::printFormatKiri("Engimon's cumulative EXP");
@@ -183,13 +178,15 @@ void Game::battle(){
         player->getInventoryEngimon().printInventory();
   
         cout << "* Choose an engimon: " << endl;
-        do
-        {
+
+        cout << "* Choice: ";
+        cin >> i;
+        while (i < 1 || i > player->getInventoryEngimon().countItemInInventory() || cin.fail()) {
           cout << "* Choice: ";
           cin.clear();
           cin.ignore(256,'\n');
           cin >> i;
-        } while (i < 1 || i > player->getInventoryEngimon().countItemInInventory() || cin.fail());
+        }
 
         player->setActiveEngimon(i-1);
       } else {
@@ -213,13 +210,15 @@ void Game::battle(){
       player->getInventoryEngimon().printInventory();
 
       cout << "* Choose an engimon: " << endl;
-      do
-      {
+
+      cout << "* Choice: ";
+      cin >> i;
+      while (i < 1 || i > player->getInventoryEngimon().countItemInInventory() || cin.fail()) {
         cout << "* Choice: ";
         cin.clear();
         cin.ignore(256,'\n');
         cin >> i;
-      } while (i < 1 || i > player->getInventoryEngimon().countItemInInventory() || cin.fail());
+      }
 
       player->setActiveEngimon(i-1);
     } else {
