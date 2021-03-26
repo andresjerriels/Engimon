@@ -73,10 +73,14 @@ void Game::start() {
        << endl;
 
   int engiChoice;
-  do {   
+  cout << "* Pilihan (1/2): ";
+  cin >> engiChoice;
+  while (engiChoice < 1 || engiChoice > 2 || cin.fail()) {
     cout << "* Pilihan (1/2): ";
+    cin.clear();
+    cin.ignore(256,'\n');
     cin >> engiChoice;
-  } while (engiChoice < 1 || engiChoice > 2);
+  }
 
   string engiName;
   cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
@@ -111,7 +115,7 @@ void Game::start() {
     } 
     map->setLevelCapslock(player->getActiveEngimon()->getLevel());
     cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
-  } while (cmd != 'x' && gameOver == false);
+  } while (cmd != 'x' && !gameOver);
 }
 
 void Game::battle(){
@@ -145,7 +149,7 @@ void Game::battle(){
     string engiName;
     vector<Element> wildElement = wildEngimon.getElements();
     printFormatKiri(playerEngimon.getName() + " won!!");
-    player->gainActiveEngimonExp(15*wildEngimon.getLevel());
+    player->gainActiveEngimonExp(20*wildEngimon.getLevel());
     printFormatKiri("You captured a " + wildEngimon.getSpecies());
     cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
          << "* Enter your new engimon's name:                    *\n"
@@ -176,8 +180,10 @@ void Game::battle(){
         do
         {
           cout << "* Choice: ";
+          cin.clear();
+          cin.ignore(256,'\n');
           cin >> i;
-        } while (i < 1 || i > player->getInventoryEngimon().countItemInInventory());
+        } while (i < 1 || i > player->getInventoryEngimon().countItemInInventory() || cin.fail());
 
         player->setActiveEngimon(i-1);
       } else {
@@ -204,8 +210,10 @@ void Game::battle(){
       do
       {
         cout << "* Choice: ";
+        cin.clear();
+        cin.ignore(256,'\n');
         cin >> i;
-      } while (i < 1 || i > player->getInventoryEngimon().countItemInInventory());
+      } while (i < 1 || i > player->getInventoryEngimon().countItemInInventory() || cin.fail());
 
       player->setActiveEngimon(i-1);
     } else {
@@ -237,8 +245,15 @@ Tile* Game::battleConfirmation(){
     for (int i = 0; i < tileswithEngimon.size(); i++){
       Util::printFormatKiri(to_string(i + 1) +  ". " + tileswithEngimon[i]->getWildEngimon().getName());
     }
-    cout << "* Insert number: ";
-    cin >> selection;
+
+    do
+    {
+      cout << "* Insert number: ";
+      cin.clear();
+      cin.ignore(256,'\n');
+      cin >> selection;
+    } while (selection > tileswithEngimon.size() || cin.fail());
+    
   } else if (tileswithEngimon.size() == 1) {
     selection = 1;
   } else {
