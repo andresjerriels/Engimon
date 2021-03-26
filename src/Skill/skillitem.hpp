@@ -36,6 +36,4 @@ class SkillItem {
         int learn(Engimon&);
 };
 
-// SkillItem returnSkillItem(int amount, string skillname);
-
 #endif

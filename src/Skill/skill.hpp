@@ -25,12 +25,6 @@ const string EngimonBaseInfo[10][3] =   {  // Enginame, UniqueSkill, EngimonElem
 
 const float USkillBP[10] = {40,45,35,45,40,45,35,45,35,45};
 
-// const string FireSkill[6] = {"Flame Claw", "Fire Breath", "Fire Bolt", "Flame Punch", "Fiery Explosion", "Magma Spill"};
-// const string WaterSkill[6] = {"Water Spill", "Water Slice", "Water Burst", "Surf Wave", "Hydro Cannon", "Tsunami"};
-// const string ElectroSkill[6] = {"Shock", "Lightning Bolt", "Thunderbolt", "Electric Surge", "Electric Discharge" ,"Storm Hammer"};
-// const string GroundSkill[6] = {"Rock Throw", "Tremor", "Stone Cutter", "Earth Spike", "Bury", "Earthquake"};
-// const string IceSkill[6] = {"Frostbite", "Frost Breath", "Ice Spike", "Chilling Touch", "Winter Curse" ,"Ice Blast"};
-
 const string LearnableSkill[5][7] ={
                                     {"Flame Claw", "Fire Breath", "Fire Bolt", "Flame Punch", "Fiery Explosion", "Magma Spill", "Cold Burn"},
                                     {"Water Spill", "Water Slice", "Mud Storm", "Water Burst", "Surf Wave", "Hydro Cannon", "Tsunami"},
@@ -83,7 +77,5 @@ class Skill{
         void printSkillInfo();
 
 };
-
-
 
 #endif

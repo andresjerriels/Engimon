@@ -1,9 +1,9 @@
 #ifndef _INVENTORY_HPP_
 #define _INVENTORY_HPP_
 #include <iostream>
-using namespace std;
 #include <vector>
 #include "../Utility.hpp"
+using namespace std;
 template<class T>
 class Inventory
 {

@@ -1,8 +1,6 @@
 #ifndef _TILE_HPP_
 #define _TILE_HPP_
 
-// #define NULL -1
-
 #include <string>
 #include "../Engimon/Engimon.hpp"
 #include "../Engimon/Engimons.hpp"
