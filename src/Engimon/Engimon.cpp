@@ -157,10 +157,10 @@ void Engimon::addSkill(Skill s) {
         }
       }
     } else {
-      throw "Engimon type is not compatible";
+      throw "* Engimon type is not compatible        *";
     }
   } else {
-    throw "Engimon already learned skill";
+    throw "* Engimon already learned skill         *";
   }
 }
 
