@@ -161,15 +161,10 @@ void Game::battle(){
     string newSkillName = LearnableSkill[wildElement[rand() % wildElement.size()]][rand() % 7];
     Util::printFormatKiri("You get a skill item: " + newSkillName);
 
-    cout << "a";
     player->addToInvSkill(newSkillName);
-    cout << "b";
     player->addToInvEngimon(wildEngimon);
-    cout << "c";
     tileWithEngimon->deleteWildEngimon();
-    cout << "d";
     map->decrementNWildEngimon();
-    cout << "e";
 
     if (playerEngimon.getCumExp() > 8000) {
       Util::printFormatKiri("Engimon's cumulative EXP");

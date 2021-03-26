@@ -139,7 +139,7 @@ void Engimon::addSkill(Skill s) {
       // Jika skill kurang dari 4
       if (skills.size() < 4) {
         skills.push_back(s);
-        cout << name << " learned " << s.getName() << endl;
+        Util::printFormatKiri(name + " learned " + s.getName());
       } else {  // Skill sudah 4
         int pilihan;
         Util::printFormatKiri("Engimon's skill full,");
@@ -307,6 +307,7 @@ void Engimon::printSkills() {
 }
 
 void Engimon::printInfo() {
+  cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
   Util::printFormatKiri("Name: " + name);
   Util::printFormatKiri("Species: " + species);
   Util::printFormatKiri("Slogan: " + slogan);
