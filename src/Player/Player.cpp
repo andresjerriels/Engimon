@@ -38,20 +38,16 @@ bool Player::isInventoryFull() {  // true kalo udah gabisa ditambahin -> otomati
                                   // maksimum MaxCapacity - 1
   int count = 0;
   count += inventoryEngimon.countItemInInventory();
-  cout << "x";
-  typename std::vector<SkillItem>::iterator it = inventorySkill.getContainer().begin();
-cout << "y";
-  int i = 0;
 
-  for (i = 0; i < inventorySkill.getContainer().size(); i++){
+  vector<SkillItem> skillItems = inventorySkill.getContainer();
+  typename std::vector<SkillItem>::iterator it = skillItems.begin();
+
+  int i = 0;
+  while (it != skillItems.end()) {
     count += inventorySkill[i].getItemAmount();
+    i++;
+    it++;
   }
-  // while (it != inventorySkill.getContainer().end()) {
-  //   count += inventorySkill[i].getItemAmount();
-  //   i++;
-  //   it++;
-  // }
-  cout << "d";
 
   if (count >= MaxCapacity) {
     return true;
@@ -120,7 +116,7 @@ void Player::removeSkillByIndex(int idx) {
 void Player::openEngimonInventory(){
   string cmd;
   do{
-    cout << "* * * * * * * * * * * * * * * * * * * * * * * * * * *\n";
+    cout << "*****************************************************\n";
     Util::printFormatKiri("Your Engimon(s):");
     inventoryEngimon.printInventory();
     Util::printFormatKiri("- To see details, select a number");
